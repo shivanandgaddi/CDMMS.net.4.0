@@ -1,0 +1,82 @@
+﻿<div>
+    <div class="header-2">SAP Material</div>
+    <!-- ko if: exists -->
+    <div class="row">
+        <div class="col-sm-6" padding-left="0px" padding-right="0px">
+            <h4>CDMMS Id: <span data-bind="text: $data.mtl.id.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" padding-left="0px" padding-right="0px">
+            <h4>Material Code: <span data-bind="text: $data.mtl.PrdctId.value" /></h4>
+        </div>
+        <div class="col-sm-6" padding-left="0px" padding-right="0px">
+            <h4>Part Number: <span data-bind="text: $data.mtl.PrtNo.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Material Description: <span data-bind="text: $data.mtl.ItmDesc.value" /></h4>
+        </div>
+        <div class="col-sm-12">
+            <h4>Additional Description: <span data-bind="text: $data.mtl.AddtlDesc.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Manufacturer CLMC: <span data-bind="text: $data.mtl.Mfg.value" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Manufacturer Name: <span data-bind="text: $data.mtl.MfgDesc.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>HECI: <span data-bind="text: $data.mtl.HECI.value" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Unit of Measurement: <span data-bind="text: $data.mtl.UOM.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>APCL Code: <span data-bind="text: $data.mtl.Apcl.value" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Material Group: <span data-bind="text: $data.mtl.CtgryId.value" /></h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Height: <span data-bind="text: $data.mtl.Hght.value() !== '0' ? $data.mtl.Hght.value : ''" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>Width: <span data-bind="text: $data.mtl.Wdth.value() !== '0' ? $data.mtl.Wdth.value : ''" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>Depth: <span data-bind="text: $data.mtl.Dpth.value() !== '0' ? $data.mtl.Dpth.value : ''" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Hazard Indicator:</h4><input type="checkbox" id="chkHzrdInd" data-bind="checked: $data.mtl.HzrdInd.bool, attr: { disabled: true }" />
+        </div>
+        <div class="col-sm-4">
+            <h4>Date Created: <span data-bind="text: $data.mtl.DtCreated.value" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>Item Status: <span data-bind="text: $data.mtl.ItemStatus.value" /></h4>
+        </div>
+
+    </div>
+
+
+    <!-- /ko -->
+    <!-- ko ifnot: exists -->
+    <div class="error_message">
+        <i class="fa fa-info-circle"></i>
+        No Material found.
+    </div>
+    <!-- /ko -->
+</div>

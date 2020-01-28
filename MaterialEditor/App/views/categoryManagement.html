@@ -1,0 +1,23 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">Please wait as we are loading the details</div>
+</div>
+
+<div class='row' id="left">
+    <div><h3>Material Group Management</h3></div>
+    <p>Material Group ID<input id="MaterialGroupId" data-bind="event:{ keypress: checkEnter }" /></p>
+    <p><button class="btn btn-success" id="btn_search" data-bind="click: $data.Search">Search</button>
+
+</div>
+<div id="right">
+    <div data-bind="compose:viewCategory" id="viewCategoryDiv"></div>
+</div>
+
+
+
+
+
+
+
+
+
+

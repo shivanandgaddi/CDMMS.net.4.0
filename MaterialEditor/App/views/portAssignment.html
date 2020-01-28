@@ -1,0 +1,127 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+<div class='panel panel-default'>
+    <div class="panel-heading">Edit Port Sequence</div>
+    <div class="panel-body">
+
+        <div class="row" style="padding-top:10px;">
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblnodename">Node Name:</label>
+                    <input type="text" class="form-control" id="idtxtnodename" data-bind="value:nodeName,event: { change:getNodeName}">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblcardname">Card Name:</label>
+                    <input type="text" class="form-control" id="idtxtcardname" data-bind="value:cardName,event: { change:getPortAssignmentDtls}">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblstartportno">Starting Port Number:</label>
+                    <input type="number" class="form-control" id="idtxtstartportnumber" data-bind="value:startingPortNumber">
+                </div>
+            </div>
+        </div>
+
+        <div id="portAssignDetails" style="padding-top:15px;padding-left:60px;">
+            <div class="table-responsive">
+                <table id="idtblPortAssign" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Details</th>
+                            <th>Sequence Number</th>
+                            <th>Port Type</th>
+                            <th>Connector Type</th>
+                            <th>Quantity</th>
+                            <th>Offset Number</th>
+                            <th>Network port Name</th>
+                            <th>Has Assignable Ports</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:CardAssignList">
+                        <tr>
+                            <td><a data-bind="click: $root.modifyCardAssign">Update</a></td>
+                            <td><span data-bind="text: $data.portSeqNo"></span></td>
+                            <td><span data-bind="text: $data.portTypNm"></span></td>
+
+                            <td><span data-bind="text: $data.connectorTypNm"></span></td>
+                            <td><span data-bind="text: $data.portQty"></span></td>
+
+                            <td><span data-bind="text: $data.portNoOffset"></span></td>
+                            <td><span data-bind="text: $data.portName"></span></td>
+                            <td><span data-bind="text: $data.hasAssignedPort"></span></td>
+                            <td><a data-bind="click: $root.removeCardAssign">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" id="portAssignInnerDiv">
+                <span id="scrollAnchor"></span>
+            </div>
+        </div>
+
+        <div class="row" align="center" style="padding-top:10px;">
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-success" data-bind="click: $data.addPortdtls,enable: addBtnEnable" id="btnAdd"> ADD </button>
+                <button type="submit" class="btn btn-success" data-bind="click: $data.btnOperations,enable: smBtnEnable" id="btnsavePortdtls"> SAVE </button>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:10px;">
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblseqnumber">Sequence Number: *</label>
+                    <select id="iddrpseqnumber" class="form-control" style="z-index: 1" data-bind="options : drpseqnumber,value : selectedSequenceNum"></select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblporttype">Port Type: *</label>
+                    <select id="iddrpporttype" class="form-control" style="z-index: 1" data-bind="options:drpportType, value : selectedPortType,optionsText:'text',optionsValue:'value'" required></select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblconnectortype">Connector Type:</label>
+                    <select id="iddrpconnectortype" class="form-control" style="z-index: 1" data-bind="options : drpconctrType,value : selectedConnectorType, optionsText: 'text',optionsValue:'value'"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:10px;">
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblseqnumber">Quantity: *</label>
+                    <select id="iddrpQuantity" class="form-control" style="z-index: 1" data-bind="options : drpquantity,value : selectedQuantity"></select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblporttype">Offset Number:</label>
+                    <input type="number" class="form-control" id="idtxtOffsetnum">
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:10px;">
+            <div class="col-sm-8">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblseqnumber">Network Port Name: </label>
+                    <input type="text" class="form-control" id="idtxtnetwnumber">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="idlblporttype">Has Assignable Port:</label>
+                    <input type="checkbox" id="idchkhasassign" class="classChkhasassign" data-bind="checked:hasAssignablePort == 'Y' ? true : false,event: { change: $data.onchangeHasAssignable } " />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+﻿<div class='panel panel-default'>
+    <div class="panel-heading">
+        <span>Slot Specification</span>
+        <div class="btnRESTORE_SEARCH btn btn-success" style="display: none; float: right; margin-top: -9px"><i class="fa fa-search"></i></div>
+    </div>
+    <div class="panel-body">
+        <form data-bind="submit: $data.updateSlotSpec" name="slotSpecForm">
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-2">
+                    <label>Completed&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="completedChkBox" name="cmplIndnmslot" data-bind="checked: $data.selectedSlotSpec().Cmplt.bool, enable:$data.selectedSlotSpec().Cmplt.enable, event: { change: onchangeCompleted }" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Propagated:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="prpgIndslot" data-bind="checked: $data.selectedSlotSpec().Prpgtd.bool, enable:$data.selectedSlotSpec().Prpgtd.enable, disable:completedNotSelected" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Unusable in NDS:&nbsp;&nbsp;</label>
+                    <input type="checkbox" data-bind="checked: $data.selectedSlotSpec().Dltd.bool" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Specification ID:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedSlotSpec().id.value" readonly required/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Name:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedSlotSpec().RvsnNm.value" maxlength="40" required/>
+                </div>
+                <div class="col-sm-6">
+                    <label>Description:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedSlotSpec().Desc.value" maxlength="2000" required/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Use Type:</label>
+                    <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedSlotSpec().SlotUseTypId.value" disabled />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+              <!-- <div class="col-sm-6">
+                    <label>Slot Consumption Id:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedSlotSpec().SltCnsmptnId.value" />
+                </div>--> 
+                <div class="col-sm-6">
+                    <label>Height:</label><font color="red">*</font>
+                    <input class="form-control" id="txtHght" data-bind="textInput: $data.selectedSlotSpec().Hght.value, event:{ keypress: NumDecimal}" required />
+                </div>
+                <div class="col-sm-6">
+                    <label>Width:</label><font color="red">*</font>
+                    <input class="form-control" id="txtWdth" data-bind="textInput: $data.selectedSlotSpec().Wdth.value, event:{ keypress: NumDecimal}" required />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">               
+                <div class="col-sm-6">
+                    <label>Depth:</label><font color="red">*</font>
+                    <input class="form-control" id="txtDpth" data-bind="textInput: $data.selectedSlotSpec().Dpth.value, event:{ keypress: NumDecimal}" required />
+                </div>
+                <div class="col-sm-6">
+                    <label>Unit of Measure</label><font color="red">*</font>
+                    <select id="iddimuom" class="form-control" data-bind="options: $data.selectedSlotSpec().DimUom.options,  optionsText: 'text', optionsValue: 'value',value:$data.selectedSlotSpec().DimUom.value" required></select>
+                </div>
+            </div>
+            <div class="row", style="padding-bottom:15px">
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Model:</label><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" id="modelTxt" required class="form-control" maxlength="47" data-bind="value: $data.selectedSlotSpec().Nm.value" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">                
+                <div class="col-sm-3">
+                    <label>Straight Through:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="SlotStrghtThruChbk" data-bind="checked: $data.selectedSlotSpec().StrghtThru.value=='Y' ? true : false" />
+                </div>
+                <div class="col-sm-3">
+                    <label>Sub Slot:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="SbSltChbk" data-bind="checked: $data.selectedSlotSpec().SbSlt.value=='Y' ? true : false" />
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+                <div class="col-sm-6">
+                    <div class='panel panel-default'>
+                        <div class="panel-heading">Slot Consumption List<font color="red" style="font-size:12px;">*</font></div>
+                        <div class="panel-body">
+                            <table id="SltCnsmptnIdCbkTbl" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Quantity</th>
+                                        <th>Type</th>
+                                        <th>Priority Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:$data.selectedSlotSpec().SltCnsmptnLst.list">
+                                    <tr>
+                                        <td><input type="checkbox" class="SltCnsmptnIdCbk" data-bind="value:$data.id.value,checked: $data.id.value == $root.selectedSlotSpec().SltCnsmptnId.value ? true : false" /></td>
+                                        <td><span data-bind="text: $data.SltCnsmptnQty.value"></span></td>
+                                        <td><span data-bind="text: $data.SltCnsmptnTyp.value"></span></td>
+                                        <td><span data-bind="text: $data.PrtyNo.value"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="slotCmptnValidTblDgr" class="alert alert-danger" hidden>Please select slot consumption from above list</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class='panel panel-default'>
+                        <div class="panel-heading">Specification Role Type List</div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Type</th>
+                                        <th>Priority Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:slotRoleTypeListTbl">
+                                    <tr>
+                                        <td><input type="checkbox" data-bind="value:$data.id.value,checked: $data.Slctd.bool, click: $parent.slotOnchangeSpcnRlTypLst" /></td>
+                                        <td><span data-bind="text: $data.SpcnRlTyp.value"></span></td>
+                                        <td><input type="number" class="form-control" data-bind="textInput: $data.PrtyNo.value,enable: $data.Slctd.bool" onkeypress='return event.charCode >= 48 && event.charCode <= 57' /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="slotRoleTypeValidTblDgr" class="alert alert-danger" hidden></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" align="center">
+                <button type="submit" class="btn btn-success" id="slotSpecFormBtn"> SAVE </button>
+                <button type="button" class="btn btn-success" id="buttonclick" data-bind="click: exportSlotSpecReport">
+                    <span class="fa fa-external-link" />
+                    <span>Export Report</span>
+                </button>
+            </div>
+</form>
+</div>
+</div>
+

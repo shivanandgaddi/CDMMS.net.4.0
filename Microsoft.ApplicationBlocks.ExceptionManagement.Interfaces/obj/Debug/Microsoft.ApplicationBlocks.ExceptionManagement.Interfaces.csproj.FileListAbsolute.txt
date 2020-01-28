@@ -1,0 +1,5 @@
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.dll
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.pdb
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.dll
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.pdb
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.csproj.CoreCompileInputs.cache

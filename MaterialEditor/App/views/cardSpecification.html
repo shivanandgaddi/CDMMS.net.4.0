@@ -1,0 +1,1168 @@
+﻿<style>
+    /* mwj: added some styling to dialog box */
+    #slotSeqDtls tbody td {
+        text-align: center;
+    }
+
+    #slotSeqDtls input.label_nm {
+        width: 220px;
+    }
+
+    #slotSeqDtls input.coord {
+        text-align: center;
+        width: 75px;
+    }
+
+    #slotSeqDtls select.rot-angl {
+        width: 75px;
+    }
+
+    tr.remove td {
+        text-decoration: line-through;
+    }
+
+        tr.remove td input {
+            background-color: lightgrey;
+        }
+
+        tr.remove td select {
+            background-color: lightgrey;
+        }
+
+    /* mwj: added some styling to Has slot div dialog box */
+    #hasSlotDiv number.slot_data {
+        text-align: center;
+        width: 75px;
+    }
+
+    #hasSlotDiv a.sltSeqCalss {
+        text-align: center;
+        width: 75px;
+    }
+
+    #hasSlotDiv button.slot_seq_btn {
+        width: 75px;
+    }
+
+    tr.remove td {
+        text-decoration: line-through;
+    }
+
+        tr.remove td number {
+            background-color: lightgrey;
+        }
+
+        tr.remove td a {
+            cursor: not-allowed;
+            opacity: 0.5;
+            text-decoration: none;
+            pointer-events: none;
+        }
+
+        tr.remove td button {
+            background-color: lightgrey;
+            cursor: not-allowed;
+            pointer-events: none;
+            color: #c0c0c0;
+            background-color: #ffffff;
+        }
+</style>
+
+<div class='panel panel-default' id="maincardSpecification">
+  <div class="panel-heading">
+      <span>Card Specification</span>
+        <div class="btnRESTORE_SEARCH btn btn-success" style="display: none; float: right; margin-top: -9px"><i class="fa fa-search"></i></div>
+  </div>
+  <div>
+    <form data-bind="submit: $data.SaveCard" name="savebayname">
+      <div class="container">
+        <div class="row" align="left" style="padding-bottom:15px;padding-bottom:10px">
+          <button type="button" id="backToMtlButton" class="btn btn-success" data-bind="click: $data.navigateToMaterial, visible: enableBackButton"> Back</button>
+        </div>
+        <div class="panel-body">
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-2">
+              <label>Record Only:</label>
+              <input type="checkbox" name="rcrdcardchk" id="rcrolyCard" data-bind="checked: $data.selectedCardSpec().RO.bool, enable: $data.selectedCardSpec().RO.enable" />
+            </div>
+            <div class="col-sm-2">
+              <button type="submit" class="btn btn-success" id="idAsscociatecard" data-bind="click: $root.associatepartCard.bind($root, $root), visible: enableAssociate">Associate Part</button>
+            </div>
+            <!--<div class="col-sm-2">
+                            <label>Interim:</label>
+                            <input type="checkbox" id="intmCard" name="intmcardchk" data-bind="checked: $data.selectedCardSpec.Itrm.bool,enable :$data.selectedCardSpec.Itrm.enable,event: { change: onchangecardInterim }" />
+                        </div>-->
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-2">
+              <label>Completed:</label>
+              <input id="cmpIndcard" name="cmpindnmcrd" type="checkbox" data-bind="checked: $data.selectedCardSpec().Cmplt.bool, enable: $data.selectedCardSpec().Cmplt.enable, event: { change: onchangeCompleted }" />
+            </div>
+            <div class="col-sm-2">
+              <label>Propagated:</label>
+              <input id="proptIndcard" name="proptIndBay" type="checkbox" data-bind="checked: $data.selectedCardSpec().Prpgtd.bool, enable: $data.selectedCardSpec().Prpgtd.enable, disable: completedNotSelected" />
+            </div>
+            <div class="col-sm-2">
+              <label>Unusable in NDS:</label>
+              <input id="delIndcard" type="checkbox" data-bind="checked: $data.selectedCardSpec().Dltd.bool" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Specification ID:</label>
+              <font color="red">*</font>
+              <input class="form-control" id="specidcard" data-bind="textInput: $data.selectedCardSpec().id.value" required="" readonly="" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Name:</label>
+              <font color="red" style="font-size:12px;">*</font>
+              <input type="text" id="namecard" required="" maxlength="40" class="form-control" data-bind="value: $data.selectedCardSpec().RvsnNm.value, enable: enableName" />
+            </div>
+            <div class="col-sm-6">
+              <label>Description:</label>
+              <font color="red" style="font-size:12px;">*</font>
+              <input type="text" class="form-control" required="" maxlength="2000" data-bind="value: $data.selectedCardSpec().Desc.value" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Model:</label>
+              <font color="red" style="font-size:12px;">*</font>
+              <input type="text" id="modelcard" required="" maxlength="47" class="form-control" data-bind="value: $data.selectedCardSpec().Nm.value, enable: enableName" />
+            </div>
+            <div class="col-sm-3">
+              <label>CLEI:</label>
+              <input type="text" id="modelTxt" class="form-control" maxlength="47" />
+            </div>
+            <div class="col-sm-3">
+              <label>HECI:</label>
+              <input type="text" id="modelTxt" class="form-control" maxlength="47" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Use Type:</label>
+              <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().CardUseTypId.value, visible: false" disabled="" />
+              <select class="form-control" data-bind="options: $data.useTypeList, value: $data.selectedCardSpec().CardNDSUseTyp.value"></select>
+            </div>
+          </div>
+          <!-- ko if: $data.selectedCardSpec().Card !== undefined -->
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-3">
+              <label>Manufacturer:</label>
+              <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].Mfg.value, enable: $data.selectedCardSpec().Card.list[0].Mfg.enable" />
+            </div>
+            <div class="col-sm-3">
+              <label>Manufacturer Name:</label>
+              <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].MfgNm.value, enable: $data.selectedCardSpec().Card.list[0].MfgNm.enable" />
+            </div>
+            <div class="col-sm-6">
+              <label>Part Number:</label>
+              <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].PrtNo.value, enable: $data.selectedCardSpec().Card.list[0].PrtNo.enable" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Material Code:</label>
+              <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].PrdctId.value, enable: $data.selectedCardSpec().Card.list[0].PrdctId.enable" />
+            </div>
+            <div class="col-sm-6">
+              <label>Material Description:</label>
+              <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].ItmDesc.value, enable: $data.selectedCardSpec().Card.list[0].ItmDesc.enable" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Depth:</label>
+              <font color="red" style="font-size:12px;">*</font>
+              <input type="text" id="txtDpth" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].Dpth.value, event: { keypress: NumDecimal }" />
+            </div>
+            <div class="col-sm-6">
+              <label>Height:</label>
+              <font color="red" style="font-size:12px;">*</font>
+              <input type="text" id="txtHght" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].Hght.value, event: { keypress: NumDecimal }" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Width:</label>
+              <font color="red" style="font-size:12px;">*</font>
+              <input type="text" id="txtWdth" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].Wdth.value, event: { keypress: NumDecimal }" />
+            </div>
+            <div class="col-sm-6">
+              <label>Dimensions Unit of Measurement:</label>
+              <select id="idCardDimUom" class="form-control" data-bind="options: $data.selectedCardSpec().Card.list[0].DimUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedCardSpec().Card.list[0].DimUom.value"></select>
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Normal Current Drain:</label>
+              <input type="text" id="txtNrmlDrn" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].ElcCurrDrnNrm.value !== '0' ? $data.selectedCardSpec().Card.list[0].ElcCurrDrnNrm.value : '', event: { keypress: NumDecimal }" />
+            </div>
+            <div class="col-sm-6">
+              <label>Unit of Measurement:</label>
+              <select id="idNrmlDrnUom" class="form-control" data-bind="options: $data.selectedCardSpec().Card.list[0].ElcCurrDrnNrmUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedCardSpec().Card.list[0].ElcCurrDrnNrmUom.value"></select>
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Peak Current Drain:</label>
+              <input type="text" id="txtPkDrn" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].ElcCurrDrnMx.value !== '0' ? $data.selectedCardSpec().Card.list[0].ElcCurrDrnMx.value : '', event: { keypress: NumDecimal }" />
+            </div>
+            <div class="col-sm-6">
+              <label>Unit of Measurement:</label>
+              <select id="idPkDrnUom" class="form-control" data-bind="options: $data.selectedCardSpec().Card.list[0].ElcCurrDrnMxUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedCardSpec().Card.list[0].ElcCurrDrnMxUom.value"></select>
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Power:</label>
+              <input type="text" id="txtPwr" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].HtDssptn.value !== '0' ? $data.selectedCardSpec().Card.list[0].HtDssptn.value : '', event: { keypress: NumDecimal }" />
+            </div>
+            <div class="col-sm-6">
+              <label>Unit of Measurement:</label>
+              <select id="idPwrUom" class="form-control" data-bind="options: $data.selectedCardSpec().Card.list[0].HtDssptnUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedCardSpec().Card.list[0].HtDssptnUom.value"></select>
+            </div>
+          </div>
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-6">
+              <label>Card Weight:</label>
+              <input type="text" id="txtWt" class="form-control" maxlength="47" data-bind="value: $data.selectedCardSpec().Card.list[0].Wght.value !== '0' ? $data.selectedCardSpec().Card.list[0].Wght.value : '', event: { keypress: NumDecimal }" />
+            </div>
+            <div class="col-sm-6">
+              <label>Unit of Measurement:</label>
+              <select id="idWtUom" class="form-control" data-bind="options: $data.selectedCardSpec().Card.list[0].WghtUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedCardSpec().Card.list[0].WghtUom.value"></select>
+            </div>
+          </div>
+          <!--<div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <label>CLEI:</label>
+                            <input type="text" class="form-control" data-bind="value: $data.selectedCardSpec().Card.list[0].CLEI.value" />
+                         </div>
+                    </div>-->
+          <!-- /ko -->
+          <!--<div id="intmcheck" data-bind="visible : intmcheckblock">
+                        <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                                <label for="idbaydptno">Depth:</label><font color="red">*</font>
+                                <input id="idbaydptno" class="form-control" data-bind="value: $data.selectedCardSpec.Dpth.value"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="idwdth">Height:</label><font color="red">*</font>
+                                <input type="text" id="idwdth" class="form-control" data-bind="value: $data.selectedCardSpec.Hght.value"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                                <label for="idhetNo">Width:</label><font color="red">*</font>
+                                <input type="text" id="idhetNo" class="form-control" data-bind="value: $data.selectedCardSpec.Wdth.value"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label>Unit Of Measurement:</label><font color="red">*</font>
+                                <select id="idUOmtyp" class="form-control" data-bind="options: $data.selectedCardSpec.DimUom.options,optionsText: 'text', optionsValue: 'value',value: $data.selectedCardSpec.DimUom.value"></select>
+
+                            </div>
+                        </div>
+                    </div>-->
+          <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-2">
+              <label>Has Slots:</label>
+              <input id="haslotCard" type="checkbox" data-bind="checked: $data.selectedCardSpec().Slts.bool, event: { change: $data.onchkSlots }" />
+            </div>
+            <div class="col-sm-2">
+              <label>Has Ports:</label>
+              <input id="hasportCard" type="checkbox" data-bind="checked: $data.selectedCardSpec().Prts.bool, event: { change: $data.onchkPort }" />
+            </div>
+            <div class="col-sm-2">
+              <label>Straight Through:</label>
+              <input id="strgtInd" type="checkbox" data-bind="checked: $data.selectedCardSpec().StrghtThru.value == 'Y' ? true : false" />
+            </div>
+          </div>
+
+          <div >
+            <div class="row" style="padding-bottom:15px">
+              <div class="col-sm-6" id="hasSlotDiv" data-bind="visible: $data.selectedCardSpec().Slts.bool ">
+                <div class='panel panel-default'>
+                  <div class="panel-body">
+                    <div class="table-responsive text-nowrap">
+                      <table id="tblslotList" class="table table-striped table-bordered table-sm">
+                        <thead>
+                          <tr>
+                            <th>Seq. No</th>
+                            <th>Slot Type</th>
+                            <th>Slots</th>
+                            <th>Unselect to Remove</th>
+                            <th>Configure</th>
+                          </tr>
+                        </thead>
+                        <tbody data-bind="foreach: slotListdetails">
+                          <tr data-bind="attr: { 'id': $data.GUID }">
+                            <td>
+                              <span data-bind="text: $data.SlotSequence"></span>
+                            </td>
+                            <td>
+                              <a class="sltSeqCalss" data-bind="text: $data.SlotType, click: $parent.onClickUpdSlotSeq"></a>
+                            </td>
+                            <td>
+                              <input type="number" id="idSloqntity" class="form-control slot_data" data-bind="value: $data.SlotQuantity, event: { change: $root.getCardSlotQuantity }"/>
+                            </td>
+                            <td>
+                              <input type="checkbox" id="idChkSlotRemove" data-bind="value: $data.UnSelectToRemove, checked: $data.UnSelectToRemove, event: { click: $root.onchkRemoveSltDef }"/>
+                            </td>
+                            <td>
+                              <button type="button" class="btn btn-success slot_seq_btn" data-bind="click: $root.onClickEditbtn" id="slotEdit">Edit</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-15" align="center">
+                      <button type="button" class="btn btn-success" data-bind="click: $root.onClickSaveSlotSeq" id="saveSlotSeq" >Save</button>
+                      <button type="button" class="btn btn-success" data-bind="click: $root.onClickAddSlotSeq" id="addSlotSeq" >Add Slot Sequence</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6" id="hasPortDiv" data-bind="visible: $data.selectedCardSpec().Prts.bool">
+                <div class='panel panel-default'>
+                  <div class="panel-body">
+                    <div class="table-responsive text-nowrap">
+                      <table id="tblportList" class="table table-striped table-bordered table-sm">
+                        <thead>
+                          <tr>
+                            <th>Seq. No</th>
+                            <th>Port Type</th>
+                            <th>Connector</th>
+                            <th>Naming Convention</th>
+                            <th>Port Count</th>
+                            <th>Assignable Ports</th>
+                            <th>Unselect To Remove</th>
+                          </tr>
+                        </thead>
+                        <tbody data-bind="foreach: portsListdetails">
+                          <tr>
+                            <td>
+                              <span data-bind="text: $data.sequenceNum"></span>
+                            </td>
+                            <td>
+                              <a data-bind="text: $data.portType, click: $parent.onClickPortType"></a>
+                            </td>
+                            <td>
+                              <a data-bind="text: $data.connector, click: $parent.onClickConctrType"></a>
+                            </td>
+                            <td>
+                              <input type="text" id="idSloqntity" class="form-control" data-bind="value: $data.namingConv"/>
+                            </td>
+                            <td>
+                              <input type="text" id="idSloqntity" class="form-control" data-bind="value: $data.portCount"/>
+                              <button type="button" class="btn btn-success" data-bind="click: $root.onClickConfigurePortbtn" id="btnPortCount">Configure</button>
+                            </td>
+                            <td>
+                              <span data-bind="text: $data.assignablePort"></span>
+                              <button type="button" class="btn btn-success" data-bind="click: $root.onClickPortAssign" id="btnPortAssign">Configure</button>
+                            </td>
+                            <td>
+                              <input type="checkbox" class="sltChkRemove" data-bind="value: $data.UnSelectToRemove, checked: $data.UnSelectToRemove, event: { change: $root.onchkRemovePortDef }"/>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                      <button type="button" class="btn btn-success" data-bind="click: $root.onClickPortType" id="addSlotSeq" >Add Port Sequence</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal" id="slotSeqDtls">
+                <div class="modal-content" style="width:40%">
+                  <div class="modal-body">
+                    <div class='panel panel-default'>
+                      <div class="panel-heading">
+                        Edit Slot Sequence <b>
+                          #<span class="slot-seq"></span>: <span class="slot-type"></span>
+                        </b>
+                        <span class="close" id="idCloseSlotSeq">&times;</span>
+                      </div>
+                      <div class="table-responsive">
+                        <table id="slotList" class="table table-striped table-bordered" style="padding:15px;">
+                          <thead>
+                            <tr>
+                              <th>Slot</th>
+                              <th>Label</th>
+                              <th>EQDES</th>
+                              <th>HORZ DISP</th>
+                              <th>Rotation</th>
+                              <th>Unselect to Remove</th>
+                            </tr>
+                          </thead>
+                          <tbody data-bind="foreach: ManageSlotslist">
+                            <tr data-bind="attr: { 'id': $data.GUID, 'data-id': $data.SlotSlotId }">
+                              <td style="vertical-align: middle; font-size: larger;">
+                                <span data-bind="text: $data.SlotSlotNo"></span>
+                              </td>
+                              <td>
+                                <input type="text" id="idSlotLabel" maxlength="20" class="form-control label_nm" data-bind="value: $data.Label"/>
+                              </td>
+                              <td>
+                                <input type="text" id="idSlotEqdes" class="form-control coord" data-bind="value: $data.EQDES, event: { change: $root.validateEQDES }"/>
+                              </td>
+                              <td>
+                                <input type="text" id="idSlotHorzDisp" class="form-control coord" data-bind="value: $data.HorzDisp"/>
+                              </td>
+                              <td>
+                                <select id="idCardDimUom" class="form-control rot-angl" data-bind=" options: $root.RotationAngle, optionsText: 'text', optionsValue: 'value', selectedOptions: $data.RotationAngleId, value: $data.RotationAngleId"></select>
+                              </td>
+                              <td>
+                                <input type="checkbox" class="sltSeqChkRemove" data-bind="checked: $data.actionCode !== 'DELETE', event: { click: $root.onMarkForDeletion }" />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row" style="padding-bottom:15px">
+                      <div class="col-sm-15" align="center">
+                        <button type="button" class="btn btn-success" data-bind="click: $root.saveManageSlots" id="saveSlotEdit" >Save</button>
+                        <button type="button" class="btn btn-success" data-bind="click: $root.closeManageSlots" id="closeSlotEdit" >Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AB48512 Port Configure chaanges starts-->
+              <div class="modal" id="ConfigCardPorts">
+                <div class="modal-content" style="width:70%">
+                  <div class="modal-body">
+                    <div class='panel panel-default'>
+                      <div class="panel-heading">
+                        Configure Card Ports
+                        <span class="close" data-bind="click: $root.closeConfigurePorts" id="idCloseConfigCardPort">&times;</span>
+                      </div>
+                      <div class="panel-body" >
+                        <div class="row" style="padding-bottom:5px">
+                          <div class="col-sm-4" >
+                            <label>Port Seq #</label>
+                            <label data-bind="text: selectedCardPortDef() && selectedCardPortDef().sequenceNum"></label>
+                          </div>
+                          <div class="col-sm-4">
+                            <label  data-bind="text: selectedCardPortDef() && selectedCardPortDef().portType"></label> (
+                            <label  data-bind="text: selectedCardPortDef() && selectedCardPortDef().portCount"></label>  Ports  )
+                          </div>
+                          <div class="col-sm-4">
+                            <label>Connector:</label>
+                            <label  data-bind="text: selectedCardPortDef() && selectedCardPortDef().connector"></label>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom:5px">
+                          <div  style="display:inline-block" >Port Offset #: <input type="number"  id="idConfigPortOffset"  visible:="" true=""" />
+                                  <button type="button" class="btn btn-success" data-bind="click: $root.autoFillConfigurePortNo" id="autofillPortDetailsPortNo" >Auto-Fill</button>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row" style=" max-height: 300px;overflow-y: scroll;">
+                        <div class="table-responsive">
+                          <table id="cardPortList" class="table table-striped table-bordered" >
+                            <thead>
+                              <tr>
+                                <th>Port #</th>
+                                <th>Label</th>
+                                <th>EQDES</th>
+                                <th>HORZ DISP</th>
+                                <th>Front/Rear</th>
+                                <th>Rotation</th>
+                                <th>Remove</th>
+                                <th>Stat</th>
+                              </tr>
+                            </thead>
+                            <tbody id='uiCardPortConfigItemList' data-bind="foreach: ConfigCardPortList">
+                              <tr  data-bind='attr: { "id": "port" + $data._guid }'>
+                                <td>
+                                  <input type="text" id="idPortNo" class="form-control" data-bind="value: $data.PortNo" required=""/>
+                                </td>
+                                <td>
+                                  <input type="text" id="idPortLabel" class="form-control" data-bind="value: $data.Label" required=""/>
+                                </td>
+                                <td>
+                                  <input type="number" id="idPortEqdes" class="form-control" data-bind="value: $data.EQDES" required=""/>
+                                </td>
+                                <td>
+                                  <input type="number" id="idPortHorzDisp" class="form-control" data-bind="value: $data.HorzDisp" required=""/>
+                                </td>
+                                <td>
+                                  <select id="idCardPortFE" class="form-control" data-bind=" options: $root.FrontRearTypes, selectedOptions: $data.FrontRearInd, value: $data.FrontRearInd" required=""> </select>
+                                </td>
+                                <td>
+                                  <select id="idPortDimUom" class="form-control" style="min-width:80px" data-bind=" options: $root.RotationAngle, optionsText: 'text', optionsValue: 'value', selectedOptions: $data.RotationAngleId, value: $data.RotationAngleId" required=""></select>
+                                </td>
+                                <td>
+                                  <input type="checkbox" class="ckDELETE" data-bind="event: { click: $root.onchkRemovePortConfig }" />
+                                </td>
+                                <td>
+                                  <i id="idStatus" data-toggle="tooltip" title="" class=""></i>
+                                </td>
+
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="row" style="padding-top:5px; padding-bottom:10px">
+                        <div class="col-sm-15" align="center">
+                          <button type="submit" class="btn btn-success" data-bind="click: $root.saveConfigurePorts" id="savePortDetailsEdit" >Save</button>
+                          <button type="button" class="btn btn-success" data-bind="click: $root.closeConfigurePorts" id="closePortDetailsEdit" >Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AB48512 Port Configure chaanges ends-->
+
+              <div class="modal" id="portAssignConfigure">
+                <div class="modal-content" style="width:60%">
+                  <div class="modal-body">
+                    <div class='panel panel-default'>
+                      <div class="panel-heading">
+                        Configure Assignable Card with Pluggable Ports Specifications
+                        <span class="close" id="idClosePortAssn">&times;</span>
+                      </div>
+                      <form>
+                        <div class="row" style="padding-bottom:15px">
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>Function : </label>
+                              <input type="text" id="idPortAssnFunc" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>HECI : </label>
+                              <select class="form-control" id="idPortAssnHeci" data-bind=""></select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>Protection Scheme : </label>
+                              <input type="text" id="idPortAssnProtScheme" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>Equip Model Matrix # : </label>
+                              <input type="text" id="idPortAssnEqpModMtx" class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>Transmission Rate : </label>
+                              <input type="text" id="idPortAssnTransRate" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>Bandwidth : </label>
+                              <input type="text" id="idPortAssnBandw" class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>unit format Code : </label>
+                              <input type="text" id="idPortAssnUnitFormatCode" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>Plug In Role Type : </label>
+                              <input type="text" id="idPortAssnPlgInRole" class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>unit format Qualifier : </label>
+                              <input type="text" id="idPortAssnUnitFormatQlf" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>Can Be Channelized : </label>
+                              <input type="text" id="idPortAssnChannel" class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                          <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <label>unit format Delimiter : </label>
+                              <input type="text" id="idPortAssnUnitFormatDel" class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                          <div class="col-sm-offset-4 col-sm-2" style="padding-left:55px">
+                            <button type="button" class="btn btn-success" data-bind="click: $data.savePortAssign">SAVE</button>
+                          </div>
+                          <div class="col-sm-offset-4 col-sm-2" style="padding-left:55px">
+                            <button type="button" class="btn btn-success" data-bind="click: $data.cancelPortAssign">CANCEL</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal" id="cardSlotSelect">
+                <div class="modal-content" style="width:60%">
+                  <div class="modal-body">
+                    <div class='panel panel-default'>
+                      <div class="panel-heading">
+                        Select Slot Type
+                        <span class="close" id="idCloseSlotSelect">&times;</span>
+                      </div>
+                      <div class="panel-body">
+                        <form>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idProductID">Specification Name</label>
+                                <input type="text" id="idSpecName" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idName">Specification Description</label>
+                                <input type="text" id="idSpecDesc" class="form-control" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idDesc">Revision Name</label>
+                                <input type="text" id="idrevName" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idstatuspec">Status</label>
+                                <select class="form-control" id="idstatuspec" data-bind="options: $data.statusSpecs, value: status "></select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-offset-4 col-sm-2" style="padding-left:55px">
+                              <button type="button" class="btn btn-success" data-bind="click: $data.Searchspec">SEARCH</button>
+                            </div>
+                          </div>
+                        </form>
+                        <div class="table-responsive">
+                          <table id="slotList" class="table table-striped table-bordered" style="padding-top:15px;">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Specification Name</th>
+                                <th>Description</th>
+                                <th>Slot Type</th>
+                                <th>Dimensions</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody data-bind="foreach: cardSlotSequence">
+                              <tr>
+                                <td class="text-left">
+                                  <a data-bind="click: $root.onClickSelectSlot">Select</a>
+                                </td>
+                                <td class="text-left">
+                                  <span data-bind="text: $data.SLOT_SPECN_NM"></span>
+                                </td>
+                                <td class="text-left">
+                                  <span data-bind="text: $data.SLOT_DSC"></span>
+                                </td>
+                                <td class="text-left">
+                                  <span data-bind="text: $data.SLOT_SPECN_REVSN_NM"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.SLOT_SPECN_DIMS"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.SLOT_SPECN_STATUS"></span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal" id="cardPortSelect">
+                <div class="modal-content" style="width:60%">
+                  <div class="modal-body">
+                    <div class='panel panel-default'>
+                      <div class="panel-heading">
+                        Select Port Type
+                        <span class="close" id="idcardPortSelect">&times;</span>
+                      </div>
+                      <div class="panel-body">
+                        <form>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label>Port Type</label>
+                                <input type="text" id="idPortType" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label>Port Role</label>
+                                <select class="form-control" id="idPortRole" data-bind="options: $data.portRole, value: roleSelect "></select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label>Description</label>
+                                <input type="text" id="idPortDesc" class="form-control" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-2" style="padding-left:50px;">
+                              <label for="idstatuspec">Config : </label>
+                            </div>
+                            <div class="col-sm-3">
+                              <input id="chkDualPorts" type="checkbox"/>
+                              <label>Dual Ports </label>
+                            </div>
+                            <div class="col-sm-4">
+                              <input id="chkTranmRate" type="checkbox"/>
+                              <label>Transmission Rate Allowed </label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-2" style="padding-left:50px;">
+                            </div>
+                            <div class="col-sm-4">
+                              <input id="chkAssPorts" type="checkbox"/>
+                              <label>Assignable Ports </label>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-offset-4 col-sm-2" style="padding-left:55px">
+                              <button type="button" class="btn btn-success" data-bind="click: $data.SearchPortType">SEARCH</button>
+                            </div>
+                          </div>
+                        </form>
+                        <div class="table-responsive">
+                          <table id="portTypeList" class="table table-striped table-bordered" style="padding-top:15px;">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Port Type</th>
+                                <th>Port Role</th>
+                                <th>Config</th>
+                                <th>Description</th>
+                              </tr>
+                            </thead>
+                            <tbody data-bind="foreach: cardPortTypeList">
+                              <tr>
+                                <td>
+                                  <a data-bind="click: $root.onClickSelectPortType">Select</a>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.PortType"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.PortRole"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.Config"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.Description"></span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal" id="PortConctrTypeSelect">
+                <div class="modal-content" style="width:60%">
+                  <div class="modal-body">
+                    <div class='panel panel-default'>
+                      <div class="panel-heading">
+                        Search for Connector Type :
+                        <span class="close" id="idcardPortCnctrSelect">&times;</span>
+                      </div>
+                      <div class="panel-body">
+                        <form>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label>Connector Name : </label>
+                                <input type="text" id="idCnctrName" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label>Aliases : </label>
+                                <input type="text" id="idAliases" class="form-control" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label>Description : </label>
+                                <input type="text" id="idCnctrDesc" class="form-control" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-2">
+                              <button type="button" class="btn btn-success" data-bind="click: $data.SearchCnctr">SEARCH</button>
+                            </div>
+                            <div class="col-sm-2">
+                              <button type="button" class="btn btn-success" data-bind="click: $data.ClearCnctr">CLEAR</button>
+                            </div>
+                            <div class="col-sm-2">
+                              <button type="button" class="btn btn-success" data-bind="click: $data.btnSetNA">Set to N/A</button>
+                            </div>
+                          </div>
+                        </form>
+                        <div class="table-responsive">
+                          <table id="conctrList" class="table table-striped table-bordered" style="padding-top:15px;">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Connector Type</th>
+                                <th>Aliases</th>
+                                <th>BiDirectional?</th>
+                                <th>Vissible?</th>
+                                <th>FEML?</th>
+                                <th>Allowed On Bay?</th>
+                              </tr>
+                            </thead>
+                            <tbody data-bind="foreach: cardCnctrListDtls">
+                              <tr>
+                                <td>
+                                  <a data-bind="click: $root.onClickSelectCnctr">Select</a>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.cnctrType"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.cnctrAlias"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.cnctrBidir"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.cnctrVisible"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.cnctrFEML"></span>
+                                </td>
+                                <td>
+                                  <span data-bind="text: $data.cnctrAllowedBay"></span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--
+                    <div data-bind="visible: navFromdeviceModel">
+                        <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                                <label>Starting Slot Number:</label>
+                                <input type="text" id="idStrtSlotNo" class="form-control" data-bind="value: " />
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Slots Per Row:</label>
+                                <input type="text" id="idSlotPerRow" class="form-control" data-bind="value: " />
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                                <label>Starting Port Number:</label>
+                                <input type="text" id="idStrtPortNo" class="form-control" data-bind="value: " />
+                            </div>
+                        </div>
+
+                    </div>
+                     commented by rxjohn for displaying values for below tables-->
+              <div class="row" style="padding-top:25px;">
+                <div class="col-sm-7">
+                  <div class='panel panel-default'>
+                    <div class="panel-heading">
+                      Slot Consumption List<font color="red" style="font-size:12px;">*</font>
+                    </div>
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <table id="slotconsumptnList" class="table table-striped table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Select</th>
+                              <th>Slot Consumption Quantity</th>
+                              <th>Priority No</th>
+                              <th>Slot Consumption Type</th>
+                              <th>Card Position</th>
+                              <!--<th></th>
+                                                <th>True/False</th>-->
+                            </tr>
+                          </thead>
+                          <tbody data-bind="foreach: consumptionlistdetails">
+                            <tr>
+                              <td>
+                                <input type="checkbox" class="slttblChkbslt" data-bind="value: $data.RwNum.value, checked: $data.Dflt.value == 'Y' ? true : false" />
+                              </td>
+                              <td>
+                                <span data-bind="text: $data.SltCnsmptnQty.value"></span>
+                              </td>
+                              <td>
+                                <span data-bind="text: $data.PrtyNo.value"></span>
+                              </td>
+                              <td>
+                                <span data-bind="text: $data.SltCnsmptnTyp.value"></span>
+                              </td>
+                              <td>
+                                <span data-bind="text: $data.CrdPstn.value"></span>
+                              </td>
+                              <!--<td><span data-bind="text: $data.RwNum.value"></span> -- <span data-bind="text: $root.selectedCardSpec().SltCnsmptnId.value"></span></td>
+                                                <td><span data-bind="text: $data.RwNum.value===$root.selectedCardSpec().SltCnsmptnId.value ? $data.CrdPstn.value : $data.SltCnsmptnTyp.value"></span></td>-->
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div id="sltconsumptionselnt" class="alert alert-danger" hidden="">
+                        <strong>Please select Slot list!</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class='panel panel-default'>
+                    <div class="panel-heading">Specification Role Type List</div>
+                    <div class="panel-body">
+
+                      <div class="table-responsive">
+                        <table id="cardrltypList" class="table table-striped table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Select</th>
+                              <th>Specification Role Type</th>
+                              <th>Priority No</th>
+                            </tr>
+                          </thead>
+                          <tbody data-bind="foreach: specnlistdetails">
+                            <tr>
+                              <td>
+                                <input type="checkbox" class="SpcnRlTypLstCbk" data-bind="value: $data.id.value, checked: $data.Slctd.bool, enable: $data.Slctd.enable, click: $parent.onchangeSpcnRlTypLst" />
+                              </td>
+                              <td>
+                                <span data-bind="text: $data.SpcnRlTyp.value"></span>
+                              </td>
+                              <td>
+                                <input type="number" class="form-control" data-bind="textInput: $data.PrtyNo.value, enable: $data.Slctd.bool" onkeypress='return event.charCode >= 48 && event.charCo'<= 57' />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div id="roleTypeValidTblDgr" class="alert alert-danger" hidden=""></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" align="center">
+              <button type="submit" class="btn btn-success" id="savecardid">Save</button>              
+              <button type="button" class="btn btn-success" id="buttonclick" data-bind="click: exportCardSpecReport">
+                    <span class="fa fa-external-link" />
+                    <span>Export Report</span>
+              </button>             
+            </div>
+          </div>
+        </div>
+       </div>
+     </form>
+  </div>
+</div>
+
+<div id="cardModalpopup" class="modal">
+  <div class="modal-content">
+    <div class="modal-body">
+      <table style="width:100%">
+        <tr>
+          <td>
+            <h4>
+              <b>Associated Part:</b>
+            </h4>
+          </td>
+          <td>
+            <span class="close">&times;</span>
+          </td>
+        </tr>
+      </table>
+      <h4>Search Input:</h4>
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label for="idcdmmscard" class="control-label">CDMMS ID:</label>
+          <input type="text" class="form-control" id="idcdmmscard"/>
+        </div>
+        <div class="col-sm-6 form-group">
+          <label for="materialcodecard">Material Code:</label>
+          <input type="text" class="form-control" id="materialcodecard"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label for="partnumbercard">Part Number:</label>
+          <input type="text" class="form-control" id="partnumbercard"/>
+        </div>
+        <div class="col-sm-6 form-group">
+          <label for="clmccard">CLMC:</label>
+          <input type="text" class="form-control" id="clmccard"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label for="catlogdsptcard">Catalog Description:</label>
+          <input type="text" class="form-control" id="catlogdsptcard" />
+        </div>
+      </div>
+      <div class="row" align="center">
+        <div>
+          <div class="Noinput" style="display: none; color:red">Please Enter An Input!</div>
+          <button class="btn btn-success" data-bind="click: $data.searchmtlcard">SEARCH</button>
+          <div class="NoRecordrp" style="display: none; color:red">No records found!</div>
+        </div>
+      </div>
+
+      <h4>Search Results:</h4>
+      <table id="searchresultcard" style="width:100%" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th>CDMMS ID</th>
+            <th>Material Code</th>
+            <th>CLMC</th>
+            <th>Part Number</th>
+            <th>Catalog/Material Description</th>
+
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: searchtblcard">
+          <tr>
+
+            <td>
+              <input type="checkbox" class="checkcardpopsearch" id="idchkcard" data-bind="value: $data.material_item_id.value" />
+            </td>
+            <td>
+              <span class="idcards" data-bind="text: $data.material_item_id.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.product_id.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.mfg_id.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.mfg_part_no.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.item_desc.value"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Associated Material:</h4>
+      <table id="associatedmtl" style="width:100%" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th>CDMMS ID</th>
+            <th>Material Code</th>
+            <th>CLMC</th>
+            <th>Part Number</th>
+            <th>Catalog/Material Description</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: associatemtlblck">
+          <tr>
+
+            <td>
+              <input type="checkbox" class="checkasstspopsearch" id="idchkncard" checked="checked" data-bind="value: $data.material_item_id.value" />
+            </td>
+            <td>
+              <span data-bind="text: $data.material_item_id.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.product_id.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.mfg_id.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.mfg_part_no.value"></span>
+            </td>
+            <td>
+              <span data-bind="text: $data.item_desc.value"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row" align="center">
+        <button type="submit" id="modalButtonSave" class="btn btn-success" data-bind="click: $data.SaveassociateCard, enable: enableModalSave">Ok</button>
+        <button type="submit" class="btn btn-success" data-bind="click: $data.CancelassociateCard">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="idSpecificationdetails" >
+  <div class="row" data-bind="compose: cardSpecification" id="cardSpec"></div>
+</div>
+

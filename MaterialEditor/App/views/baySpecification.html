@@ -1,0 +1,418 @@
+﻿
+<div class='panel panel-default'>
+    <div class="panel-heading">        
+        <span>Bay Specification</span>
+        <div class="btnRESTORE_SEARCH btn btn-success" style="display: none; float: right; margin-top: -9px"><i class="fa fa-search"></i></div>
+    </div>
+    <div class="panel-body">
+        <form data-bind="submit: $data.SaveBay" name="savebaynameForm">
+            <div class="container">
+                <div class="row" align="left" style="padding-bottom:15px;padding-bottom:10px">
+                    <button type="button" id="backToMtlButton" class="btn btn-success" data-bind="click: $data.navigateToMaterial, visible: enableBackButton">&laquo; Back</button>
+                </div>
+                <div class="row"></div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-2">
+                        <label>Generic:</label>
+                        <input type="checkbox" name="gnrcIndbay" id="gnrcInd" data-bind="checked:$data.selectedBaySpec().Gnrc.bool,enable:$data.selectedBaySpec().Gnrc.enable, event: { change: onchangebayGeneric }" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Record Only:</label>
+                        <input type="checkbox" id="rcrdlyBay" name="rcrdolyBay" data-bind="checked: $data.selectedBaySpec().RO.bool, enable:$data.selectedBaySpec().RO.enable" />
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-success" id="idAsscociate" data-bind="click:$root.associatepartBay.bind($root,$root), visible : enableAssociate">Associate Part</button>
+                    </div>
+                    <div class="col-8"></div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-2">
+                        <label>Completed:</label>
+                        <input id="cmpIndBay" type="checkbox" name="cmpindnm" data-bind="checked: $data.selectedBaySpec().Cmplt.bool, enable: $data.selectedBaySpec().Cmplt.enable, event: { change: onchangeCompleted }" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Propagated:</label>
+                        <input id="proptIndBay" name="proptIndBay" type="checkbox" data-bind="checked: $data.selectedBaySpec().Prpgtd.bool, enable:$data.selectedBaySpec().Prpgtd.enable, disable:completedNotSelected" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Unusable in NDS:</label>
+                        <input id="delIndBay" type="checkbox" data-bind="checked: $data.selectedBaySpec().Dltd.bool" />
+                    </div>
+                    <div class="col-9"></div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Specification ID:</label><font color="red">*</font>
+                        <input class="form-control" id="specidbay" data-bind="textInput: $data.selectedBaySpec().id.value" required readonly />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label for="idbayspecnm">Name:</label><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" class="form-control" id="idbayspecnm" required maxlength="40" data-bind="textInput: $data.specName, enable: enableName" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="idspecdesc">Description :</label>
+                        <input type="text" class="form-control" maxlength="2000" data-bind="textInput: $data.selectedBaySpec().Desc.value" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-3">
+                        <label for="idbayrltyp">Role Type:</label><font color="red" style="font-size:12px;">*</font>
+                        <select id="idbayrltyp" class="form-control" required data-bind="options: $data.selectedBaySpec().BayRlTypId.options,optionsText: 'text', optionsValue: 'value',value: $data.selectedBaySpec().BayRlTypId.value"></select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="idbayustyp">Use Type:</label>
+                        <input id="idbayustyp" class="form-control" data-bind="textInput: $data.selectedBaySpec().BayUseTypId.value" disabled />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Mounting Position Offset:</label>
+                        <input type="text" class="form-control" id="mtngPstOffbay" data-bind="value: $data.selectedBaySpec().MntngPosOfst.value !== '0' ? $data.selectedBaySpec().MntngPosOfst.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Mounting Position UOM:</label>
+                        <select id="idDimuom" class="form-control" data-bind="options: $data.selectedBaySpec().DimUom.options,optionsText: 'text', optionsValue: 'value',value: $data.selectedBaySpec().DimUom.value"></select>
+                    </div>
+                </div>
+                <div id="nongenericBlock" data-bind="visible: nongenericBlockview">
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <label>Max Weight Capacity:</label>
+                            <input type="text" id="maxCapNo" class="form-control" data-bind="value: $data.selectedBaySpec().MxWght.value !== '0' ? $data.selectedBaySpec().MxWght.value : '', event:{ keypress: NumDecimal}" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Max Weight UOM:</label>
+                            <select id="idMaxwidthuom" class="form-control" data-bind="options: $data.selectedBaySpec().MxWghtUom.options,optionsText: 'text', optionsValue: 'value',value: $data.selectedBaySpec().MxWghtUom.value"></select>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <label>Model:</label><font color="red" style="font-size:12px;">*</font>
+                            <input type="text" id="modelTxt" required class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Nm.value" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label>CLEI:</label>
+                            <input type="text" id="cleitext" class="form-control" maxlength="12" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label>HECI:</label>
+                            <input type="text" id="hecitext" class="form-control" maxlength="18" />
+                        </div>
+                    </div>
+                </div>
+                <div id="genericBlock" data-bind="visible : genericBlockview">
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <label>External Depth:</label><font color="red">*</font>
+                            <input type="text" id="xtnldpthbay" class="form-control" data-bind="textInput: $data.selectedBaySpec().XtnlDpth.value, event:{ keypress: NumDecimal}" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>External Height:</label><font color="red">*</font>
+                            <input type="text" id="xhghtbay" class="form-control" data-bind="textInput: $data.selectedBaySpec().XtnlHgt.value, event:{ keypress: NumDecimal}" />
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <label>External Width:</label><font color="red">*</font>
+                            <input type="text" id="xtnwdthbay" class="form-control" data-bind="textInput: $data.selectedBaySpec().XtnlWdth.value, event:{ keypress: NumDecimal}" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="idXDimuom">External Dimensions UOM:</label><font color="red">*</font>
+                            <select id="idXDimuom" class="form-control" data-bind="options: $data.selectedBaySpec().XtnlDimUom.options,optionsText: 'text', optionsValue: 'value',value: $data.selectedBaySpec().XtnlDimUom.value"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Label Start Position:</label><font color="red" style="font-size:12px;">*</font><br />
+                        <input type="radio" id="strgInd1" name="startlbl" value="B" data-bind="checked: $data.selectedStrtLbl"/>
+                        <label for="strgInd1">Bottom</label>
+                        <input type="radio" id="strgInd2" name="startlbl" value="T" data-bind="checked: $data.selectedStrtLbl" />
+                        <label for="strgInd2">Top</label>
+                    </div>
+                </div>
+                <!-- ko if: $data.selectedBaySpec().Bay !== undefined -->
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6" hidden>
+                        <label>cdmms:</label>
+                        <input type="text" id="cdmmsmat" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].id.value" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Manufacturer:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].Mfg.value, enable:$data.selectedBaySpec().Bay.list[0].Mfg.enable" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Manufacturer Name:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].MfgNm.value, enable:$data.selectedBaySpec().Bay.list[0].MfgNm.enable" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Part Number:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].PrtNo.value, enable:$data.selectedBaySpec().Bay.list[0].PrtNo.enable" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Material Code:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].PrdctId.value, enable:$data.selectedBaySpec().Bay.list[0].PrdctId.enable" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Material Description:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].ItmDesc.value, enable:$data.selectedBaySpec().Bay.list[0].ItmDesc.enable" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Depth:</label><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" id="txtDpth" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].Dpth.value, event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Height:</label><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" id="txtHght" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].Hght.value, event:{ keypress: NumDecimal}" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Width:</label><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" id="txtWdth" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].Wdth.value, event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Dimensions Unit of Measurement:</label>
+                        <select id="idBayDimUom" class="form-control" data-bind="options: $data.selectedBaySpec().Bay.list[0].DimUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedBaySpec().Bay.list[0].DimUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Normal Current Drain:</label>
+                        <input type="text" id="txtNrmlDrn" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].ElcCurrDrnNrm.value !== '0' ? $data.selectedBaySpec().Bay.list[0].ElcCurrDrnNrm.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idNrmlDrnUom" class="form-control" data-bind="options: $data.selectedBaySpec().Bay.list[0].ElcCurrDrnNrmUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedBaySpec().Bay.list[0].ElcCurrDrnNrmUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Peak Current Drain:</label>
+                        <input type="text" id="txtPkDrn" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].ElcCurrDrnMx.value !== '0' ? $data.selectedBaySpec().Bay.list[0].ElcCurrDrnMx.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idPkDrnUom" class="form-control" data-bind="options: $data.selectedBaySpec().Bay.list[0].ElcCurrDrnMxUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedBaySpec().Bay.list[0].ElcCurrDrnMxUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Power:</label>
+                        <input type="text" id="txtPwr" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].HtDssptn.value !== '0' ? $data.selectedBaySpec().Bay.list[0].HtDssptn.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idPwrUom" class="form-control" data-bind="options: $data.selectedBaySpec().Bay.list[0].HtDssptnUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedBaySpec().Bay.list[0].HtDssptnUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Planned Heat Generation:</label>
+                        <input type="text" id="txtHtGntn" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].HtGntn.value !== '0' ? $data.selectedBaySpec().Bay.list[0].HtGntn.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idHtGntnUom" class="form-control" data-bind="options: $data.selectedBaySpec().Bay.list[0].HtGntnUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedBaySpec().Bay.list[0].HtGntnUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Bay Weight:</label>
+                        <input type="text" id="txtWt" class="form-control" maxlength="47" data-bind="value: $data.selectedBaySpec().Bay.list[0].Wght.value !== '0' ? $data.selectedBaySpec().Bay.list[0].Wght.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idWtUom" class="form-control" data-bind="options: $data.selectedBaySpec().Bay.list[0].WghtUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedBaySpec().Bay.list[0].WghtUom.value"></select>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-2">
+                        <label>Dual SD:</label>
+                        <input id="dualInd" type="checkbox" data-bind="checked: $data.selectedBaySpec().DualSd.value =='Y' ? true : false" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Straight Through:</label>
+                        <input id="strgtInd" type="checkbox" data-bind="checked: $data.selectedBaySpec().StrghtThru.value =='Y' ? true : false" />
+                    </div>
+                    <!--</div>
+                    <div class="row" style="padding-bottom:15px">-->
+                    <div class="col-sm-2">
+                        <label>Wall Mount:</label>
+                        <input id="wllmtInd" type="checkbox" data-bind="checked: $data.selectedBaySpec().WllMnt.value =='Y' ? true : false" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Mid Plane:</label>
+                        <input id="midInd" type="checkbox" data-bind="checked: $data.selectedBaySpec().MidPln.value =='Y' ? true : false" />
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class='panel panel-default' data-bind="visible: $data.enablebayintbl">
+                    <div class="panel-heading">Available Bay Internal Specifications</div>
+                    <div class="panel-body">
+                        <div class="row" style="overflow-x:auto;padding-top:25px;">
+                            <div class="table-responsive">
+                                <table id="bayinternalTbl" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Height</th>
+                                            <th>Height UOM</th>
+                                            <th>Width</th>
+                                            <th>Width UOM</th>
+                                            <th>Depth</th>
+                                            <th>Depth UOM</th>
+                                            <th>Mounting Position Quantity</th>
+                                            <th>Mounting Position Distance</th>
+                                            <th>Wall Mount</th>
+                                            <th>Straight Through</th>
+                                            <th>Mid Plane</th>
+                                            <th>Nominal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:Bayinterlsdetails">
+                                        <tr>
+                                            <td><input type="checkbox" class="baytblChkb" data-bind="value:$data.id.value,checked: $data.id.value==$root.selectedBaySpec().BayItnlId.value ? true : false" /></td>
+                                            <td><span data-bind="text: $data.Nm.value"></span></td>
+                                            <td><span data-bind="text: $data.Desc.value"></span></td>
+                                            <td><span data-bind="text: $data.BayItnlHght.value"></span></td>
+                                            <td><span data-bind="text: $data.BayItnlHghtUom.value"></span></td>
+                                            <td><span data-bind="text: $data.BayItnlWdth.value"></span></td>
+                                            <td><span data-bind="text: $data.BayItnlWdthUom.value"></span></td>
+                                            <td><span data-bind="text: $data.BayItnlDpth.value"></span></td>
+                                            <td><span data-bind="text: $data.BayItnlDpthUom.value"></span></td>
+                                            <td><span data-bind="text: $data.MntngPosQty.value"></span></td>
+                                            <td><span data-bind="text: $data.MntngPosDist.value"></span></td>
+                                            <td><span data-bind="text: $data.BayIntlWllMnt.value"></span></td>
+                                            <td><span data-bind="text: $data.BayIntlStrghtThru.value"></span></td>
+                                            <td><span data-bind="text: $data.BayIntlMidPln.value"></span></td>
+                                            <td><span data-bind="text: $data.Nmnl.value"></span></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div id="BayItnlLstTblDgr" class="alert alert-danger" hidden>
+                            <strong>Please select a Bay Internal.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" align="center">
+                <button type="submit" class="btn btn-success" id="savebayid">Save</button>
+                <button type="button" class="btn btn-success" id="buttonclick" data-bind="click: exportBaySpecReport">
+                    <span class="fa fa-external-link" />
+                    <span>Export Report</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="bayModalpopup" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Associated Part:</b></h4></td>
+                    <td><span class="close">&times;</span></td>
+                </tr>
+            </table>
+            <h4>Search Input:</h4>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="idcdmmsbay" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmsbay">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="materialcodebay">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcodebay">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="partnumberbay">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumberbay">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="clmcbay">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcbay">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptbay">Catalog Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptbay">
+                </div>
+            </div>
+            <div class="row" align="center">
+                <div class="Noinput" style="display: none; color:red">Please enter at least one input.</div>
+                <button class="btn btn-success" data-bind="click: $data.searchmtlbay">SEARCH</button>
+                <div class="NoRecordrp" style="display: none; color:red">No records found!</div>
+            </div>
+
+            <h4>Search Results:</h4>
+            <table id="searchresultbay" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>Catalog/Material Description</th>
+
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:searchtblbay">
+                    <tr>
+                        <!--<td><input type="checkbox" class="checkbaypopsearch" data-bind="value: $data.material_item_id.value" /></td>-->
+                        <td><input type="checkbox" class="chkbxsearch" id="idbaychk" data-bind="value: $data.material_item_id.value" /></td>
+                        <td><span class="idbays" data-bind="text: $data.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.item_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Associated Material:</h4>
+            <table id="associatedmtl" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>Catalog/Material Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:associatemtlblck">
+                    <tr>
+
+                        <td><input type="checkbox" class="checkasstspopsearch" id="idchknbay" checked="checked" data-bind="value: $data.material_item_id.value" /></td>
+                        <td><span class="idsasspnode" data-bind="text: $data.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.item_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row" align="center">
+                <button type="submit" id="modalButtonSave" class="btn btn-success" data-bind="click: $data.SaveAssociateBay, enable: enableModalSave">Ok</button>
+                <button type="submit" class="btn btn-success" data-bind="click: $data.CancelAssociateBay">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

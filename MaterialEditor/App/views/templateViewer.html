@@ -1,0 +1,188 @@
+﻿<div id="sectTemplateViewer">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span>Template Viewer</span></div>
+        <div class="panel-body">
+            <div id="PANEL_GRAPHICAL_VIEW" class="panel panel-default split" style="overflow-y: auto">
+                <input type="text" id="hiddenTempId" hidden />
+                <input type="text" id="hiddenTempTyp" hidden />
+                <div class="cad-button-bank">
+                    <div id="btnSET_TRAIL_POINT" data-toggled="0" class="btn" title="Click to set a trail point..."><img src="/Content/icons/trail-point.png" /></div><div id="btnADD_LABEL" class="btn" title="Click to add label..."><img src="/Content/icons/add-label.png" /></div>
+                    <div id="btnADD_EQUIP" class="btn" title="Click to add equipment..."><img src="/Content/icons/add-equip.png"/></div>
+                    &nbsp;
+                    <span class="zoom-control">-<input id="rngZOOM_LEVEL" type="range" step=".1" max="2" min=".1" style="display: none;" onchange="OnZoomCanvas(this.value)">+ &nbsp; <input type="text" id="txtZOOM_LEVEL" value="100%" /></span>
+                    &nbsp;
+                    <div id="btnRESIZE_CONTAINER" class="btn" title="Click to resize container..."><img src="/Content/icons/resize-container.png" /></div><div id="btnSET_CONTAINER" class="btn" title="Click to add items to surrounding container..."><img src="/Content/icons/set-container.png" /></div><div id="btnTOGGLE_GRID" class="btn" title="Toggle grid..."><img src="/Content/icons/toggle-grid.png" /></div>
+                    &nbsp;
+                    <div id="btnALIGN_LEFT" class="btn" title="Click to align to the left..."><img src="/Content/icons/align-left.png" /></div><div id="btnALIGN_CENTER" class="btn" title="Click to align to center..."><img src="/Content/icons/align-center.png" /></div><div id="btnALIGN_RIGHT" class="btn" title="Click to align to the right..."><img src="/Content/icons/align-right.png" /></div>
+                    &nbsp;
+                    <div id="btnALIGN_TOP" class="btn" title="Click to align to the top..."><img src="/Content/icons/align-top.png" /></div><div id="btnALIGN_MIDDLE" class="btn" title="Click to align to the middle..."><img src="/Content/icons/align-middle.png" /></div><div id="btnALIGN_BOTTOM" class="btn" title="Click to align to the bottom..."><img src="/Content/icons/align-bottom.png" /></div>
+                    &nbsp;
+                    <div id="btnDIST_HORZ" class="btn" title="Click to distribute horizontally..."><img src="/Content/icons/dist-horz.png" /></div><div id="btnDIST_VERT" class="btn" title="Click to distribute vertically ..."><img src="/Content/icons/dist-vert.png" /></div>
+                    &nbsp;
+                    <div id="btnROTATE_LEFT" class="btn" title="Click to rotate left..."><img src="/Content/icons/rotate-left.png" /></div><div id="btnROTATE_RIGHT" class="btn" title="Click to rotate right..."><img src="/Content/icons/rotate-right.png" /></div>
+                    &nbsp;
+                    <div id="btnCUT" class="btn" title="Click to delete cut item..."><img src="/Content/icons/cut.png" /></div><div id="btnCOPY" class="btn" title="Click to copy selected item..."><img src="/Content/icons/copy.png" /></div><div id="btnPASTE" class="btn" title="Click to paste copied or cut item..."><img src="/Content/icons/paste.png" /></div>
+                    &nbsp;
+                    <div id="btnAUTO_NUMBER" class="btn" title="Click to auto-number selection..."><img src="/Content/icons/auto-number.png" /></div>
+                    &nbsp;
+                    <div id="btnFONT_LARGER" class="btn" title="Click to increase font size..."><img src="/Content/icons/font-larger.png" /></div><div id="btnFONT_SMALLER" class="btn" title="Click to decrease font size..."><img src="/Content/icons/font-smaller.png" /></div><div id="btnFONT_SETTINGS" class="btn" title="Click to change font settings..."><img src="/Content/icons/font-settings.png" /></div>
+                    &nbsp;
+                    <div id="btnAUDIT_LOG" class="btn" title="Click to see audit log..."><img src="/Content/icons/audit-log.png" /></div>
+                    &nbsp;
+                    <div id="btnSAVE" class="btn btn-success" title="Click to save changes...">Save Template Attributes</div>
+
+                    <div id="msgLOG" style="display:none">LOG GOES HERE;</div>
+                    <div id="msgDIMENSIONS">&nbsp;</div>
+                    <div id="msgCOORDS">&nbsp;<br />&nbsp;</div>
+                </div>
+                <canvas id="tmpltCanvas" class="cad-canvas" width="1024" height="1024"></canvas>
+            </div>
+            <div id="PANEL_TABULAR_VIEW" class="panel panel-default split" style="height: 1078px;overflow:auto">
+                <div class="tabs">
+                    <ul>
+                        <li><a href="#tabINFO_LOC">Location Information</a></li>
+                        <li><a href="#tabINFO_MTRL">In Use By References</a></li>
+                        <li><a href="#tabINFO_TMPLT">Additional Info</a></li>
+                    </ul>
+                    <div id="tabINFO_LOC">
+                        <table>
+                            <thead>
+                                <tr>
+                                <th>CDMMS ID</th>
+                                <th>Spec Name</th>
+                                <th>Part Number</th>
+                                <th>Feature Type</th>
+                                <th>Label</th>
+                                <th>Mounting Position</th>
+                                <th>EQDES</th>
+                                <th>HORZ DISP</th>
+                                <th>Template Name</th>
+                                <th>Dept</th>
+                                <th>Owner</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div id="tabINFO_MTRL">
+                        (show list of Templates, HLPNs, CCs that reference this template...)
+                    </div>
+                    <div id="tabINFO_TMPLT">
+                        (show other information...)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CadEquipPropertiesDialog" style="display:none">
+    <div class="tabs-props">
+        <ul>
+            <li><a href="#tabPROPS_INFO_LOC">Equipment Information</a></li>
+            <li><a href="#tabPROPS_INFO_MTRL">In Use By References</a></li>
+            <li><a href="#tabPROPS_INFO_TMPLT">Additional Info</a></li>
+        </ul>
+        <div id="tabPROPS_INFO_LOC">
+            <table>
+                <tbody class="container"></tbody>
+            </table>
+        </div>
+        <div id="tabPROPS_INFO_MTRL">(show list of Templates, HLPNs, CCs that reference this equipment)</div>
+        <div id="tabPROPS_INFO_TMPLT">(show other information)</div>
+    </div>
+</div>
+<div id="CadAddEquipDialog" style="display:none">
+    <div class="row">
+        <div class="col-sm-3">
+            <label id='lblTYP'></label>
+            <select class="form-control" id="ddCONTEXT"></select>
+        </div>
+        <div class="col-sm-7">
+            <label>Search:&nbsp;</label>
+            <input class="form-control" id="txtSEARCH_BOX" style="width: 90%" />
+        </div>
+        <div style="padding-top: 30px;text-align: right">
+            <span class="status">searching...</span> <i class="fa fa-spinner fa-spin"></i>
+        </div>
+    </div>
+    <div class="row errors">
+    </div>
+    <hr />
+    <div style="height: 82%; overflow: auto">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>CDMMS ID</th>
+                        <th>Feature Type</th>
+                        <th>Name</th>
+                        <th>Size (W x H)</th>
+                    </tr>
+                </thead>
+                <tbody class="results"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script id="TMPLT_TEMPLATE_ITEMS_SEARCH_RESULTS" type="text/x-jquery-tmpl">
+    <tr class="{{if CAN_FIT==0}}equip-too-big{{/if}}">
+        <td>
+            <div class="btn btn-success {{if CAN_FIT==0}}ui-state-error{{/if}}" style="font-size: x-small" data-rec="${JSON.stringify(this.data)}">SELECT</div>
+        </td>
+        <td><span>${CDMMS_ID}</span></td>
+        <td><span>${EQ_TYP}</span></td>
+        <td style='text-align: left'>
+            <span>${NAME}</span>
+            <br />
+            <span style="font-size: xx-small">${MTRL_DESCR}</span>
+        </td>
+        <td style="text-align: right; padding-right: 10px">
+            {{if CAN_FIT==0}}
+                <span class="ui-state-error" title="Equipment is too large; container is ${CNTNR_W}${CNTNR_UOM} x ${CNTNR_H}${CNTNR_UOM} ...">${DIMS}</span>
+            {{else}}
+                <span>${DIMS}</span>
+            {{/if}}
+        </td>
+    </tr>
+</script>
+<script id="TMPLT_EQUIP_PROPS" type="text/x-jquery-tmpl">
+    <tr><th colspan="1">CDMMS ID:</th></tr>
+    <tr><td colspan="1">${MTRL_ID} <div class="btn"><i title="Click to open Material Inventory record..." class="fa fa-external-link btnOPEN_MTRLINV" data-id="${MTRL_ID}" data-page="mtlInv"></i></div></td></tr>
+
+    <tr><th colspan="1">Name:</th></tr>
+    <tr><td colspan="1">${NAME} <div class="btn"><i title="Click to open Specification record..." class="fa fa-external-link btnOPEN_SPEC" data-id="${CDMMS_ID}" data-page="spec"></i></div></td></tr>
+
+    <tr><th colspan="1">Material Desc:</th></tr>
+    <tr><td colspan="1">${MTRL_DESCR}</td></tr>
+
+    <tr><th colspan="1">Size (WxH):</th></tr>
+    <tr><td colspan="1">${DIMS}</td></tr>
+
+    <tr><th>Mounting Pos:</th></tr>
+    <tr><td><input id='MTNTG_POS' type="text" value="${MNTNG_POS}" style="text-align: center; width: 50px" /></td></tr>
+
+    <tr><th>EQDES</th></tr>
+    <tr><td><input id="EQDES" type="text" value='##.###' style="text-align: center; width: 50px" /></td></tr>
+
+    <tr><th>HORZD</th></tr>
+    <tr><td><input id="HORZ_DISP" type="text" value='##.###' style="text-align: center; width: 50px" /></td></tr>
+</script>
+<script id="TMPLT_TAB_INFO_LOC" type="text/x-jquery-tmpl">
+    <tr id="rec${CDMMS_ID}" data-recid="${CDMMS_ID}" data-mtlinv="${MTRL_ID}" data-spec="${CDMMS_ID}" title="${MTRL_DESC}">
+        <td class='btnOPEN' data-cat="mtlInv"><a href="javascript:void(0)" title='Click to view Material Inventory record...'>${MTRL_ID}</a></td>
+        <td class='btnOPEN' data-cat="spec"><a href="javascript:void(0)">${SPECN_NAME}</a></td>
+        <td>${PART_NO}</td>
+        <td>${FEAT_TYP}</td>
+        <td><input type="text" class="" value="${LABEL}"/></td>
+        <td><input type="text" class="pos pos-ru" value="${MNTNG_POS}"/></td>
+        <td><input type="text" class="pos pos-eqdes" value="${EQDES}"/></td>
+        <td><input type="text" class="pos pos-horz" value="${HORZ_DISP}"/></td>
+        <td class='btnOPEN' data-cat="tmplt"><a title='Click to view Template record...' href="javascript:void(0)">&nbsp;</a></td>
+        <td>${DEPT}</td>
+        <td>${OWNER}</td>
+    </tr>
+</script>
+
+

@@ -1,0 +1,204 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+<div class='panel panel-default'>
+    <div class="panel-heading">Slot Assignment</div>
+    <div class="panel-body">
+        <form data-bind="" name="slotSpecForm" >
+            <br />
+            <div class="row">
+                <div class="col-lg-12" data-bind="">
+                    <div class="input-group input-group-sm">
+                        <button class="btn btn-success btn">back</button>&nbsp;
+                        <button class="btn btn-success" data-bind="click: updateSlotAssign">Update</button>&nbsp;
+                        <button class="btn btn-success" data-bind="click: getSlotAlias" id="btnSltDisplayAlias">DisplayAlias</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-sm-4">
+                        <label>Name:</label><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" id="nmanode" required class="form-control" maxlength="40" data-bind="textInput: $data.specName, value: $data.specName, enable: false" />
+                    </div>
+                    <div class="col-sm-4" >
+                        <b><span data-bind="text: $data.specTypeHTML" style="font-size:inherit"></span>&nbsp;<label>Name</label></b><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" id="shcdname" required class="form-control" maxlength="40" data-bind="textInput: $data.shelforCardName, value: $data.shelforCardName, enable: false" />
+                    </div>
+                    <div class="col-sm-4">
+                        <label >Slot/Card Start Number.:</label><font color="red" style="font-size:12px;">*</font><br/>
+                        <select class="form-control" ><option value="1">1</option></select>
+                    </div>
+                </div>
+           </div>
+            <br />
+            <div style="padding-top:15px;margin-right:20px;margin-left:20px;" >
+                <div class="table-responsive" id="divSlotAssignDtls">
+                    <table id="idSlotAssignDtls" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Slot Spec ID</th>
+                                <th>Slot Spec Name</th>
+                                <th>Slot Seq No</th>
+                                <th>Quantity</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: slotAssignList">
+                            <tr>
+                                <td><a data-bind="click: $parent.selectedSlot">Select</a></td>
+                                <td><span data-bind="text: $data.slotSpecID" ></span></td>
+                                <td><span data-bind="text: $data.slotSpecNm"></span></td>
+                                <td><input type="number" data-bind="value: $data.seqNo, enable: false"/></td>
+                                <td><input type="number" data-bind="value: $data.seqQty , event: { change: $parent.calculateSequence },valueUpdate: 'afterkeydown' "/></td>
+                                <td><a data-bind="click: $root.removeShelfSlot">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" align="center">
+                <div class="btn-group" style="padding:1%">
+                    <button type="submit" class="btn btn-success" data-bind="click: $data.addSlot, enable: specType() == 'SHELF'">Add Slot to Shelf</button>&nbsp;
+                    <button type="submit" class="btn btn-success" data-bind="click: $data.addQualifiedSlot, enable: specType() == 'CARD'">Add card to Slot</button>&nbsp;
+                    <button type="submit" class="btn btn-success" data-bind="click: $data.addSlot, enable: specType() == 'CARD'">Add Slots to a Card</button>&nbsp;
+                </div>
+            </div>
+            <div class="modal" id="idSlotsearchlist">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <table style="width:100%">
+                            <tr>
+                                <td><h4><b>Select Slot:</b></h4></td>
+                                <td><span class="close" id="idSlotclose">&times;</span></td>
+                            </tr>
+                        </table>
+                        <table id="idSpecList" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Details</th>
+                                    <th>Specification ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Completed</th>
+                                    <th>Propagated</th>
+                                    <th>Unusable in NDS</th>
+                                    <th>Specification Type</th>
+                                    <th>Specification Class</th>
+
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:SlotSpecList">
+                                <tr>
+                                    <td><a data-bind="click: $parent.specificationSelectCall">Select</a></td>
+                                    <td><span data-bind="text: $data.specn_id.value"></span></td>
+                                    <td><span data-bind="text: $data.specn_nm.value"></span></td>
+                                    <td><span data-bind="text: $data.specn_dsc.value"></span></td>
+                                    <td><span data-bind="text: $data.cmplt_ind.value"></span></td>
+                                    <td><span data-bind="text: $data.prpgt_ind.value"></span></td>
+                                    <td><span data-bind="text: $data.del_ind.value"></span></td>
+                                    <td><span data-bind="text: $data.specTyp.value"></span></td>
+                                    <td><span data-bind="text: $data.specClss.value"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" id="specificationDetailsInnerDiv">
+                        <span id="scrollAnchor"></span>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div style="padding-top:15px;margin-right:20px;margin-left:20px;"  >
+                <div class="table-responsive" id="divSltAliasdtls" hidden="hidden">
+                    <table style="width:100%">
+                        <tr>
+                            <td><h6><b>Alias Details:</b></h6></td>
+                        </tr>
+                    </table>
+                    <table id="idSlotAliasDtls" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Alias Name</th>
+                                <th>Alias Value</th>
+                                <th>NTE Value</th>
+                                <th>Application Name</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: slotAliasList">
+                            <tr>
+                                <td><span data-bind="text: $data.aliasName"></span></td>
+                                <td><span data-bind="text: $data.aliasValue"></span></td>
+                                <td><span data-bind="text: $data.nteVal"></span></td>
+                                <td><span data-bind="text: $data.appName"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" id="shelfDetailsInnerDiv">
+                    <span id="scrollAnchor"></span>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div id="idSlotAssignmentdetails">
+                    <div class="row" data-bind="compose:slotSpecification" id="slotSpec1"></div>
+                    <a href="#" class="scrollup"><span class="glyphicon glyphicon-chevron-up"></span></a>
+            </div>
+            <!-- added for showing Qualified slots for placing Cards-->
+            <div class="modal" id="idQualifiedSlots">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <table style="width:100%">
+                            <tr>
+                                <td><h4><b>Select Slot:</b></h4></td>
+                                <td><span class="close" id="idQualifiedSlotsclose">&times;</span></td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-sm-4">
+                                    <label>Qualified Slots:</label>
+                                    <select class="form-control" id="drpSlot" data-bind="options: $data.qualifiedSlotsforCard, optionsCaption:'select', optionsText: 'slotSpecNm', optionsValue: 'slotSpecID', event: { change: selectSlotSpecification }"></select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Position:</label><font color="red" style="font-size:12px;">*</font><br/>
+                                    <select class="form-control" id="drpCardPos" data-bind="options: $data.cardPositionTypes, optionsText: 'text', optionsValue: 'value', event: { change: selectCardPosition }"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" align="center">
+                            <div class="btn-group" style="padding:1%">
+                                <button type="submit" class="btn btn-success" data-bind="click: $data.addCard">Add</button>&nbsp;
+                                <button type="submit" class="btn btn-success" data-bind="click: $data.creatNewSlot, ">create New Slot</button>&nbsp;
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Card Dimension: width,Height,Depth,UOM</label><br />
+                            <span id="spSelectedCrdWth" data-bind="text: $data.selectedCardwidth"></span>
+                            <span id="spSelectedCrdHth" data-bind="text: $data.selectedCardheight"></span>
+                            <span id="spSelectedCrdDth" data-bind="text: $data.selectedCarddepth"></span>
+                            <span id="spSelectedCrdUom" data-bind="text:$data.selectedCarduom"></span>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Slot Dimension: width,Height,Depth,UOM</label><br />
+                            <span id="spSelectedSltWth" data-bind="text: $data.selectedSlotwidth"></span>
+                            <span id="spSelectedSltHth" data-bind="text: $data.selectedSlotheight"></span>
+                            <span id="spSelectedSltDth" data-bind="text: $data.selectedSlotdepth"></span>
+                            <span id="spSelectedSltUom" data-bind="text: $data.selectedSlotuom"></span>
+                        </div>
+                    </div>
+                    <div class="row" id="cardDetailsInnerDiv">
+                        <span id="scrollAnchor"></span>
+                    </div>
+               </div>
+            </div>
+
+</form>
+</div>
+</div>
+

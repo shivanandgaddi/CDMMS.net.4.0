@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ROOT">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DOC_HEADER" maxOccurs="unbounded">
+					<xs:complexType>						
+            <xs:all>
+              <xs:element name="MATNR" type="xs:string" minOccurs="0"/>
+              <xs:element name="HECI_CODE" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="MFRPN" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="MFRNR" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="APCL_CODE" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="MEINS" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="MATKL" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="ZMAKTX" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="NAME1" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="LVORM" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="ICC_CODE" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="AIC_CODE" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="DATE_SENT" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="BSTME" type="xs:string" minOccurs="0"  nillable="true"/>
+              <xs:element name="UMREZ" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="UMREN" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="ERSDA" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="LAEDA" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="PO_TEXT" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="VERPR" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="KZUMW" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="PLIFZ" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="MTART" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="ZHEIGHT" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="ZWIDTH" type="xs:string" minOccurs="0" nillable="true"/>
+              <xs:element name="ZDEPTH" type="xs:string" minOccurs="0" nillable="true"/>
+            </xs:all>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

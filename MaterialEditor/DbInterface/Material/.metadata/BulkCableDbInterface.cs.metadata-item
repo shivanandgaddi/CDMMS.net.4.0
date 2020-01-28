@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16555545
+file-version=1
+checksum=9dbb42fc807fa8e29000287b42a5353c
+fetch-size=15716
+mtime=1532966815
+item-spec=43444D4D533A4B58504E4D2042554C4B4341424C454442494E544552464143452043532D323831323931303435583335303732583338382E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/MaterialEditor/DbInterface/Material/BulkCableDbInterface.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

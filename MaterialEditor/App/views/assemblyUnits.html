@@ -1,0 +1,411 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+<div class="row" style="padding-bottom:15px">
+    <button type="button" data-bind="click: $data.openFireworks" class="btn btn-success">Search Fireworks</button>
+</div>
+<div class='panel panel-default'>
+    <div class="panel-heading">Select Labor ID</div>
+    <div class="panel-body">
+        <div class="row" data-bind="visible : btnAddLabor" style="padding-bottom:10px">
+            <div class="col-sm-offset-3 col-sm-3">
+                <label>New Labor Id: </label><input class="form-control" data-bind="textInput: newLaborId" />
+            </div>
+        </div>   
+        <div class="row" style="padding-bottom: 20px;">
+                    <div class="col-sm-3">
+                        <label>Labor ID:</label>
+                        <select class="form-control" data-bind="options: $data.assemblyLaborLt, optionsCaption:'select', optionsText: 'text', optionsValue: 'value',event: { change: getlaborTitleDescription }"></select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Title: </label><input class="form-control" data-bind="textInput: laborTitle" />
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Description: </label><input class="form-control" data-bind="textInput: laborDescription" />
+                    </div>
+                    <div class="col-sm-2" style="padding-top:20px">
+                        <button type="button" class="btn btn-success" data-bind="click: $data.saveNewLaborTitleDesc, enable: btnAddLabor">Add</button>
+                        <button type="button" class="btn btn-success" data-bind="click: $data.editLaborTitleDesc, enable: btnEditLabor">Edit</button>
+                    </div>
+                </div>
+        <div class="row" style="padding-top:20px;border: 1px solid lightgray;" data-bind="visible: visibleMtrlclsfnUI">
+                    <div data-bind="visible: visibleMtrlclsfnUI" class="col-md-8" style="max-height:204px;overflow-y:scroll">
+                        <table id="laborIdAttributesTbl" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Material Category</th>
+                                    <th>Feature Type</th>
+                                    <th>Cable Type</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:laborIdDetails">
+                                <tr>
+                                    <td><input class="chkbx_assemblyUnit" type="checkbox" data-bind="checked: $data.selected.value=='Y' ? true : false" /></td>
+                                    <td><span data-bind="text: $data.mtrlcattyp.value"></span></td>
+                                    <td><span data-bind="text: $data.feattyp.value"></span></td>
+                                    <td><span data-bind="text: $data.cabltyp.value"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4" data-bind="visible: visibleMtrlclsfnUI">
+                        <div class="row">
+                            <label>Search: &nbsp;&nbsp;</label><input type="text" class="form-control" style="display:inline;width:50%" id="classificationSearchBox"><br /><br />
+                            <button type="button" class="btn btn-success" data-bind="click: $data.saveLbrIdMtrlclsfn">Save Classification</button>
+                           </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class='panel panel-default' data-bind="visible: visibleMtrlclsfnUI">
+            <div class="panel-heading">Assembly Units</div>
+            <div class="panel-body">
+                <table id="assemblyUnitDt" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Assembly Unit Name</th>
+                            <th>Calculation</th>
+                            <th>Unit of Measurement</th>
+                            <th>Retired</th>
+                            <th>Muliplier Number</th>
+                            <th>Alternate</th>
+                            <th>Alternate to AU</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:laborIdDetailsAssembly">
+                        <tr>
+                            <td><input class="chkbx_assemblyUnit" type="checkbox" checked="checked" data-bind="checked: isselected.value=='Y' ? true : false,value: $data.aunm.value" /></td>
+                            <td><span class="aunm_assemblyUnit" data-bind="text: aunm.value"></span></td>
+                            <td><span class="calcnm_assemblyUnit" data-bind="text: calcnm.value"></span></td>
+                            <td><span data-bind="text: uomnm.value"></span></td>
+                            <td><input type="checkbox" data-bind="checked: retind.value=='Y' ? true : false,enable:false" /></td>
+                            <td><input class="form-control" data-bind="textInput: mtplrno.value" /></td>
+                            <td><input type="checkbox" data-bind="checked: alternative.value=='Y' ? true : false,enable:false" /></td>
+                            <td><input class="form-control" data-bind="textInput: alttoau.value" readonly /></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class='panel panel-default' id="idMaterialList" data-bind="visible: visibleMtrlclsfnUI">
+            <div class="panel-heading">Give inputs and click on Search</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group input-group-sm">
+                            <label>Assembly Unit Name</label>
+                            <input type="text" class="form-control" data-bind="textInput :assemblyUnitName">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group input-group-sm">
+                            <label>Calculation</label>
+                            <select class="form-control" data-bind="options: $data.searchCalculationValues, optionsText: 'text', optionsValue: 'value', value: $data.selectedSearchCalculation"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-sm">
+                            <label><input type="checkbox" value="retired" data-bind="checked: searchRetired">&nbsp;&nbsp;Retired&nbsp;&nbsp;</label>
+                            <button type="button" class="btn btn-success" data-bind="click: $data.searchAssemblyUnit">SEARCH</button>
+                            <button type="button" style="float:right" data-bind="click: $data.calculationModalClick" class="btn btn-success">Add/Edit Calculation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='panel panel-default' data-bind="visible: visibleSearchResultsUI">
+            <div class="panel-heading">Search Results</div>
+            <div class="panel-body">
+                <table id="assemblyUnitSearchDt" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Assembly Unit Name</th>
+                            <th>Calculation</th>
+                            <th>Unit of Measurement</th>
+                            <th>Default</th>
+                            <th>Alternate</th>
+                            <th>Multiplier Number</th>
+                            <th>Alternate to AU</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: assemblyUnitSearchResults">
+                        <tr>
+                            <td><input class="chkbx_searchAssemblyUnit" type="checkbox" data-bind="checked: $data.searchChooseChecked,value: $data.auid.value,event: { click: $parent.alternativechooseCheckbox }" /></td>
+                            <td><span data-bind="text: $data.aunm.value"></span></td>
+                            <td><span data-bind="text: $data.calcnm.value"></span></td>
+                            <td><span data-bind="text: $data.uomnm.value"></span></td>
+                            <td><input type="checkbox" data-bind="checked: $data.default.value=='Y' ? true : false,value: $data.auid.value,enable :$data.searchChooseChecked,event: { click: $parent.alternativeDefaultCheckbox }" /></td>
+                            <td><input type="checkbox" data-bind="checked: $data.alternative.value=='Y' ? true : false,enable :$data.searchChooseChecked,value: $data.auid.value,event: { onclick: $parent.alternativeCheckbox, onchange: $parent.alternativeCheckbox, onselect: $parent.alternativeCheckbox, click: $parent.alternativeCheckbox }" /></td>
+                            <td><input class="form-control" data-bind="textInput: $data.mtplrno.value" /></td>
+                            <td><input class="form-control" data-bind="textInput: alttoau.value" readonly /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" data-bind="visible: visibleMtrlclsfnUI">
+            <button type="button" class="btn btn-success center-block" data-bind="click: $data.saveSearchAssembly">Save Assembly Unit</button>
+        </div>
+        <div id="fireworksModal" class="modal">
+            <div class="modal-content" style="max-width:800px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click: $data.closeFireworks">&times;</button>
+                    <h4 class="modal-title">Fireworks:</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"> Search Input</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <h6><b>Name:</b> </h6><input class="form-control" data-bind="textInput: inputFireWorksName" />
+                                    </div>
+                                    <div class="col-sm-4" style="padding-top: 20px;">
+                                        <h6 style="padding-right: 5px;"><b>Not Retired:</b> </h6><input type="checkbox" data-bind="checked: fireworkNotRetiredChkb,event: { click: $data.fireworkNotRetiredSectionChkbValid }" />
+                                        <h6 style="padding-right: 5px;padding-left: 15px"><b>Section:</b> </h6><input type="checkbox" data-bind="checked: fireworkSectionChkb,event: { click: $data.fireworkNotRetiredSectionChkbValid }" />
+                                    </div>
+                                    <div class="col-sm-3" style="padding-top: 10px;">
+                                        <button type="button" class="btn btn-success center-block" data-bind="click: searchFireworksModal">Search Fireworks</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"> Search Results:</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table id="fireworksSearchTb" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Choose</th>
+                                            <th>Name</th>
+                                            <th>Retired Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach : fireworksSearchResults">
+                                        <tr>
+                                            <td><input type="checkbox" class="fireworksChkbx" data-bind="value: $data.assemblyunitsk.value" /></td>
+                                            <td><span data-bind="text: description.value"></span></td>
+                                            <td><span data-bind="text: dateexpired.value"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <label>Calculation</label>
+                            <select class="form-control" id="getFireworksCalculationId" data-bind="options: $data.getFireworksCalculation, optionsCaption:'select', optionsText: 'text', optionsValue: 'value'"></select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Unit of measurement:</label>
+                            <select class="form-control" id="getFireworksMeasurementId" data-bind="options: $data.getFireworksMeasurement, optionsCaption:'select', optionsText: 'text', optionsValue: 'value'"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="fireworksSave" data-bind="click: $data.saveFireworksModal">Save</button>
+                    <button type="button" class="btn btn-default" data-bind="click: $data.closeFireworks">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="calculationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click: $data.calculationModalClose">&times;</button>
+                    <h4 class="modal-title">Add/Edit Calculations</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="modalCalcValues">Calculation Name:</label>
+                            <select id="modalCalcValues" class="form-control" data-bind="options: $data.calculationValues, optionsText: 'text', optionsValue: 'value', value: $data.selectedCalculation, event: { change: selectedCalculationValues }"></select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <table id="calcOperationsTbl" style="width:100%" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Operation</th>
+                                        <th>Order of Operation</th>
+                                        <th hidden>AU_OP_ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:calculationOperations">
+                                    <tr>
+                                        <td><input class="chkbx_calcOperationsTbl" type="checkbox" data-bind="checked: isSelected.value=='Y' ? true : false, enable: $root.addNewCalcMode, event: { onclick: $parent.calcOperationsClick, onchange: $parent.calcOperationsClick, onselect: $parent.calcOperationsClick, click: $parent.calcOperationsClick }" /></td>
+                                        <td><span data-bind="text: opNm.value"></span></td>
+                                        <td><select class="slct_calcOperationsTbl" data-bind="options:ordrOfOprtn.options, optionsText: 'text', optionsValue: 'value', value: ordrOfOprtn.value, enable: $root.addNewCalcMode, event: {change: $parent.calcOperationsDDChange}"> </select></td>
+                                        <td hidden><span data-bind="text: auOpId.value" class="auOpId_calcOperationsTbl"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <button type="button" class="btn btn-success" data-bind="click: $data.addNewCalcBtnPress">Add New Calculation</button>
+                                <button type="button" id="deleteNewCalBtn" style="margin-left:5px" class="btn btn-success" data-bind="click: $data.deleteNewCalcBtnPress, enable: EnableDeleteCalcBtn, visible : VisibleDeleteCalcBtn">Delete Calculation</button>
+                                <!-- ko if: $data.addNewCalcMode() -->
+                                <button type="button" class="btn btn-success" data-bind="click: $data.saveNewCalcBtnPress">Save Calculation</button>
+                                <button type="button" class="btn btn-success" data-bind="click: $data.addNewCalcCancelBtnPress">Cancel</button>
+                                <!-- /ko -->
+                            </div>
+                            <div class="row" style="padding-top:20px">
+                                <!-- ko if: $data.addNewCalcMode() -->                             
+                                   <div id="newCalcNameTextBox"></div>                               
+                                <!-- /ko -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    To add a new operation&nbsp;<a href="#addoperationCollapse" data-toggle="collapse"><b>Click here</b></a>
+                                </h4>
+                            </div>
+                            <div id="addoperationCollapse" class="row panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="col-lg-4">
+                                        <table id="operatorsTbl" style="width:100%" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Select</th>
+                                                    <th>Operator</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:operators">
+                                                <tr>
+                                                    <td><input class="operatorsTblCbk" type="checkbox" data-bind="value: value" /></td>
+                                                    <td><span data-bind="text: text"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <table id="dataTermsTbl" style="width:100%" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Select</th>
+                                                    <th>Term</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:dataTerms">
+                                                <tr>
+                                                    <td><input class="dataTermsTblCbk" type="checkbox" data-bind="value: value" /></td>
+                                                    <td><span data-bind="text: text"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label id="variableConstantTxtFirstLabel">Constant: </label><input id="variableConstantTxtFirstId" data-bind="textInput: variableTermConstantTxtSecond" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1" style="text-align: center;padding-top: 60px;">
+                                        <div class="center-vert">
+                                            <label id="staticByTextLbl">By</label>
+                                            <label id="staticFromTextLbl">From</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <table id="variableTermsTbl" style="width:100%" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Select</th>
+                                                    <th>Term</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:variableTerms">
+                                                <tr>
+                                                    <td><input class="variableTermsTblCbk" type="checkbox" data-bind="value: value" /></td>
+                                                    <td><span data-bind="text: text"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label id="variableConstantTxtSecondLabel">Constant: </label><input id="variableConstantTxtSecondId" data-bind="textInput: variableTermConstantTxtFirst" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="alert alert-success" style="margin-bottom:0px">
+                                                <strong>
+                                                    <span data-bind="text: operationbindingTextFirst"></span>
+                                                    <span data-bind="text: operationbindingTextSecond"></span>
+                                                    <span data-bind="text: operationbindingTextThird"></span>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-success" data-bind="click: $data.saveAddOperation">Add Operation</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-bind="click: $data.calculationModalClose" class="btn btn-success">Close</button>
+                </div>
+            </div>
+        </div>
+        <div id="alternativeModal" class="modal">
+            <div class="modal-content" style="max-width:600px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click: $data.closeAlternativeModal">&times;</button>
+                    <h4 class="modal-title">Alternative</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <table id="alternativeModalTb" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Choose</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:alternativeAssemblyUnitsList">
+                                <tr>
+                                    <td><input class="chkbx_alternative" type="checkbox" data-bind="value:  $data.auid.value" /></td>
+                                    <td><span class="aunm_alternative" data-bind="text: $data.aunm.value"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bind="click: $data.saveAlternative">Save</button>
+                    <button type="button" class="btn btn-default" data-bind="click: $data.closeAlternativeModal">Close</button>
+                </div>
+            </div>
+        </div>

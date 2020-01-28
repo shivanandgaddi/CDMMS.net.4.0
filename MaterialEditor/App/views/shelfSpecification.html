@@ -1,0 +1,368 @@
+﻿<div class='panel panel-default'>
+    <div class="panel-heading">
+        <span>Shelf Specification</span>
+        <div class="btnRESTORE_SEARCH btn btn-success" style="display: none; float: right; margin-top: -9px"><i class="fa fa-search"></i></div>
+    </div>
+    <div class="panel-body">
+        <form data-bind="submit: $data.updateShelfSpec" name="shelfSpecForm">
+            <div class="container">
+                <div class="row" align="left" style="padding-bottom:15px;padding-bottom:10px">
+                    <button type="button" id="backToMtlButton" class="btn btn-success" data-bind="click: $data.navigateToMaterial, visible: enableBackButton">Back</button>
+                </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-2">
+                    <label>Generic:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="GenericChbk" data-bind="checked: $data.selectedShelfSpec().Gnrc.bool, enable:$data.selectedShelfSpec().Gnrc.enable, event: { change: onchangeShelfGeneric }" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Record Only:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="shelfROChbk" data-bind="checked: $data.selectedShelfSpec().RO.bool, enable:$data.selectedShelfSpec().RO.enable, event: { change: onchangeShelfRecordOnly }" />
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-success" id="idAsscociateshelf" data-bind="click:$root.associatepartShelf.bind($root,$root), visible : enableAssociate">Associate Part</button>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-2">
+                    <label>Completed:&nbsp;&nbsp;</label>
+                    <input type="checkbox" name="cmpIndnmshelf" id="shelfCmpltChbk" data-bind="checked: $data.selectedShelfSpec().Cmplt.bool,enable:$data.selectedShelfSpec().Cmplt.enable, event: { change: onchangeShelfCompleted }" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Propagated:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="shelfPrpgtdChbk" name="proptIndBay" data-bind="checked: $data.selectedShelfSpec().Prpgtd.bool,enable:$data.selectedShelfSpec().Prpgtd.enable, disable:completedNotSelected" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Unusable in NDS:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="shelfNdLvlMtrlChbk" data-bind="checked: $data.selectedShelfSpec().Dltd.bool" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Specification ID:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedShelfSpec().id.value" required readonly />
+                </div>                
+            </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Name:</label><font color="red">*</font>
+                        <input class="form-control" data-bind="textInput: $data.specName, enable: enableName,value: $data.specName" maxlength="40" required />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Description:</label><font color="red">*</font>
+                        <input class="form-control" data-bind="textInput: $data.selectedShelfSpec().Desc.value" maxlength="2000" required />
+                    </div>
+                </div>
+                <!--<div class="col-sm-6">
+                <label>Revision Name:</label><font color="red">*</font>
+                <input class="form-control" data-bind="textInput: $data.selectedShelfSpec().RvsnNm.value" maxlength="250" required />
+            </div>-->
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Slots Per Row Quantity:</label>
+                    <input class="form-control" id="valSltsRwQtyLblId"  data-bind="textInput: $data.selectedShelfSpec().SltsRwQty.value !== '0' ? $data.selectedShelfSpec().SltsRwQty.value : ''" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+                    <label id="valSltsRwQtyLbl" hidden><font color="red"><i>Should be in range from 1 to 999</i></font></label>
+                 </div>
+                <div class="col-sm-6">
+                    <label>Starting Slot No:</label>
+                    <input class="form-control" id="idStrtSltNo" data-bind="textInput: $data.selectedShelfSpec().StrtSltNo.value !== '0' ? $data.selectedShelfSpec().StrtSltNo.value : ''" maxlength="250" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />                    
+                  </div>
+            </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Use Type:</label><font color="red">*</font>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().ShelfUseTypId.value, visible: false;" disabled />
+                        <select class="form-control" data-bind="options: $data.useTypeList, value:$data.selectedShelfSpec().ShelfNDSUseTyp.value"></select>
+                    </div>
+                </div>
+            <div class="row" style="padding-bottom:15px">              
+                <div class="col-sm-6">
+                    <label>Orientation:</label><font color="red">*</font>
+                    <select class="form-control" data-bind="options: $data.selectedShelfSpec().OrnttnId.options,  optionsText: 'text', optionsValue: 'value',value:$data.selectedShelfSpec().OrnttnId.value"></select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Label Name:</label>
+                    <input class="form-control" data-bind="textInput: $data.selectedShelfSpec().LblNm.value" maxlength="20" />
+                </div>
+                <div class="col-sm-3">
+                    <label>Label Position:</label>
+                    <select class="form-control" data-bind="options: $data.selectedShelfSpec().LblPosId.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedShelfSpec().LblPosId.value"></select>
+                </div>
+            </div>
+            <div id="nongenericBlock" data-bind="visible: nongenericBlockview">
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Model:</label><font color="red" style="font-size:12px;">*</font>
+                        <input type="text" id="modelTxt" required class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Nm.value" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>CLEI:</label>
+                        <input type="text" id="modelTxt" class="form-control" maxlength="47" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>HECI:</label>
+                        <input type="text" id="modelTxt" class="form-control" maxlength="47" />
+                    </div>
+                </div>
+            </div>          
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-3" data-bind="visible: genericSelected">
+                    <label>Height:</label><font color="red">*</font>
+                    <input id="idHeight" class="form-control" data-bind="textInput: $data.selectedShelfSpec().Hght.value !== '0.00' ? $data.selectedShelfSpec().Hght.value : '', event:{ keypress: NumDecimal}" />
+                </div>
+                <div class="col-sm-3" data-bind="visible: genericSelected">
+                    <label>Width:</label><font color="red">*</font>
+                    <input id="idWidth" class="form-control" data-bind="textInput: $data.selectedShelfSpec().Wdth.value !== '0.00' ? $data.selectedShelfSpec().Wdth.value : '', event:{ keypress: NumDecimal}"  />
+                </div>
+                <div class="col-sm-3" data-bind="visible: genericSelected">
+                    <label>Depth:</label><font color="red">*</font>
+                    <input id="idDepth" class="form-control" data-bind="textInput: $data.selectedShelfSpec().Dpth.value !== '0.00' ? $data.selectedShelfSpec().Dpth.value : '', event:{ keypress: NumDecimal}"  />
+                </div>
+                <div class="col-sm-3" data-bind="visible: genericSelected">
+                    <label>Dimension UOM:</label><font color="red">*</font>
+                    <select id="idDUOM" class="form-control" data-bind="options: $data.selectedShelfSpec().DimUom.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedShelfSpec().DimUom.value" ></select>
+                </div>
+            </div>
+        <!-- ko if: $data.selectedShelfSpec().Shelf !== undefined -->
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-3">
+                        <label>Manufacturer:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].Mfg.value, enable:$data.selectedShelfSpec().Shelf.list[0].Mfg.enable" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Manufacturer Name:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].MfgNm.value, enable:$data.selectedShelfSpec().Shelf.list[0].MfgNm.enable" />
+                    </div>
+                    <!--<div class="col-sm-3">
+                        <label>NDS Manufacturer:</label>
+                        <input type="text" class="form-control" maxlength="20" readonly data-bind="value: $data.selectedShelfSpec().NdsMfr.value" />
+                    </div>-->
+                    <div class="col-sm-3">
+                        <label>Part Number:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].PrtNo.value, enable:$data.selectedShelfSpec().Shelf.list[0].PrtNo.enable" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Material Code:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].PrdctId.value, enable:$data.selectedShelfSpec().Shelf.list[0].PrdctId.enable" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Material Description:</label>
+                        <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].ItmDesc.value, enable:$data.selectedShelfSpec().Shelf.list[0].ItmDesc.enable" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Depth:</label><font color="red">*</font>
+                        <input type="text" id="txtDpth" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].Dpth.value, event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Height:</label><font color="red">*</font>
+                        <input type="text" id="txtHght" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].Hght.value, event:{ keypress: NumDecimal}" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">                    
+                    <div class="col-sm-6">
+                        <label>Width:</label><font color="red">*</font>
+                        <input type="text" id="txtWdth" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].Wdth.value, event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Dimensions Unit of Measurement:</label>
+                        <select id="idShelfDimUom" class="form-control" data-bind="options: $data.selectedShelfSpec().Shelf.list[0].DimUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedShelfSpec().Shelf.list[0].DimUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Normal Current Drain:</label>
+                        <input type="text" id="txtNrmlDrn" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnNrm.value !== '0' ? $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnNrm.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idNrmlDrnUom" class="form-control" data-bind="options: $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnNrmUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnNrmUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Peak Current Drain:</label>
+                        <input type="text" id="txtPkDrn" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnMx.value !== '0' ? $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnMx.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idPkDrnUom" class="form-control" data-bind="options: $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnMxUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedShelfSpec().Shelf.list[0].ElcCurrDrnMxUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Power:</label>
+                        <input type="text" id="txtPwr" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].HtDssptn.value !== '0' ? $data.selectedShelfSpec().Shelf.list[0].HtDssptn.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idPwrUom" class="form-control" data-bind="options: $data.selectedShelfSpec().Shelf.list[0].HtDssptnUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedShelfSpec().Shelf.list[0].HtDssptnUom.value"></select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Shelf Weight:</label>
+                        <input type="text" id="txtWt" class="form-control" maxlength="47" data-bind="value: $data.selectedShelfSpec().Shelf.list[0].Wght.value !== '0' ? $data.selectedShelfSpec().Shelf.list[0].Wght.value : '', event:{ keypress: NumDecimal}" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Unit of Measurement:</label>
+                        <select id="idWtUom" class="form-control" data-bind="options: $data.selectedShelfSpec().Shelf.list[0].WghtUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedShelfSpec().Shelf.list[0].WghtUom.value"></select>
+                    </div>
+                </div>              
+                <!-- /ko -->
+            <div class="row" style="padding-bottom:25px">               
+                <div class="col-sm-2">
+                    <label>Straight Through:</label>
+                    <input type="checkbox" id="shelfStrghtThruChbk" data-bind="checked: $data.selectedShelfSpec().StrghtThru.value =='Y' ? true : false" />
+                    <!--<input type="checkbox" id="shelfStrghtThruChbk" data-bind="checked: true" />-->
+                </div>
+                <div class="col-sm-2">
+                    <label>Mid Plane:</label>
+                    <input type="checkbox" id="shelfMidPlnChbk" data-bind="checked: $data.selectedShelfSpec().MidPln.value =='Y' ? true : false" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Node Level Material</label>
+                    <input type="checkbox" id="shelfNmnlChbk" data-bind="checked: $data.selectedShelfSpec().NdLvlMtrl.value =='Y' ? true : false" />
+                </div>
+            </div>
+         
+            <div class="row" style="padding-top:20px;">
+                <div class="col-sm-6">
+                    <div class='panel panel-default'>
+                        <div class="panel-heading">Shelf Role Type List</div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Shelf Role Type</th>
+                                        <th>Priority Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:shelfRoleTypeListTbl">
+                                    <tr>
+                                        <td><input type="checkbox" class="SpcnRlTypLstCbk" data-bind="value:$data.id.value,checked: $data.Slctd.bool, enable: $data.Slctd.enable,click: $parent.onchangeSpcnRlTypLst" /></td>
+                                        <td><span data-bind="text: $data.SpcnRlTyp.value"></span></td>
+                                        <td><input type="number" class="form-control" data-bind="textInput: $data.PrtyNo.value,enable: $data.Slctd.bool" onkeypress='return event.charCode >= 48 && event.charCode <= 57' /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="roleTypeValidTblDgr" class="alert alert-danger" hidden></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="row" align="center">                
+                <button type="submit" class="btn btn-success" id="shelfSpecFormBtn"> Save </button>
+                <button type="button" class="btn btn-success" id="buttonclick" data-bind="click: exportShelfSpecReport">
+                    <span class="fa fa-external-link" />
+                    <span>Export Report</span>
+                </button>
+            </div>
+ </form>
+</div>
+</div>
+<div id="shelfAssociateModalpopup" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Associated Part:</b></h4></td>
+                    <td><span class="close">&times;</span></td>
+                </tr>
+            </table>
+            <h4>Search Input:</h4>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="idcdmmsshelf" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmsshelf">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="materialcodeshelf">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcodeshelf">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="partnumbershelf">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumbershelf">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="clmcshelf">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcshelf">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptshelf">Catalog Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptshelf">
+                </div>
+            </div>
+            <div class="row" align="center">
+                <div>
+                    <div class="Noinput" style="display: none; color:red">Please Enter An Input!</div>    
+                    <button class="btn btn-success" data-bind="click: $data.searchmtlshelf">SEARCH</button>
+                    <div class="NoRecordrp" style="display: none; color:red">No records found!</div>
+                </div>
+            </div>
+
+            <h4>Search Results:</h4>
+            <table id="searchresultshelf" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>Catalog/Material Description</th>
+
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:searchtblshelf">
+                    <tr>
+                      
+                        <td><input type="checkbox" class="checkshelfpopsearch" id="chkshelf"  data-bind="value: $data.material_item_id.value" /></td>
+                        <td><span class="idshelfs" data-bind="text: $data.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.item_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Associated Material:</h4>
+            <table id="associatedmtl" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>Catalog/Material Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:associatemtlblck">
+                    <tr>
+
+                        <td><input type="checkbox" class="checkasstspopsearch" id="idchkshelf" checked="checked" data-bind="value: $data.material_item_id.value" /></td>
+                        <td><span class="idsasspnode" data-bind="text: $data.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.item_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row" align="center">
+                <button type="submit"  id="modalButtonSave" class="btn btn-success" data-bind="click: $data.SaveassociateShelf, enable: enableModalSave"> OK </button>
+                <button type="submit" class="btn btn-success" data-bind="click: $data.Cancelassociateshelf">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

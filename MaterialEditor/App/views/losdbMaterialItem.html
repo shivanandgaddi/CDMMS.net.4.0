@@ -1,0 +1,293 @@
+﻿<div>
+    <div class="header-2">LOSDB Material</div>
+    <div>
+        <p>
+            <button type="button" class="btn btn-success" id="btn_revision_losdb" data-bind="click: $root.searchLosdbMaterial.bind($root,$root), enable:$data.mtl.MtrlId.value() === '0' ? false : true">Search</button>
+        </p>
+    </div>
+    <!-- ko if: exists -->
+    <div class="row">
+        <div class="col-sm-6" padding-left="0px" padding-right="0px">
+            <h4>CDMMS Id: <span  data-bind="text: $data.mtl.id.value" /></h4>
+        </div>
+    <!--</div>
+    <div class="row">
+        <div class="col-sm-6" padding-left="0px" padding-right="0px">
+            <h4>Product ID: <span data-bind="text: $data.mtl.PrdctId.value" /></h4>
+        </div>-->
+        <div class="col-sm-6" padding-left="0px" padding-right="0px">
+            <h4>Part Number: <span data-bind="text: $data.mtl.PrtNo.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Equipment Description: <span data-bind="text: $data.mtl.EqptDscr.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Inventory Description: <span data-bind="text: $data.mtl.CtlgDesc.value" /></h4>
+        </div>
+    </div>
+    <!--<div class="row">
+        <div class="col-sm-12">
+            <h4>Asset ID: <span data-bind="text: $data.mtl.AsstId.value" /></h4>
+        </div>
+    </div>-->
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Vendor: <span data-bind="text: $data.mtl.Mfg.value" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Vendor Name: <span data-bind="text: $data.mtl.MfgNm.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>CLEI: <span data-bind="text: $data.mtl.CLEI.value" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>Compatible Equipment CLEI(7):</h4>
+            <h4><select id="compatibleClei7DropDown" class="form-control" data-bind="options: compatibleClei7Item.CompatibleClei7"></select></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>Equipment Catalog Item ID: <span data-bind="text: $data.mtl.EqptCtlgItmId.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Drawing: <span data-bind="text: $data.mtl.Drwg.value" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Drawing Issue: <span data-bind="text: $data.mtl.DrwgIss.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Height: <span data-bind="text: $data.mtl.Hght.value() !== '0' ? $data.mtl.Hght.value : ''" />&nbsp;<span data-bind="text: $data.mtl.Hght.value() !== '0' ? $data.mtl.DimUom.value : ''" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Width: <span data-bind="text: $data.mtl.Wdth.value() !== '0' ? $data.mtl.Wdth.value : ''" />&nbsp;<span data-bind="text: $data.mtl.Wdth.value() !== '0' ? $data.mtl.DimUom.value : ''" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Depth: <span data-bind="text: $data.mtl.Dpth.value() !== '0' ? $data.mtl.Dpth.value : ''" />&nbsp;<span data-bind="text: $data.mtl.Dpth.value() !== '0' ? $data.mtl.DimUom.value : ''" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Weight: <span data-bind="text: $data.mtl.Wght.value() !== '0' ? $data.mtl.Wght.value : ''" />&nbsp;<span data-bind="text: $data.mtl.Wght.value() !== '0' ? $data.mtl.WghtUom.value : ''" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>LS or Series: <span data-bind="text: $data.mtl.LsOrSrs.value" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>Ordering Status: <span data-bind="text: $data.mtl.OrdStat.value" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>Ordering Code: <span data-bind="text: $data.mtl.OrdgCd.value" /></h4>
+        </div>
+    </div>
+    <!--
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Input Voltage Minimum: <span data-bind="text: $data.mtl.VltgMin.value() !== '0' ? $data.mtl.VltgMin.value : ''" />&nbsp;<span data-bind="text: $data.mtl.VltgMin.value() !== '0' ? $data.mtl.VltgMinUom.value : ''" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Input Voltage Maximum: <span data-bind="text: $data.mtl.VltgMx.value() !== '0' ? $data.mtl.VltgMx.value : ''" />&nbsp;<span data-bind="text: $data.mtl.VltgMx.value() !== '0' ? $data.mtl.VltgMxUom.value : ''" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Normal Electrical Current: <span data-bind="text: $data.mtl.ElcCurrDrnNrm.value() !== '0' ? $data.mtl.ElcCurrDrnNrm.value : ''" />&nbsp;<span data-bind="text: $data.mtl.ElcCurrDrnNrm.value() !== '0' ? $data.mtl.ElcCurrDrnNrmUom.value : ''" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Maximum Electrical Current: <span data-bind="text: $data.mtl.ElcCurrDrnMx.value() !== '0' ? $data.mtl.ElcCurrDrnMx.value : ''" />&nbsp;<span data-bind="text: $data.mtl.ElcCurrDrnMx.value() !== '0' ? $data.mtl.ElcCurrDrnMxUom.value : ''" /></h4>
+        </div>
+    </div>
+    -->
+    <div class="row">
+        <table id="losdbelectricalresults" style="width:100%" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Input Voltage Min</th>
+                    <th>Input Voltage Max</th>
+                    <th>Normal Elec Current</th>
+                    <th>Max Elec Current</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:$data.electricalItems()">
+                <tr>
+                    <td><span data-bind="text:InputvoltageMinimum()"></span></td>
+                    <td><span data-bind="text:InputVoltageMaximum()"></span></td>
+                    <td><span data-bind="text:NormalElectricalCurrent()"></span></td>
+                    <td><span data-bind="text:MaximumElectricalCurrent()"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Heat Generation: <span data-bind="text: $data.mtl.HtGntn.value() !== '0' ? $data.mtl.HtGntn.value : ''" />&nbsp;<span data-bind="text: $data.mtl.HtGntn.value() !== '0' ? $data.mtl.HtGntnUom.value : ''" /></h4>
+        </div>
+        <div class="col-sm-6">
+            <h4>Heat Dissipation: <span data-bind="text: $data.mtl.HtDssptn.value() !== '0' ? $data.mtl.HtDssptn.value : ''" />&nbsp;<span data-bind="text: $data.mtl.HtDssptn.value() !== '0' ? $data.mtl.HtDssptnUom.value : ''" /></h4>
+        </div>
+    </div>
+    <!--<div class="row">
+        <div class="col-sm-4">
+            <h4>System Name 1: <span data-bind="text: $data.mtl.SysNm1.value" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>System Name 2: <span data-bind="text: $data.mtl.SysNm2.value" /></h4>
+        </div>
+        <div class="col-sm-4">
+            <h4>System Name 3: <span data-bind="text: $data.mtl.SysNm3.value" /></h4>
+        </div>
+    </div>-->
+    <!-- /ko -->
+    <!-- ko ifnot: exists --> 
+ 
+    
+
+    <div class="error_message">
+        <i class="fa fa-info-circle"></i>
+        No Material found.
+    </div>
+
+    <!-- /ko -->
+</div>
+<div id="searchLosdbMaterialModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-bind="click: $data.cancelSearchLosbModal" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">LOSDB Search</h4>
+        </div>
+        <div class="modal-body">
+            <div>
+                <div hidden="hidden">
+                    <div class="col-sm-6" padding-left="0px" padding-right="0px">
+                        <h4>cdmms id: <span id="cdmmslosdb" data-bind="text: $data.mtl.id.value" /></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" padding-left="0px" padding-right="0px">
+                        <h4>Material Code: <span id="prodtid" data-bind="text: $data.mtl.PrdctId.value" /></h4>
+                    </div>
+                    <div class="col-sm-6" padding-left="0px" padding-right="0px">
+                        <h4>Part Number: <span data-bind="text: $data.mtl.PrtNo.value" /></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Material Description: <span data-bind="text: $data.mtl.ItmDesc.value" /></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Manufacturer CLMC: <span data-bind="text: $data.mtl.Mfg.value" /></h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Manufacturer Name: <span data-bind="text: $data.mtl.MfgDesc.value" /></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>HECI: <span data-bind="text: $data.mtl.HECI.value" /></h4>
+                    </div>
+                </div>
+            </div>
+            <h4>Search Input:</h4>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="seachLosdbClei" class="control-label">CLEI</label>
+                    <input type="text" class="form-control" id="seachLosdbClei" data-bind="event: {keyup: $data.enableSearch}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="seachLosdbCompatible" class="control-label">Compatible 7 CLEI</label>
+                    <input type="text" class="form-control" id="seachLosdbCompatible" data-bind="event: {keyup: $data.enableSearch}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="seachLosdbPartNum" class="control-label">Part Number</label>
+                    <input type="text" class="form-control" id="seachLosdbPartNum" data-bind="event: {keyup: $data.enableSearch}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="seachLosdbClmc" class="control-label">CLMC</label>
+                    <input type="text" class="form-control" id="seachLosdbClmc" data-bind="event: {keyup: $data.enableSearch}">
+                </div>
+            </div>
+            <div class="row" align="center">
+                <!--
+                <div class="col-sm-6 form-group">
+                    <label for="seachLosdbDescription" class="control-label">Catalog Description</label>
+                    <input type="text" class="form-control" id="seachLosdbDescription">
+                </div>
+                -->               
+                    <button class="btn btn-success" data-bind="click: $data.searchOpenLosdbMaterial, enable: $data.searchButtonEnabled">SEARCH</button>
+                    <div class="NoRecordrp" style="display: none; color:red">No records found!</div>
+                
+            </div>
+            <h4>Search Results:</h4>
+            <table id="srchlosdbresults"  style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>PART NO</th>
+                        <th>CLMC</th>
+                        <th>CLEI</th>
+                        <th>COMPATIBLE 7 CLEI</th>
+                        <th>MATERIAL DESCRIPTION</th>
+                        <th hidden="hidden">ID</th>
+                        <th hidden="hidden">EQPT ID</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:srchlosdbresults">
+                    <tr>
+                        <td><input class="chksearch" type="checkbox" data-bind="value: $data.Attributes.prod_id.value" /></td>
+                        <td><span data-bind="text:$data.Attributes.part_no_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.clmc_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.Clei_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.compatible_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.desc_losdb.value"></span></td>
+                        <td hidden="hidden"><span data-bind="text:$data.Attributes.prod_id.value"></span></td>
+                        <td hidden="hidden"><span class="eqptIds" data-bind="text:$data.Attributes.eqpt_id.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Associated Material:</h4>
+            <table id="associatedlosdbmtl" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>PART NO</th>
+                        <th>CLMC</th>
+                        <th>CLEI</th>
+                        <th>COMPATIBLE 7 CLEI</th>
+                        <th>MATERIAL DESCRIPTION</th>
+                        <th hidden="hidden">ID</th>
+                        <th hidden="hidden">EQPT ID</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:losdbmtl">
+                    <tr>
+                        <td><input class="chkassoc" type="checkbox" checked="checked" data-bind="value: $data.Attributes.prod_id.value" /></td>
+                        <td><span data-bind="text:$data.Attributes.part_no_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.clmc_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.Clei_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.compatible_losdb.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.desc_losdb.value"></span></td>
+                        <td hidden="hidden"><span data-bind="text:$data.Attributes.prod_id.value"></span></td>
+                        <td hidden="hidden"><span class="eqptIds" data-bind="text:$data.Attributes.eqpt_id.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div align="center">
+                <button type="submit" class="btn btn-success" data-bind="click: $data.saveSearchLosbModal, enable: enableModalSave">Save</button>
+                <button type="submit" class="btn btn-success" data-bind="click: $data.cancelSearchLosbModal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

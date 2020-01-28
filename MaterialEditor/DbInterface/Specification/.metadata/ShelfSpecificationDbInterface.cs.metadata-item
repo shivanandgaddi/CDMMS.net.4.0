@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16555616
+file-version=1
+checksum=6e132fd77d42e87a572ef9bca335d2ac
+fetch-size=38928
+mtime=1538158813
+item-spec=43444D4D533A4B58504E4D205348454C4653504543494649434154494F4E4442494E544552464143452043532D323831323931303435583335303732583432322E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/MaterialEditor/DbInterface/Specification/ShelfSpecificationDbInterface.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

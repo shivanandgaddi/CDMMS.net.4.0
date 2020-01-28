@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+  <DOC_HEADER>    
+    <StagingTableFields>
+      <MATNR required="true">MTL_CD</MATNR>
+      <HECI_CODE>HECI</HECI_CODE>
+      <MFRPN>MFG_PART_NO</MFRPN>
+      <MFRNR>MANUFACTURER</MFRNR>
+      <APCL_CODE>APCL</APCL_CODE>
+      <MEINS required="true">UOM</MEINS>
+      <MATKL required="true">MTL_GRP</MATKL>
+      <ZMAKTX required="true">MTL_DESC</ZMAKTX>
+      <NAME1>MFG_NM</NAME1>
+      <LVORM>ITEM_STATUS</LVORM>
+      <ICC_CODE>ICC_CD</ICC_CODE>
+      <AIC_CODE>AIC_CD</AIC_CODE>
+      <DATE_SENT required="true">PROC_DT</DATE_SENT>
+      <BSTME>ALT_UOM</BSTME>
+      <UMREZ>CONV_RATE1</UMREZ>
+      <UMREN>CONV_RATE2</UMREN>
+      <ERSDA required="true">DT_CREATED</ERSDA>
+      <LAEDA>LAST_CHG_DT</LAEDA>
+      <PO_TEXT required="true">PO_TEXT</PO_TEXT>
+      <VERPR required="true">MVG_AVG_PRICE_AMT</VERPR>
+      <KZUMW>HAZARD_IND</KZUMW>
+      <PLIFZ required="true">PLAND_DEL_TM</PLIFZ>
+      <MTART required="true">MTL_TYPE</MTART>
+      <ZHEIGHT>ZHEIGHT</ZHEIGHT>
+      <ZWIDTH>ZWIDTH</ZWIDTH>
+      <ZDEPTH>ZDEPTH</ZDEPTH>
+      <RecordType>Record_Type</RecordType>       
+    </StagingTableFields>    
+  </DOC_HEADER>
+</ROOT>

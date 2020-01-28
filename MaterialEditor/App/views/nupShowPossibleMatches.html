@@ -1,0 +1,50 @@
+﻿<div class='panel panel-default' id="sap1" data-bind="visible: showsap">
+    <div class="panel-heading">Show Partial Matches</div>
+    <div class="panel-body" id="nupShowPartialMatchesPanel">
+        <div class="table-responsive">
+            <table id="nupShowPartialMatches" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Root Part No</th>
+                        <th>Mfg Part No</th>
+                        <th>CLMC</th>
+                        <th>Product ID</th>
+                        <th>Desc</th>
+                        <th>Category</th>
+                        <th>Feature Type</th>
+                        <th>Rev No</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:NupShowlist">
+                    <tr>
+                        <td><input class="chksearch" type="checkbox"/></td>
+                        <td><span>CDMMS ID</span></td>
+                        <td><span>Root Part No</span></td>
+                        <td><span>Mfg Part No</span></td>
+                        <td><span>CLMC</span></td>
+                        <td><span>Product ID</span></td>
+                        <td><span>Desc</span></td>
+                        <td><span>Category</span></td>
+                        <td><span>Feature Type</span></td>
+                        <td><span>Rev No</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td><h4>New Revision No: </h4><input class="form-control" id="newRevNo"/></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td><button id="associatbtn" class="btn btn-success" type="button">Add Revision and Accept</button></td>
+                    <td><button id="continuebtn" class="btn btn-success" type="button">Continue Without Revision</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

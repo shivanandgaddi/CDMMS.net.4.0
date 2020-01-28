@@ -1,0 +1,81 @@
+﻿<div class='panel panel-default'>
+    <div class="panel-heading">        
+        <span>Port Specification</span>
+        <div class="btnRESTORE_SEARCH btn btn-success" style="display: none; float: right; margin-top: -9px"><i class="fa fa-search"></i></div>
+    </div>
+    <div class="panel-body">
+        <form data-bind="submit: $data.updatePortSpec" name="portSpecForm">
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-2">
+                    <label>Completed&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="completedChkBox" name="cmplIndnmport" data-bind="checked: $data.selectedPortSpec().Cmplt.bool, enable:$data.selectedPortSpec().Cmplt.enable, event: { change: onchangeCompleted }" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Propagated:&nbsp;&nbsp;</label>
+                    <input type="checkbox" id="prpgIndport" data-bind="checked: $data.selectedPortSpec().Prpgtd.bool, enable:$data.selectedPortSpec().Prpgtd.enable, disable:completedNotSelected" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Unusable in NDS:&nbsp;&nbsp;</label>
+                    <input type="checkbox" data-bind="checked: $data.selectedPortSpec().Dltd.bool" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Specification ID:</label><font color="red">*</font>
+                    <input class="form-control" id="specidport" data-bind="textInput: $data.selectedPortSpec().id.value" readonly required />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Specification Name:</label><font color="red">*</font>
+                    <input class="form-control" id="nameport" data-bind="textInput: $data.selectedPortSpec().RvsnNm.value" maxlength="47" required />
+                </div>
+                <div class="col-sm-6">
+                    <label>Description:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedPortSpec().Desc.value" maxlength="35" required />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Model Name:</label><font color="red">*</font>
+                    <input type="text" class="form-control" maxlength="40" data-bind="value: $data.selectedPortSpec().Nm.value" />
+                </div>
+                <div class="col-sm-6">
+                    <label>Role Type:</label>
+                    <select class="form-control" data-bind="options: $data.portUseTypeList,  optionsText: 'text', optionsValue: 'value',value:$data.selectedPortSpec().PortUseTypId.value"></select>
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Type:</label>
+                    <select class="form-control" data-bind="options: $data.portType,  optionsText: 'text', optionsValue: 'value',value:$data.selectedPortSpec().PortTyp.value"></select>
+                </div>
+                <div class="col-sm-6">
+                    <label>Service Level:</label>
+                    <select class="form-control" data-bind="options: $data.portServiceLevel,  optionsText: 'text', optionsValue: 'value',value:$data.selectedPortSpec().PortSrvLvl.value"></select>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Connector Type:</label>
+                    <select class="form-control" data-bind="options: $data.selectedPortSpec().CnctrTyp.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPortSpec().CnctrTyp.value" required></select>
+                </div>
+                <div class="col-sm-6">
+                    <label>Physical Status:</label>
+                    <select class="form-control" data-bind="options: $data.portPhysicalStts,  optionsText: 'text', optionsValue: 'value',value:$data.selectedPortSpec().physStts.value"></select>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Department:</label>
+                    <select class="form-control" data-bind="options: $data.portDepartment,  optionsText: 'text', optionsValue: 'value',value:$data.selectedPortSpec().PortDept.value"></select>
+                </div>               
+            </div>
+            <div class="row" align="center">
+                <button type="submit" class="btn btn-success" id="portSpecFormBtn"> SAVE </button>
+            </div>
+        </form>
+    </div>
+</div>
+

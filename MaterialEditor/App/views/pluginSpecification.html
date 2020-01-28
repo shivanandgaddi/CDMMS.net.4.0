@@ -1,0 +1,339 @@
+﻿<div class='panel panel-default'>
+    <div class="panel-heading">        
+        <span>Plug In Specification</span>
+        <div class="btnRESTORE_SEARCH btn btn-success" style="display: none; float: right; margin-top: -9px"><i class="fa fa-search"></i></div>
+    </div>
+    <div class="panel-body">
+        <form data-bind="submit: $data.updatePluginSpec" name="pluginSpecForm">
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Specification ID:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedPlugInSpec().id.value" required readonly="readonly" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Specification Name:</label><font color="red">*</font>
+                    <!-- <textarea rows="1" class="form-control" type="text" data-bind="value: $data.selectedPlugInSpec().Nm.value" maxlength="250" />-->
+                    <input class="form-control" data-bind="textInput: $data.selectedPlugInSpec().Nm.value" maxlength="250" required />
+                </div>
+                <div class="col-sm-6">
+                    <label>Function Code Description:</label>
+                    <textarea rows="1" class="form-control" type="text" data-bind="value: $data.selectedPlugInSpec().FnctnCd.value" maxlength="250" />
+                    <!-- <input class="form-control" data-bind="textInput: $data.selectedPlugInSpec().FnctnCd.value" />-->
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Channel No:</label>
+                    <input class="form-control" id="chnlNoTxt" data-bind="textInput: $data.selectedPlugInSpec().ChnlNo.value !== '0' ? $data.selectedPlugInSpec().ChnlNo.value : ''" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                </div>
+                <div class="col-sm-6">
+                    <label>Form Factor:</label>
+                    <input class="form-control" data-bind="textInput: $data.selectedPlugInSpec().FrmFctr.value" maxlength="10" />
+                </div>
+                <!--<div class="col-sm-6">
+                    <label>Description</label>
+                    <input class="form-control" data-bind="textInput: $data.selectedPlugInSpec().Desc.value" />
+                </div>-->
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Use Type:</label>
+                    <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().PluginUseTypId.value" disabled />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <!--<div class="col-sm-6">
+                    <label>Transmit/Receive:</label>
+                    <select class="form-control" data-bind="options: $data.selectedPlugInSpec().XmtRcvInd.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().XmtRcvInd.value"></select>
+                </div>-->
+                <div class="col-sm-6">
+                    <label>PlugIn Role Type Id:</label>
+                    <input class="form-control" id="PlgInRlTypIdInput" data-bind="textInput: $data.selectedPlugInSpec().PlgInRlTypId.value" type="number" />
+                </div>
+                <div class="col-sm-6">
+                    <label>Transmission Media</label>
+                    <select class="form-control" data-bind="options: $data.selectedPlugInSpec().XmsnMed.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().XmsnMed.value"></select>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+
+                <div class="col-sm-6">
+                    <label>Connector Type:</label><font color="red">*</font>
+                    <select class="form-control" data-bind="options: $data.selectedPlugInSpec().CnctrTyp.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().CnctrTyp.value" required></select>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px" id="divWavelength" data-bind="visible: $data.BiDrctnl() == 'N' ? true : false">
+                <div class="col-sm-6">
+                    <label>Wavelength:</label>
+                    <select class="form-control" data-bind="options: $data.selectedPlugInSpec().Wvlgth.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().Wvlgth.value,enable:$data.BiDrctnl() == 'Y' ? false : true"></select>
+                </div>
+            </div>
+            <div id="divRecTrawave" data-bind="visible: $data.BiDrctnl() == 'Y' ? true : false">
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <label>Transmit Wavelength:</label>
+                        <select class="form-control" data-bind="options: $data.selectedPlugInSpec().Wvlgth.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().TraWvlgth.value,enable:$data.BiDrctnl() == 'Y' ? true : false"></select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Recieve Wavelength:</label>
+                        <select class="form-control" data-bind="options: $data.selectedPlugInSpec().Wvlgth.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().RecWvlgth.value,enable:$data.BiDrctnl() == 'Y' ? true : false"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>High Temperature (Celsius):</label>
+                    <input class="form-control" id="hiTmpTxt" data-bind="textInput: $data.selectedPlugInSpec().HiTmp.value !== '0' ? $data.selectedPlugInSpec().HiTmp.value : ''" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                </div>
+                <div class="col-sm-6">
+                    <label>Low Temperature (Celsius):</label>
+                    <input class="form-control" id="loTmpTxt" data-bind="textInput: $data.selectedPlugInSpec().LoTmp.value !== '0' ? $data.selectedPlugInSpec().LoTmp.value : ''" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:25px">
+                <!--<div class="col-sm-6">
+                    <label>Transmission Rate:</label>
+                    <select class="form-control" data-bind="options: $data.selectedPlugInSpec().XmsnRt.options,  optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().XmsnRt.value"></select>
+                </div>-->
+                <div class="col-sm-3">
+                    <label>Transmission Distance:</label><font color="red">*</font>
+                    <input class="form-control" data-bind="textInput: $data.selectedPlugInSpec().MxLiteXmsn.value" required type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                </div>
+                <div class="col-sm-3">
+                    <label>Distance UOM:</label><font color="red">*</font>
+                    <select class="form-control" data-bind="options: $data.selectedPlugInSpec().DistUom.options, optionsText: 'text', optionsValue: 'value',value:$data.selectedPlugInSpec().DistUom.value" required></select>
+                </div>
+            </div>
+            <!-- ko if: $data.selectedPlugInSpec().Plugin !== undefined -->
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Manufacturer:</label>
+                    <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().Plugin.list[0].Mfg.value, enable:$data.selectedPlugInSpec().Plugin.list[0].Mfg.enable" />
+                </div>
+                <div class="col-sm-6">
+                    <label>Part Number:</label>
+                    <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().Plugin.list[0].PrtNo.value, enable:$data.selectedPlugInSpec().Plugin.list[0].PrtNo.enable" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Material Code:</label>
+                    <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().Plugin.list[0].PrdctId.value, enable:$data.selectedPlugInSpec().Plugin.list[0].PrdctId.enable" />
+                </div>
+                <div class="col-sm-6">
+                    <label>Depth:</label><font color="red">*</font>
+                    <input type="text" id="txtdepth" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().Plugin.list[0].Dpth.value, enable:$data.selectedPlugInSpec().Plugin.list[0].Dpth.enable, event:{ keypress: NumDecimal}" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Height:</label><font color="red">*</font>
+                    <input type="text" id="txtheight" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().Plugin.list[0].Hght.value, enable:$data.selectedPlugInSpec().Plugin.list[0].Hght.enable, event:{ keypress: NumDecimal}" />
+                </div>
+                <div class="col-sm-6">
+                    <label>Width:</label><font color="red">*</font>
+                    <input type="text" id="txtwdth" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().Plugin.list[0].Wdth.value, enable:$data.selectedPlugInSpec().Plugin.list[0].Wdth.enable, event:{ keypress: NumDecimal}" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <label>Unit of Measurement:</label>
+                    <input type="text" class="form-control" maxlength="47" data-bind="value: $data.selectedPlugInSpec().Plugin.list[0].DimUom.value, enable:$data.selectedPlugInSpec().Plugin.list[0].DimUom.enable" />
+                </div>
+            </div>
+
+            <!-- /ko -->
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-3">
+                    <label>Transmission Rate:</label>
+                    <div class="table-responsive" style="overflow:scroll;height:300px;">
+                        <table id="pluginTransmRateTbl" class="table table-striped table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: transmissionRatelist">
+                                <tr>
+                                    <td><input type="checkbox" class="transmtRateIdCbk" data-bind="value:$data.value,checked:$data.checkVal=='Y'? true : false ,click: $root.onchkTransmitrate " /></td>
+                                    <td><span data-bind="text: $data.text"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>Bi Directional:</label>
+                    <input type="checkbox" class="active" id="BiDrctnlCbk" data-bind="checked: $data.selectedPlugInSpec().BiDrctnl.value=='Y' ? true : false , event: { change: $data.onchkBidirectional }" />
+                </div>
+                <div class="col-sm-3">
+                    <label>Multi Functional Wavelength:</label>
+                    <input type="checkbox" class="active" id="MultFxWvlgthCbk" data-bind="checked: $data.selectedPlugInSpec().MultFxWvlgth.value=='Y' ? true : false" />
+                </div>
+                <div class="col-sm-2">
+                    <label>Variable Wavelength:</label>
+                    <input type="checkbox" id="VarWvlgthCbk" data-bind="checked: $data.selectedPlugInSpec().VarWvlgth.value=='Y' ? true : false" />
+                </div>
+            </div>
+
+            <!--<div class='panel panel-default'>
+                <div class="panel-heading">PlugIn Role Type List</div>
+                <div class="panel-body">
+                    <div class="row" style="overflow-x:auto;padding-top:25px;">
+                        <div class="table-responsive">
+                            <table id="pluginRoleTypeTbl" class="table table-striped table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>PlugIn Role Type</th>
+                                        <th>Bi Directional</th>
+                                        <th>External Height</th>
+                                        <th>External Width</th>
+                                        <th>External Depth</th>
+                                        <th>External Dimension UOM</th>
+                                        <th style="min-width: 100px">PlugIn Role Type Name</th>
+                                        <th>Connector Height</th>
+                                        <th>Connector Width</th>
+                                        <th>Connector UOM</th>
+                                        <th style="min-width: 400px">PlugIn Role Type Desc</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:$data.selectedPlugInSpec().PlgInRlTypLst.list">
+                                    <tr>
+                                        <td><input type="checkbox" class="PlgInRlTypIdCbk" data-bind="value:$data.id.value,checked: $data.id.value==$root.selectedPlugInSpec().PlgInRlTypId.value ? true : false" /></td>
+                                        <td><span data-bind="text: $data.PlgInRlTyp.value"></span></td>
+                                        <td><span data-bind="text: $data.BiDrctnl.value"></span></td>
+                                        <td><span data-bind="text: $data.XtnlHgt.value"></span></td>
+                                        <td><span data-bind="text: $data.XtnlWdth.value"></span></td>
+                                        <td><span data-bind="text: $data.XtnlDpth.value"></span></td>
+                                        <td><span data-bind="text: $data.XtnlDimUom.value"></span></td>
+                                        <td style="min-width: 100px"><span data-bind="text: $data.PlgInRlTypNm.value"></span></td>
+                                        <td><span data-bind="text: $data.CnctrHgt.value"></span></td>
+                                        <td><span data-bind="text: $data.CnctrWdth.value"></span></td>
+                                        <td><span data-bind="text: $data.CnctrUom.value"></span></td>
+                                        <td style="min-width: 400px"><span data-bind="text: $data.PlgInRlTypDsc.value"></span></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="plugInLstTblDgr" class="alert alert-danger" hidden>
+                                <strong>Please select a role from list!</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="row" align="center">
+                <button type="submit" class="btn btn-success"> SAVE </button>
+                <button type="submit" class="btn btn-success" id="idAsscociateplugin" data-bind="click:$root.associatepartPlugin.bind($root,$root)">Associate Parts</button>
+                <button type="button" class="btn btn-success" id="buttonclick" data-bind="click: exportPlgInSpecReport">
+                    <span class="fa fa-external-link" />
+                    <span>Export Report</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="pluginModalpopup" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Associated Parts:</b></h4></td>
+                    <td><span class="close">&times;</span></td>
+                </tr>
+            </table>
+            <h4>Search Input:</h4>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="idcdmmsplugin" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmsplugin">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="materialcodeplugin">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcodeplugin">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="partnumberplugin">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumberplugin">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="clmcplugin">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcplugin">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptplugin">Catalog Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptplugin" />
+                </div>
+            </div>
+            <div class="row" align="center">
+                <div class="Noinput" style="display: none; color:red">Please Enter An Input!</div>
+                <button class="btn btn-success" data-bind="click: $data.searchmtlplugin">SEARCH</button>
+                <div class="NoRecordrp" style="display: none; color:red">No records found!</div>
+
+            </div>
+
+            <h4>Search Results:</h4>
+            <table id="searchresultplugin" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>Catalog/Material Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:searchtblplugin">
+                    <tr>
+                        <td><input type="checkbox" class="checkpluginpopsearch" id="idchkplugin" data-bind="value: $data.material_item_id.value,click: $root.onchkAssociteid " /></td>
+                        <td><span data-bind="text: $data.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.item_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Associated Material:</h4>
+            <table id="associatedmtl" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>Catalog/Material Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:associatemtlblck">
+                    <tr>
+
+                        <td><input type="checkbox" class="checkasstspopsearch" id="idchkplugdis" checked="checked" data-bind="value: $data.material_item_id.value,click: $root.onchkDeAssociteid " /></td>
+                        <td><span class="idsasspnode" data-bind="text: $data.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.item_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row" align="center">
+                <button type="submit" class="btn btn-success" data-bind="click: $data.SaveassociatePlugin">Save</button>
+                <button type="submit" class="btn btn-success" data-bind="click: $data.CancelassociatePlugin">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

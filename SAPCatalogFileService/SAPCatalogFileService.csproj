@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7F93DE39-9410-4C86-A87E-C251DA2EF05A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CenturyLink.Network.Engineering.Catalog.File.Service</RootNamespace>
+    <AssemblyName>SAPCatalogFileService</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.11\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\FileManager.cs" />
+    <Compile Include="CatalogFileService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.Data\CenturyLink.ApplicationBlocks.Data.csproj">
+      <Project>{b6e2e887-b926-4d5a-91c9-94ca63d76a69}</Project>
+      <Name>CenturyLink.ApplicationBlocks.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.ExceptionManagement\CenturyLink.ApplicationBlocks.ExceptionManagement.csproj">
+      <Project>{968f3462-58aa-4c31-a550-a647adb92b69}</Project>
+      <Name>CenturyLink.ApplicationBlocks.ExceptionManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.ExceptionManager\CenturyLink.ApplicationBlocks.ExceptionManager.csproj">
+      <Project>{93336b1a-876d-4be8-9647-c6928f4194aa}</Project>
+      <Name>CenturyLink.ApplicationBlocks.ExceptionManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0e7b2a1e-5598-48c9-bd69-52aa436eae66}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MaterialManagement\MaterialManagement.csproj">
+      <Project>{9c0f3c45-b5da-4a32-9fb4-d501bb100ef8}</Project>
+      <Name>MaterialManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.csproj">
+      <Project>{5f25f8c2-da02-46c6-a6ca-01e719ead35d}</Project>
+      <Name>Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.ApplicationBlocks.ExceptionManagement\Microsoft.ApplicationBlocks.ExceptionManagement.csproj">
+      <Project>{386cbf50-f4a9-4f05-98cb-b387d2d8f357}</Project>
+      <Name>Microsoft.ApplicationBlocks.ExceptionManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeLibrary\TypeLibrary.csproj">
+      <Project>{d05580d0-1474-4545-b9bd-72ad0df67de9}</Project>
+      <Name>TypeLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

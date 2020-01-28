@@ -1,0 +1,12 @@
+﻿# Running list of high level changes made to schema in DEV, TEST, or PROD
+
+DEV:
+* Added GET_ROTTN_ANGL proc to SPEC_PKG - Mark
+
+TEST:
+
+PROD:
+
+
+
+

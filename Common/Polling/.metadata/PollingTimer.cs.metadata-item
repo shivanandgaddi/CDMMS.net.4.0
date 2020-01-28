@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16554647
+file-version=1
+checksum=de27befa9aeabf005b099e44f64a1a6f
+fetch-size=3359
+mtime=1500556032
+item-spec=43444D4D533A4B5850445220504F4C4C494E4754494D45522043532D3238313239303636315833313935305835342E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/Common/Polling/PollingTimer.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

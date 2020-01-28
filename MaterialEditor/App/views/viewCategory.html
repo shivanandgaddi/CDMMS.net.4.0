@@ -1,0 +1,105 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">Please wait as we are loading the details</div>
+</div>
+
+<div id="filterCategory" align="center">
+    <label><input type="radio" value="All" data-bind="checked : filterOption, event: { change: $root.Filter}"  checked="checked" name="Filter" id="rd_ALL" />ALL</label>
+
+    <label><input type="radio" value="Approved" data-bind="checked : filterOption, event: { change: $root.Filter}"  name="Filter" id="rd_APPROVED" />APPROVED</label>
+
+    <label><input type="radio" value="Unapproved" data-bind="checked : filterOption, event: { change: $root.Filter}"  name="Filter" id="rd_UNAPPROVED" />UNAPPROVED</label>
+</div>
+<div align="left">
+    <p><button class="btn btn-success" id="btn_add" data-bind="click: $root.ShowAdd.bind($root,$root)">Add</button> </p>
+</div>
+
+<div class="row">
+    <table id="categorymanagement" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Material Group ID</th>
+                <th>Application Name</th>
+                <th>Last Updated User ID</th>
+                <th>Last Updated Date</th>
+                <th>Approved/Unapproved</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:CAM">
+            <tr>
+                <td><span data-bind="text: $data.Attributes.mtlgrpid.value"></span></td>
+                <td><span data-bind="text: $data.Attributes.Appnm.value"></span></td>
+                <td><span data-bind="text: $data.Attributes.lastupdtid.value"></span></td>
+                <td><span data-bind="text: $data.Attributes.update.value"></span></td>
+                <td class="approvedstatus"><span data-bind="text: $data.Attributes.approvedstatus.value"></span></td>
+                <td><button id="btn_delete"  class="btn btn-success" data-bind="click: $root.Delete.bind($data,$root)">Delete</button></td>
+                <td><button id="btn_update"  class="btn btn-success" data-bind="click: $parent.Update.bind($parent,$root)">Update</button><!--<a data-bind="attr: { href: $root.openOrderHref($data)}" >Update</a>--></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="deleteSuccessfully" style="display: none; color:red;">Deleted Sucessfully !</div>
+<div>
+    <table id="updateCategory" data-bind="if : selectedElement">
+        <tr>
+            <td><label for="mtlgrpid">Material Group ID :</label>
+            </td><td><input type="text" id="mtlgrpid" data-bind="textInput:selectedElement().updateMtlGrpId" disabled /></td>
+        </tr>
+        <tr>
+            <td><label for="app_nm">Application Name: </label></td>
+            <td><input type="text" id="app_nm" data-bind="textInput:selectedElement().updateAppnm" /><input type="text" id="app_nm_hd" data-bind="textInput:selectedElement().updateAppnm" hidden="hidden" /></td>
+        </tr>       
+        <tr>
+            <td><label for="startdate">Effective Start Date: </label></td>
+            <td><input type="text" id="startdate" data-bind="textInput:selectedElement().updateeffsrtdt" /> </td>
+        </tr>
+        <tr>
+            <td><label for="enddate">Effective End Date: </label></td>
+            <td><input type="text" id="enddate" data-bind="textInput:selectedElement().updateeffenddt" /></td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btn_save" class="btn btn-success" data-bind="click: $data.Save">Save</button>
+            </td>
+            <td>
+                <div class="updatedSuccessfully" style="display: none; color:red;">Updated Sucessfully !</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <table id="addCategory"  data-bind="if : addElement">
+        <tr>
+            <td>
+                <label for="mtlgrpid">Material Group ID :</label>
+            </td>
+            <td><input type="text" id="mtlgrpid1" data-bind="textInput: addedElement().Attributes.mtlgrpid.value" /></td>
+        </tr>
+        <tr>
+            <td><label for="app_nm">Application Name: </label></td>
+            <td><input type="text" id="app_nm1" data-bind="textInput: addedElement().Attributes.Appnm.value" /></td>
+        </tr>      
+        <tr>
+            <td><label for="startdate">Effective Start Date: </label></td>
+            <td><input type="text" id="startdate1" data-bind="textInput: addedElement().Attributes.effsrtdt.value" /> </td>
+        </tr>
+        <tr>
+            <td><label for="enddate">Effective End Date: </label></td>
+            <td><input type="text" id="enddate1" data-bind="textInput: addedElement().Attributes.effenddt.value" /></td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btn_save1" class="btn btn-success" data-bind="click: $root.Saveadd.bind($root,$root)">Save</button>
+            </td>
+            <td>
+                <div class="insertSuccessfully" style="display: none; color:red" >Added Sucessfully !</div>
+
+            </td>
+        </tr>
+    </table>
+</div>
+

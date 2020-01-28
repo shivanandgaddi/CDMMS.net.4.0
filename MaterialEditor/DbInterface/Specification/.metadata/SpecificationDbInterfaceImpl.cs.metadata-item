@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16555581
+file-version=1
+checksum=d3d78fb83dda1f75d9f633866bafed84
+fetch-size=3295
+mtime=1520634915
+item-spec=43444D4D533A4B58504E4D2053504543494649434154494F4E4442494E54455246414345494D504C2043532D323831323931303435583335303732583430362E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/MaterialEditor/DbInterface/Specification/SpecificationDbInterfaceImpl.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

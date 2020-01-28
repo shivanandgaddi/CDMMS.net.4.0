@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9C0F3C45-B5DA-4A32-9FB4-D501BB100EF8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CenturyLink.Network.Engineering.Material.Management</RootNamespace>
+    <AssemblyName>MaterialManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CenturyLink.ApplicationBlocks.ExceptionManager">
+      <HintPath>..\CenturyLink.ApplicationBlocks.ExceptionManager\bin\Debug\CenturyLink.ApplicationBlocks.ExceptionManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.ExceptionManagement">
+      <HintPath>..\Microsoft.ApplicationBlocks.ExceptionManagement\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces">
+      <HintPath>..\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\DTO\CatalogErrorDTO.cs" />
+    <Compile Include="Business\DTO\PackageOutputDTO.cs" />
+    <Compile Include="Business\Exceptions\CatalogException.cs" />
+    <Compile Include="Business\Utility\ApplicationFieldConfiguration.cs" />
+    <Compile Include="Business\Utility\Constants.cs" />
+    <Compile Include="Business\Utility\OSPFMSendMail.cs" />
+    <Compile Include="Business\Utility\OSPFMValidations.cs" />
+    <Compile Include="Business\Utility\ParseCatalogXML.cs" />
+    <Compile Include="Manager\CatalogProcessingManager.cs" />
+    <Compile Include="Manager\MaterialManager.cs" />
+    <Compile Include="Manager\PartMatchingManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.Data\CenturyLink.ApplicationBlocks.Data.csproj">
+      <Project>{b6e2e887-b926-4d5a-91c9-94ca63d76a69}</Project>
+      <Name>CenturyLink.ApplicationBlocks.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0e7b2a1e-5598-48c9-bd69-52aa436eae66}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeLibrary\TypeLibrary.csproj">
+      <Project>{d05580d0-1474-4545-b9bd-72ad0df67de9}</Project>
+      <Name>TypeLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Schema\SAPCatalogInputSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Schema\XMLToDbColumnMapping.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

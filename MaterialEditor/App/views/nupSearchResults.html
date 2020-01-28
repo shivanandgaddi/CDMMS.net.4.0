@@ -1,0 +1,134 @@
+﻿<div class='panel panel-default'>
+    <div class="panel-heading">Search Results</div>
+    <div class="panel-body">
+        <div style="padding-bottom:10px" class="table-responsive">
+        <table id="newupdatedparts" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>LINK</th>
+                    <th>ACCEPT</th>
+                    <th>REJECT</th>
+                    <th>SOURCE SYSTEM</th>
+                    <th>HAS LOSDB ASSOC</th>
+                    <th>MATERIAL CODE</th>
+                    <th>ITEM STATUS</th>
+                    <th>COMPATIBLE 7 CLEI/HECI</th>
+                    <th>CLEI</th>
+                    <th>PART NUMBER</th>
+                    <th>CLMC</th>
+                    <th>MATERIAL DESCRIPTION</th>
+                    <th>LAST CHANGED DATE</th>
+                    <th>NEEDS TO BE REVIEWED</th>
+                    <th hidden="hidden">approval ind</th>
+                    <th hidden="hidden">user tmstp</th>
+                    <th hidden="hidden">user text</th>
+                    <th hidden="hidden">audit id</th>
+                    <th hidden="hidden">Audit Table Pk Column Name</th>
+                    <th hidden="hidden">CDMMS Column Name</th>
+                    <th hidden="hidden">New Column Value</th>
+                    <th hidden="hidden">CDMMS Table Name</th>
+                    <th hidden="hidden">LOSDB ProdID</th>
+                    <th hidden="hidden">Audit Table Pk Column Value</th>
+                    <th hidden="hidden">Audit Parent Table PK Column Name</th>
+                    <th hidden="hidden">Audit Parent Table Pk Column Value</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:NupSearchlist">
+                <tr>
+                    <td><a data-bind="click: $parent.MaterialLink">Show details</a></td>
+                    <td><button data-bind="click:$parent.MaterialAccept">Accept</button></td>
+                    <td><button data-bind="click:$parent.MaterialReject">Reject</button></td>
+                    <td><span data-bind="text: $data.Attributes.type.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.has_losdb.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.materialcode.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.item_status.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.heci.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.clei7.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.clmc.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.mtl_desc.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.last_chg_dt.value"></span></td>
+                    <td><span data-bind="text: $data.Attributes.needs_to_be_reviewed.value"></span></td>
+                    <td hidden="hidden"><span data-bind="text: $data.Attributes.usraprvind.value"></span></td>
+                    <td hidden="hidden"> <span data-bind="text: $data.Attributes.usraprvtmstp.value"></span></td>
+                    <td hidden="hidden"><span data-bind="text: $data.Attributes.usraprvtxt.value"></span></td>
+                    <td hidden="hidden"> <span data-bind="text: $data.Attributes.auditdaid.value"></span></td>
+                    <td hidden="hidden"><span data-bind="text: $data.Attributes.AuditTablePkColumnName.value"></span></td>
+                    <td hidden="hidden"> <span data-bind="text: $data.Attributes.CDMMSColumnName.value"></span></td>
+                    <td hidden="hidden"><span data-bind="text: $data.Attributes.NewColumnValue.value"></span></td>
+                    <td hidden="hidden"> <span data-bind="text: $data.Attributes.CDMMSTableName.value"></span></td>
+                    <td hidden="hidden"><span data-bind="text: $data.Attributes.losdbprodid.value"></span></td>
+                    <td hidden="hidden"> <span data-bind="text: $data.Attributes.AuditTablePkColumnValue.value"></span></td>
+                    <td hidden="hidden"><span data-bind="text: $data.Attributes.AuditParentTablePKColumnName.value"></span></td>
+                    <td hidden="hidden"> <span data-bind="text: $data.Attributes.AuditParentTablePkColumnValue.value"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<div id="nupPossibleMatchesModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-bind="click: $data.cancelPossibleMatchModal" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Possible Material Match List - This material may be a revision of an already existing material.</h4>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table id="nupShowPartialMatches" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>CDMMS ID</th>
+                            <th>Root Part No</th>
+                            <th>Mfg Part No</th>
+                            <th>CLMC</th>
+                            <th>Product ID</th>
+                            <th>HECI</th>
+                            <th>Associated CLEI</th>
+                            <th>Desc</th>
+                            <th>Category</th>
+                            <th>Feature Type</th>
+                            <th>Rev No</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:NupPossibleMatchList">
+                        <tr>
+                            <td><input class="chksearch" type="checkbox" data-bind="checked: CheckedRow" /></td>
+                            <td><span data-bind="text: MaterialID"></span></td>
+                            <td><span data-bind="text: RootPartNumber"></span></td>
+                            <td><span data-bind="text: MfgPartNumber"></span></td>
+                            <td><span data-bind="text: CLMC"></span></td>
+                            <td><span data-bind="text: ProductID"></span></td>
+                            <td><span data-bind="text: HECI"></span></td>
+                            <td><span data-bind="text: CLEI"></span></td>
+                            <td><span data-bind="text: Description"></span></td>
+                            <td><span data-bind="text: MaterialCategory"></span></td>
+                            <td><span data-bind="text: FeatureType"></span></td>
+                            <td><span data-bind="text: RevisionNumber"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td><h4 style="white-space:nowrap">New Revision Number: </h4></td>
+                        <td><input maxlength="31" id="newRevNo" /></td>
+                        <td><h4>&nbsp;&nbsp;</h4></td>
+                        <td><h4 style="white-space:nowrap">Make Current Revision: </h4></td>
+                        <td><input type="checkbox" data-bind="checked: MakeCurrentRev" /></td>
+                    </tr>
+                </table>
+                <br/><br/>
+                <table>
+                    <tr>
+                        <td><button id="associatebtn" data-bind="click: $data.saveRevisionModal" class="btn btn-success" type="button">Add Revision and Accept</button></td>
+                        <td><button id="continuebtn" data-bind="click: $data.continueModal" class="btn btn-success" type="button">Continue Without Revision</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

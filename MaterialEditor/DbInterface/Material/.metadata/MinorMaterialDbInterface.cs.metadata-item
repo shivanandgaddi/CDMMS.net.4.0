@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16555517
+file-version=1
+checksum=f97eaeea1e0c3f0c5908f517df9f2810
+fetch-size=9701
+mtime=1518716140
+item-spec=43444D4D533A4B58504E4D204D494E4F524D4154455249414C4442494E544552464143452043532D323831323931303435583335303732583337342E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/MaterialEditor/DbInterface/Material/MinorMaterialDbInterface.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

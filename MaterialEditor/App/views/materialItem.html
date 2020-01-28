@@ -1,0 +1,1350 @@
+﻿<style>
+
+tr.to-be-removed {color: silver;}
+tr.to_be_removed input {color:silver;}
+tr.to_be_removed select {color:silver;}
+    tr.dragging {
+        width: 100%;
+    }
+
+        tr.dragging td {
+            background-color: lightsalmon;
+            border-top: 1px solid lightgrey;
+            border-bottom: 1px solid lightgrey;
+        }
+.dragger { cursor: move; }
+</style>
+<div>
+    <div class="header-2">Active Material</div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" padding-left="0px" padding-right="0px">
+            <h4>CDMMS Id: <span data-bind="text: $data.mtl.id.value" id="cdmmsidmain" /></h4>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2" padding-left="0px" padding-right="0px">
+            <p><button class="btn btn-success" id="btn_chaining" data-bind="click: $data.cppartspopup,enable:$data.mtl.MtrlId.value() === '0' ? false : true">Chained</button> </p>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2" padding-left="0px" padding-right="0px">
+            <p><button class="btn btn-success" id="btn_revision" data-bind="click: $root.revisionparts.bind($root,$root),enable:$data.mtl.HasRvsns.enable">Revisions</button> </p>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-4" padding-left="0px" padding-right="0px">
+            <h4><input id="chkbx_revision" type="checkbox" data-bind="checked:$data.mtl.HasRvsns.bool" disabled /> Revision Exists</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Material Code: <span data-bind="text: $data.mtl.PrdctId.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Part Number: <span data-bind="text: $data.mtl.PrtNo.value" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Material Description: <span data-bind="text: $data.mtl.ItmDesc.value" /></h4>
+        </div>
+        <!--<div class="col-sm-12">
+            <h4>Additional Description: </h4><textarea id="txtAddtlDesc" data-bind="value: $data.mtl.AddtlDesc.value" MaxLength="256" rows="2" style="width: 100%" />
+        </div>-->
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Catalog Description: </h4><textarea id="txtCtlgDesc" data-bind="value: $data.mtl.CtlgDesc.value, event: {change: $data.getfirstword,keyup: $data.enableSave}" MaxLength="47" rows="2" style="width: 100%" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Manufacturer CLMC: <span data-bind="text: $data.mtl.Mfg.value" /></h4>
+            <!--<span class='input-group-addon glyphicon glyphicon-search' ></span><input id="mfgAutoComplete" />-->
+            <!--<textarea id="txtMfg" data-bind="value: $data.mtl.Mfg.value" required MaxLength="10" style="width: 100%" />-->
+        </div>
+        <div class="col-sm-6">
+            <h4><span class='glyphicon glyphicon-search'></span><input class="form-control" id="mfgAutoComplete" data-bind="event: {keyup: $data.enableSave}" /></h4>
+            <!--<textarea id="txtMfg" data-bind="value: $data.mtl.Mfg.value" required MaxLength="10" style="width: 100%" />-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>
+                Manufacturer Name: <span data-bind="text: $data.mtl.MfgDesc.value" />
+                <!--<input id="txtMfgDesc" readonly data-bind="text: $data.mtl.MfgDesc.value" />-->
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <!-- ko if: $data.mtl.HECI.src !== undefined && $data.mtl.HECI.src() === 'LOSDB' -->
+        <div class="col-sm-6">
+            <h4>HECI: <span data-bind="text: $data.mtl.HECI.value" /></h4>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: $data.mtl.HECI.src !== undefined && $data.mtl.HECI.src() === 'LOSDB' -->
+        <div class="col-sm-6">
+            <h4>HECI: </h4><input class="form-control" id="txtHECI" data-bind="value: $data.mtl.HECI.value, event: {keyup: $data.enableSave}" MaxLength="18" />
+        </div>
+        <!-- /ko -->
+        <div class="col-sm-6">
+            <h4>Unit of Measurement: </h4><input class="form-control" id="txtUOM" data-bind="value: $data.mtl.UOM.value, event: {keyup: $data.enableSave}" MaxLength="3" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Material Group: </h4><input class="form-control" id="txtCtgryId" data-bind="value: $data.mtl.CtgryId.value, event: {keyup: $data.enableSave}" MaxLength="9" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Height: </h4><input class="form-control" id="txtHght" data-bind="value: $data.mtl.Hght.value() !== '0' ? $data.mtl.Hght.value : '',event:{ keypress: NumDecimal},enable : enableheight" MaxLength="9" />
+        </div>
+        <div class="col-sm-4">
+            <h4>Width: </h4><input class="form-control" id="txtWdth" data-bind="value: $data.mtl.Wdth.value() !== '0' ? $data.mtl.Wdth.value : '',event:{ keypress: NumDecimal},enable: enablewidth" MaxLength="9" />
+        </div>
+        <div class="col-sm-4">
+            <h4>Depth: </h4><input class="form-control" id="txtDpth" data-bind="value: $data.mtl.Dpth.value() !== '0' ? $data.mtl.Dpth.value : '',event:{ keypress: NumDecimal},enable: enabledepth" MaxLength="9" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Hazard Indicator: <input type="checkbox" id="chkHzrdInd" data-bind="checked: $data.mtl.HzrdInd.bool, attr: { disabled: false },event: {change: $data.enableSave}" /></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <h4>Material Category: <font color="red" style="font-size:12px;">*</font></h4><select class="form-control" id="mtlctgdpdwn" width="40px" required data-bind="options: $data.mtl.MtlCtgry.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedMaterialCategory, event: {change: changeMtlCtgry}"></select>
+        </div>
+        <div class="col-sm-6">
+            <h4>Feature Type: </h4><select class="form-control" disabled="disabled" id="ftrTypDropdown" data-bind="options: $data.mtl.FtrTyp.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedFeatureType, event: {change: changeFtrTyp}"></select>
+        </div>
+    </div>
+    <div class="row" style="padding-top:10px">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-success" id="hlpnBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-bind="click:$root.showModalHLPN">HLPN</button>
+
+            <button type="button" class="btn btn-success" disabled="disabled" id="btnassociate" data-bind="click:$root.associatecablepopup.bind($root,$root),enable:checkFtrTyp">Associated XXX Cable</button>
+
+        </div>
+    </div>
+    <div class="row">
+        <!-- ko if: $data.mtl.VarCbl !== undefined -->
+        <div class="col-sm-12">
+            <h4>Variable Cable: <span data-bind="text: $data.mtl.VarCbl.value" /> </h4>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Cable Type: </h4><select class="form-control" disabled="disabled" id="cblTypDropdown" data-bind="options: $data.mtl.CblTypId.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedCableType,event: {change: $data.changeCableType}"></select>
+        </div>
+        <div class="col-sm-4">
+            <h4>Set Length: </h4><input class="form-control" id="txtSetLgth" style="font-size:12px;" disabled="disabled" data-bind="value: $data.mtl.SetLgth.value,event: {keyup: $data.enableSave}" MaxLength="10" />
+        </div>
+        <div class="col-sm-4">
+            <h4>Set Length Unit: </h4>
+            <select id="setLgthUomDropdown" class="form-control" disabled="disabled" data-bind="options: $data.mtl.SetLgthUom.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedSetLgthUom,event: {change: $data.enableSave}"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-7">
+            <h4>Specification Name: </h4><input class="form-control" id="txtSpecNm" data-bind="value: $data.mtl.SpecNm.value,event: {keyup: $data.enableSave}" MaxLength="40" style="width: 100%" />
+            <button type="button" id="specNameNavigateBtn" class="btn btn-link" data-bind="click: $data.navigateToSpecification">Create Specification</button>
+        </div>
+        <div class="col-sm-5">
+            <h4>Plug-In Role Type: </h4><select class="form-control" disabled="disabled" id="plginTypDropdown" data-bind="options: $data.mtl.PlgInRlTyp.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedPlugInType,event: {change: $data.enableSave}"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>APCL Code: <font color="red" style="font-size:12px;">*</font></h4>
+            <select class="form-control" id="txtApcl" width="100px" required data-bind="options: $data.mtl.Apcl.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedApcl, event: {change: changeApcl}"></select>
+        </div>
+        <div class="col-sm-2" style="padding-top:39px;">
+            <button type="submit" class="btn btn-success" id="btnsr" data-bind="click:$root.srpartspopup">S/R</button>
+        </div>
+        <div class="col-sm-6">
+            <h4>Status:<font color="red">*</font> </h4><select class="form-control" id="statusDropdown" required data-bind="options: $data.mtl.Stts.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedStatus,event: {change: $data.enableSave}"></select>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Labor ID: </h4><select class="form-control" id="lbrIdDropdown" data-bind="options: $data.mtl.LbrId.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedLbrId,event: {change: $data.enableSave}"></select>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h4>Last Updated UserID: <span data-bind="text: $data.mtl.LstUid.value" /></h4>
+    </div>
+    <div class="col-sm-6">
+        <h4>Last Updated Date: <span data-bind="text: $data.mtl.LstDt.value" /></h4>
+    </div>
+</div>
+<div class="header-2">Additional Attributes</div>
+<div class="row">
+    <div class="col-sm-4">
+        <label><input type="radio" value="O" data-bind="checked: viewIspOrOspAttrs,event: {change: $data.enableSave}" />OSP</label>
+    </div>
+    <div class="col-sm-4">
+        <label><input type="radio" value="I" data-bind="checked: viewIspOrOspAttrs,event: {change: $data.enableSave}" />ISP</label>
+    </div>
+</div>
+<div>
+    <!-- ko if: $data.mtl.AccntCd !== undefined && $data.mtl.AccntCd.iOro() === viewIspOrOspAttrs() -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Account Code:<font color="red">*</font> </h4><input id="txtAccntCd" data-bind="value: $data.mtl.AccntCd.value,event: {keyup: $data.enableSave}" required MaxLength="7" style="width: 100px" readonly class="form-control" />
+        </div>
+    </div>
+
+    <!-- /ko -->
+    <div class="row">
+        <!-- ko if: $data.mtl.IntrlHght !== undefined && $data.mtl.IntrlHght.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4">
+            <h4>Internal Height: </h4><input id="txtIntrlHght" data-bind="value: $data.mtl.IntrlHght.value,event:{ keypress: NumDecimal}, enable:$data.mtl.IntrlHght.enable" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.IntrlWdth !== undefined && $data.mtl.IntrlWdth.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4">
+            <h4>Internal Width: </h4><input id="txtIntrlWdth" data-bind="value: $data.mtl.IntrlWdth.value,event:{ keypress: NumDecimal}, enable:$data.mtl.IntrlWdth.enable" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.IntrlDpth !== undefined && $data.mtl.IntrlDpth.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4">
+            <h4>Internal Depth: </h4><input id="txtIntrlDpth" data-bind="value: $data.mtl.IntrlDpth.value,event:{ keypress: NumDecimal}, enable:$data.mtl.IntrlDpth.enable" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="row">
+        <!-- ko if: $data.mtl.AmpsDrn !== undefined && $data.mtl.AmpsDrn.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4">
+            <h4>Amps Drain: </h4><input id="txtAmpsDrn" data-bind="value: $data.mtl.AmpsDrn.value,event:{ keypress: NumDecimal}, enable:$data.mtl.AmpsDrn.enable" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.EqpWght !== undefined && $data.mtl.EqpWght.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4">
+            <h4>Equipment Weight:</h4><input id="txtEqpWght" data-bind="value: $data.mtl.EqpWght.value,event:{ keypress: NumDecimal}, enable:$data.mtl.EqpWght.enable" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.FrmNm !== undefined && $data.mtl.FrmNm.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4">
+            <h4>Frame Name: </h4><input id="txtFrmNm" data-bind="value: $data.mtl.FrmNm.value, enable:$data.mtl.FrmNm.enable,event: {keyup: $data.enableSave}" MaxLength="12" style="width: 110px" class="form-control" />
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="row">
+        <!-- ko if: $data.mtl.NumMtgSpcs !== undefined && $data.mtl.NumMtgSpcs.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6">
+            <h4>Number Mounting Spaces : </h4><input id="txtNumMtgSpcs" data-bind="value: $data.mtl.NumMtgSpcs.value,event:{ keypress: NumDecimal}, enable:$data.mtl.NumMtgSpcs.enable" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.VltDsc !== undefined && $data.mtl.VltDsc.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6">
+            <h4>Voltage Description: </h4><input id="txtVltDsc" data-bind="value: $data.mtl.VltDsc.value, enable:$data.mtl.VltDsc.enable,event: {keyup: $data.enableSave}" MaxLength="6" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="row">
+        <!-- ko if: $data.mtl.LctnPosInd !== undefined && $data.mtl.LctnPosInd.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6">
+            <h4>Location Position Indicator:</h4>
+            <select id="lctnPosIndDropdown" data-bind="options: $data.mtl.LctnPosInd.options, optionsText: 'text', optionsValue: 'value', value: $data.selectedLctnPosInd, enable:$data.mtl.LctnPosInd.enable,event: {change: $data.enableSave}" class="form-control" style="width: 250px"></select>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.PosSchm !== undefined && $data.mtl.PosSchm.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6" hidden="hidden">
+            <h4>Default Position Scheme: </h4>
+            <select id="txtPosSchm" data-bind="value: $data.mtl.PosSchm.value, enable:$data.mtl.PosSchm.enable,event: {change: $data.enableSave},visible : visbledefaultscheme" class="form-control" style="width: 250px">
+                <option value=""></option>
+                <option value="BOTTOM">BOTTOM</option>
+                <option value="FLOOR">FLOOR</option>
+                <option value="TOP">TOP</option>
+            </select>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="row">
+        <!-- ko if: $data.mtl.MntPosHght !== undefined && $data.mtl.MntPosHght.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4" hidden="hidden">
+            <h4>First Mount Position Height:</h4><input id="txtMntPosHght" data-bind="value: $data.mtl.MntPosHght.value,event:{ keypress: NumDecimal}, enable:$data.mtl.MntPosHght.enable,visible: visbleMntposhgt" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.MtgPltSz !== undefined && $data.mtl.MtgPltSz.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4" hidden="hidden">
+            <h4>Mounting Plate Size: </h4><input id="txtMtgPltSz" data-bind="value: $data.mtl.MtgPltSz.value,event:{ keypress: NumDecimal}, enable:$data.mtl.MtgPltSz.enable,visible: visblemntngpltsz" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.MxEqpPos !== undefined && $data.mtl.MxEqpPos.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-4">
+            <h4>Max Equipment Positions: </h4><input id="txtMxEqpPos" data-bind="value: $data.mtl.MxEqpPos.value,event:{ keypress: NumDecimal}, enable:$data.mtl.MxEqpPos.enable" MaxLength="9" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="row">
+        <!-- ko if: $data.mtl.Gge !== undefined && $data.mtl.Gge.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6">
+            <h4>Gauge: </h4><input id="txtGge" data-bind="value: $data.mtl.Gge.value, enable:$data.mtl.Gge.enable,event: {keyup: $data.enableSave}" MaxLength="8" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.GgeUnt !== undefined && $data.mtl.GgeUnt.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6">
+            <h4>Gauge Unit: </h4>
+            <select id="txtGgeUnt" data-bind="value: $data.mtl.GgeUnt.value, enable:$data.mtl.GgeUnt.enable,event: {change: $data.enableSave}" class="form-control" style="width: 250px">
+                <option value=""></option>
+                <option value="NOT APPLICABLE">NOT APPLICABLE</option>
+                <option value="CIRCULAR MILL">CIRCULAR MILL</option>
+                <option value="GAUGE">GAUGE</option>
+            </select>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="row">
+        <!-- ko if: $data.mtl.EqptCls !== undefined && $data.mtl.EqptCls.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6">
+            <h4>Equipment Class:</h4><input id="txtEqptCls" data-bind="value: $data.mtl.EqptCls.value, enable:$data.mtl.EqptCls.enable,event: {keyup: $data.enableSave}" MaxLength="30" style="width: 100px" class="form-control" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.mtl.PrdTyp !== undefined && $data.mtl.PrdTyp.iOro() === viewIspOrOspAttrs() -->
+        <div class="col-sm-6">
+            <h4>Product Type:</h4>
+            <select id="txtPrdTyp" data-bind="value: $data.mtl.PrdTyp.value, enable:$data.mtl.PrdTyp.enable,event: {change: $data.enableSave}" class="form-control" style="width: 250px">
+                <option value=""></option>
+                <option value="CSYS">CSYS</option>
+                <option value="LOOP">LOOP</option>
+                <option value="MISC">MISC</option>
+                <option value="POWR">POWR</option>
+                <option value="RADO">RADO</option>
+                <option value="SWTC">SWTC</option>
+                <option value="TRAN">TRAN</option>
+            </select>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko if: $data.mtl.PrtNbrTypCd !== undefined && $data.mtl.PrtNbrTypCd.iOro() === viewIspOrOspAttrs() -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Part Number Type Code:</h4>
+            <select id="txtPrtNbrTypCd" data-bind="value: $data.mtl.PrtNbrTypCd.value, enable:$data.mtl.PrtNbrTypCd.enable,event: {change: $data.enableSave}" class="form-control" style="width: 250px">
+                <option value=""></option>
+                <option value="ATOMIC">ATOMIC</option>
+                <option value="CONFIGURATION">CONFIGURATION</option>
+                <option value="MANUFACTURER'S ASSEMBLY">MANUFACTURER'S ASSEMBLY</option>
+                <option value="PLUG-IN PACKAGE">PLUG-IN PACKAGE</option>
+            </select>
+        </div>
+    </div>    
+    <!-- /ko -->
+    <div class='row' style="padding-top:10px;text-align:center">
+        <button type="button" class="btn btn-success" id="buttonclick" data-bind="click: exportMaterialReport">Export Report</button>
+    </div>
+    <br/>
+</div>
+
+<div id="duplicateRtPrtNoModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>The following material already exists with the same Root Part Number:</b></h4></td>
+                    <td><span class="close">&times;</span></td>
+                </tr>
+            </table>
+            <table id="dupRtPrtNbrTbl" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th hidden="hidden">CDMMS ID</th>
+                        <th hidden="hidden">MTRL ID</th>
+                        <th>Part Number</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Description</th>
+                        <th>Revision</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:exceptionData">
+                    <tr>
+                        <td hidden="hidden"><span class="rtMtrlId" data-bind="text: $data.Attributes.mtrl_id.value"></span></td>
+                        <td hidden="hidden"><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.item_desc.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.rvsn.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width:50%">
+                <tr>
+                    <td colspan="4"><h4><b>You may:</b></h4></td>
+                </tr>
+                <tr>
+                    <td><h4><b>Make this a revision of the above material:</b></h4></td>
+                    <td>
+                        <input type="text" class="form-control" id="idrtprtnbrrvsntxt" data-bind="event: {keyup: $data.enableCreateRevision}">
+                    </td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>
+                        <button class="btn btn-success" data-bind="click: $data.saveMaterialAsRevision, enable: enableModalCreateRvsn">Create Revision</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><b>Enter a unique Root Part Number:</b></h4></td>
+                    <td>
+                        <input type="text" class="form-control" id="idrtprtnbrtxt" data-bind="event: {keyup: $data.enableSaveRtPrtNbr}">
+                    </td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>
+                        <button class="btn btn-success" data-bind="click: $data.saveMaterialWithRtPrtNo, enable: enableModalSaveRtPrtNbr">Save Root Part Number</button>
+                    </td>
+                </tr>
+            </table>
+            <!--<table align="center">
+                <tr>
+                    <td align="center">
+                        <button class="btn btn-success" data-bind="click: $data.savemodalVC">Save</button>
+                        <button class="btn btn-success" id="cancelmodal" data-bind="click: $data.cancelmodalVC">Cancel</button>
+                        <div class="saveErrorVC" style="display: none; color:red">Save Error!</div>
+                    </td>
+                </tr>
+            </table>-->
+        </div>
+    </div>
+</div>
+
+<div id="variableCableModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Associated Cables Info:</b></h4></td>
+                    <td><span class="close">&times;</span></td>
+                </tr>
+            </table>
+
+            <div class="row">
+                <div class="col-sm-2 form-group">
+                    <h4> CLMC: </h4><span data-bind="text: $data.mtl.Mfg.value" />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <h4> Description: </h4> <span data-bind="text: $data.mtl.CtlgDesc.value" />
+                </div>
+                <div class="col-sm-4 form-group">
+                    <h4>Part Number: </h4><span data-bind="text: $data.mtl.PrtNo.value" />
+                </div>
+            </div>
+            <h4>Search Input:</h4>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="idcdmmsidmodal" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmsidmodal" data-bind="event:{ keypress: checkEnterVC}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="materialcodemodal">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcodemodal" data-bind="event:{ keypress: checkEnterVC}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="partnumbermodal">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumbermodal" data-bind="event:{ keypress: checkEnterVC}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="clmcmodal">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcmodal" data-bind="event:{ keypress: checkEnterVC}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptn">Catalog Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptn" data-bind="event:{ keypress: checkEnterVC}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <button class="btn btn-success" data-bind="click: $data.searchmtl">SEARCH</button>
+                    <div class="NoRecord" style="display: none; color:red">No records found!</div>
+                </div>
+            </div>
+            <h4>Search Results:</h4>
+            <table id="searchresults" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>Part Number</th>
+                        <th>CLMC</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:searchtbl">
+                    <tr>
+                        <td><input class="chkbxsearch" type="checkbox" data-bind="value: $data.Attributes.material_item_id.value" /></td>
+                        <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mat_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Associated Cables</h4>
+            <table id="associatedcables" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>Part Number</th>
+                        <th>CLMC</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:associatetbl">
+                    <tr>
+                        <td><input class="chktablasc" type="checkbox" checked="checked" data-bind="value: $data.Attributes.material_item_id.value" /></td>
+                        <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mat_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table align="center">
+                <tr>
+                    <td align="center">
+                        <button class="btn btn-success" data-bind="click: $data.savemodalVC">Save</button>
+                        <button class="btn btn-success" id="cancelmodal" data-bind="click: $data.cancelmodalVC">Cancel</button>
+                        <div class="saveErrorVC" style="display: none; color:red">Save Error!</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="replacesModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Supercedes/Replaces:</b></h4></td>
+                    <td><span class="closesr">&times;</span></td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-sm-2 form-group">
+                    <h4> CLMC: </h4><span data-bind="text: $data.mtl.Mfg.value" />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <h4> Description: </h4><span data-bind="text: $data.mtl.CtlgDesc.value" />
+                </div>
+                <div class="col-sm-4 form-group">
+                    <h4>Part Number: </h4><span data-bind="text: $data.mtl.PrtNo.value" />
+                </div>
+            </div>
+            <table align="center">
+                <tr>
+                    <td align="center">
+                        <button class="btn btn-success" data-bind="click: $data.savemodalsrs">Save</button>
+                        <button class="btn btn-success" id="cancelmodalsrs" data-bind="click: $data.cancelmodalsrs">Cancel</button>
+                        <div class="saveErrorSRS" style="display: none; color:red">Save Error!</div>
+                    </td>
+                </tr>
+            </table>
+            <table id="srsPartsTable" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>Part Number</th>
+                        <th>APCL</th>
+                        <th>CLMC</th>
+                        <th>Catalog/Material Description</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:srsPartstbl">
+                    <tr>
+                        <td><input class="chktablsrs" type="checkbox" checked="checked" data-bind="value: $data.Attributes.id.value + ' - ' + $data.Attributes.cmntTxt.value" /></td>
+                        <td><span class="idtablsrs" data-bind="text: $data.Attributes.id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.PrdctId.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.PrtNo.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.Apcl.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.Mfg.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.CtlgDesc.value"></span></td>
+                        <td><input class="cmnttablsrs" data-bind="value: $data.Attributes.cmntTxt.value" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="replacedByModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <!--<table style="width:100%">
+                <tr>
+                    <td><h4><b>Search:</b></h4></td>
+                    <td><span class="closesrd">&times;</span></td>
+                </tr>
+            </table>-->
+            <div class="row">
+                <div class="col-sm-2 form-group">
+                    <h4> CLMC: </h4><span data-bind="text: $data.mtl.Mfg.value" />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <h4> Description: </h4><span data-bind="text: $data.mtl.CtlgDesc.value"></span>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <h4>Part Number: </h4><span data-bind="text: $data.mtl.PrtNo.value" />
+                </div>
+            </div>
+            <table style="width:100%">
+                <tr>
+                    <!--<td><h4><b>Superceded/Replaced by:</b></h4></td>-->
+                    <td><h4><b>Search:</b></h4></td>
+                    <td><span class="closesrd">&times;</span></td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="idcdmmssrd" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmssrd" data-bind="event:{ keypress: checkEnterSR}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="materialcodesrd">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcodesrd" data-bind="event:{ keypress: checkEnterSR}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="partnumbersrd">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumbersrd" data-bind="event:{ keypress: checkEnterSR}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="clmcsrd">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcsrd" data-bind="event:{ keypress: checkEnterSR}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptnsrd">Catalog Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptnsrd" data-bind="event:{ keypress: checkEnterSR}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <button class="btn btn-success" data-bind="click: $data.searchmtlSR">SEARCH</button>
+                    <div class="NoRecordsrd" style="display: none; color:red">No records found!</div>
+                </div>
+            </div>
+            <table align="center">
+                <tr>
+                    <td align="center">
+                        <!--<button class="btn btn-success" id="savemodalsrdbtn" data-bind="click: $data.savemodalsrd" data-toggle="tooltip" data-placement="bottom" title="Save SR">Save SR</button>-->
+                        <button class="btn btn-success" id="saveAllmodalsrdbtn" data-bind="click: $data.saveCloseModalsrd" data-toggle="tooltip" data-placement="bottom" title="Save SR & Active Material Inventory">Save & Close</button>
+                        <button class="btn btn-success" id="cancelmodalsrd" data-bind="click: $data.cancelmodalsrd">Cancel</button>
+                        <div class="saveErrorSRD" style="display: none; color:red">Save Error!</div>
+                    </td>
+                </tr>
+            </table>
+            <h4><b>Search Results:</b></h4>
+            <table id="searchresultssrd" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>Part Number</th>
+                        <th>CLMC</th>
+                        <th>Description</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:searchtblsrd">
+                    <tr>
+                        <td><input class="chkbxsearchsrd" type="checkbox" data-bind="value: $data.Attributes.material_item_id.value+'-'+$data.Attributes.mfg_id.value" /></td>
+                        <td><span class="idtablsrd" data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.item_desc.value"></span></td>
+                        <td><input class="cmnttablsrd" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div data-bind="if:parentSRd">
+                <h4><b>Superceded/Replaced by:</b></h4>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <h4>CDMMS ID:</h4><span data-bind="text: parentSRd().Attributes.id.value" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <h4>Material Code:</h4><span data-bind="text: parentSRd().Attributes.PrdctId.value" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <h4>CLMC:</h4><span data-bind="text: parentSRd().Attributes.Mfg.value" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <h4>Part Number:</h4><span data-bind="text: parentSRd().Attributes.PrtNo.value" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <h4>Catalog/Material Description:</h4><span data-bind="text: parentSRd().Attributes.CtlgDesc.value" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <h4>Apcl Code:</h4><span data-bind="text: parentSRd().Attributes.Apcl.value" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <h4>Comments:</h4><input data-bind="value: parentSRd().Attributes.cmntTxt.value" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <h4>CUID:</h4><span data-bind="text: $root.mtl.LstUid.value" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <h4>Date:</h4><span data-bind="text: $root.mtl.LstDt.value" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="revisionPartsModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Revisions:</b></h4></td>
+                    <td><span class="closerp">&times;</span></td>
+                </tr>
+            </table>
+            <div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h4>CLMC :  </h4><span data-bind="text: $data.mtl.Mfg.value" />
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Description :  </h4> <span data-bind="text: $data.mtl.CtlgDesc.value" />
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Part Number :  </h4> <span data-bind="text: $data.mtl.PrtNo.value" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h4>Root Part Number :<font color="red">*  </font> </h4><input id="txtRootpartno" data-bind="value: $data.mtl.RtPrtNbr.value" MaxLength="40" />
+                    </div>
+                </div>
+            </div>
+            <h4>Search Input:</h4>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="idcdmmsrp" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmsrp" data-bind="event:{ keypress: checkEnterRP}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="materialcoderp">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcoderp" data-bind="event:{ keypress: checkEnterRP}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="partnumberrp">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumberrp" data-bind="event:{ keypress: checkEnterRP}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="clmcrp">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcrp" data-bind="event:{ keypress: checkEnterRP}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptnrp">Catalog Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptnrp" data-bind="event:{ keypress: checkEnterRP}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <button class="btn btn-success" data-bind="click: $data.searchmtlRP">SEARCH</button>
+                    <div class="NoRecordrp" style="display: none; color:red">No records found!</div>
+                </div>
+            </div>
+
+            <h4>Search Results:</h4>
+            <table id="searchresultsrp" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>Catalog/Material Description</th>
+                        <th>Revision Number</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:searchtblrp">
+                    <tr>
+                        <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.item_desc.value"></span></td>
+                        <td><input type="text" data-bind="value: $data.Attributes.rvsn.value" /></td>
+                        <td><button id="addRP" data-bind="click:$parent.Add_RevisionParts">ADD</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Revision Hierarchy:</h4>
+            <table id="idRevisionPartsrp" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>CLMC</th>
+                        <th>Part Number</th>
+                        <th>CLEI</th>
+                        <th>Catalog/Material Description</th>
+                        <th>APCL</th>
+                        <th>Orderable</th>
+                        <th>Specification Name</th>
+                        <th>Revision Number</th>
+                        <th>Base Revision</th>
+                        <th>Current Revision</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:revisionPartstbl">
+                    <tr>
+                        <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.cleiCode.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.item_desc.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.apcl.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.orderable.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.spec_name.value"></span></td>
+                        <td><input type="text" data-bind="value: $data.Attributes.rvsn.value" /></td>
+                        <td><input class="chkbx_baservsn" type="checkbox" data-bind="checked: $data.Attributes.baseRvsn.value=='Y' ? true : false" /></td>
+                        <td><input class="chkbx_currvsn" type="checkbox" data-bind="checked: $data.Attributes.currRvsn.value=='Y' ? true : false" /></td>
+                        <td><button id="deleterp" data-bind="click:$parent.Delete_RevisionParts">DELETE</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table align="center">
+                <tr>
+                    <td align="center">
+                        <button class="btn btn-success" data-bind="click: $data.savemodalrp">Save</button>
+                        <button class="btn btn-success" id="cancelmodalrp" data-bind="click: $data.cancelmodalrp">Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="CPreplacesModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Chaining Parts:</b></h4></td>
+                    <td><span class="closecp">&times;</span></td>
+                </tr>
+            </table>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <h4>CLMC: </h4><span data-bind="text: $data.mtl.Mfg.value" />
+                </div>
+                <div class="col-sm-6">
+                    <h4>Description: </h4><span data-bind="text: $data.mtl.CtlgDesc.value" />
+                </div>
+                <div class="col-sm-4">
+                    <h4>Part Number: </h4><span data-bind="text: $data.mtl.PrtNo.value" />
+                </div>
+            </div>
+            <div>
+                <h4><b>Details:</b></h4>
+            </div>
+            <div>
+                <table id="cpsPartsTable" style="width:100%" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>CDMMS ID</th>
+                            <th>Material Code</th>
+                            <th>Part Number</th>
+                            <th>CLMC</th>
+                            <th>Catalog/Material Description</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:cpsPartstbl">
+                        <tr>
+                            <td><span data-bind="text: $data.Attributes.id.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.PrdctId.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.PrtNo.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.Mfg.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.CtlgDesc.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.cmntTxt.value"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4>LOSDB Material:</h4>
+            <div class="table-responsive">
+                <table id="losdbTbl" style="width:100%" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Equipment Catalog Item ID</th>
+                            <th>Ordering Code</th>
+                            <th>Part Number</th>
+                            <th>Manufacturer</th>
+                            <th>CLEI</th>
+                            <th>List or Series</th>
+                            <th>Drawing</th>
+                            <th>Drawing Issue</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:losdbChainedIn">
+                        <tr>
+                            <td><span data-bind="text: $data.Attributes.prdId.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.eqptCtlgItmId.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.ordrCd.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.prtNo.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.vndr.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.CLEI.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.lsOrSrs.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.drwg.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.drwgIss.value"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CPreplacedByModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Chaining Parts:</b></h4></td>
+                    <td><span class="closecpd">&times;</span></td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-sm-2">
+                    <h4> CLMC: </h4><span data-bind="text: $data.mtl.Mfg.value" />
+                </div>
+                <div class="col-sm-6">
+                    <h4> Description: </h4><span data-bind="text: $data.mtl.CtlgDesc.value"></span>
+                </div>
+                <div class="col-sm-4">
+                    <h4>Part Number: </h4><span data-bind="text: $data.mtl.PrtNo.value" />
+                </div>
+            </div>
+            <div class="row">
+                <h4><b>Details:</b></h4>
+            </div>
+            <div data-bind="if:parentCPd">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>CDMMS ID:</h4><span data-bind="text: parentCPd().Attributes.id.value" />
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Material Code:</h4><span data-bind="text: parentCPd().Attributes.PrdctId.value" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>CLMC:</h4><span data-bind="text: parentCPd().Attributes.Mfg.value" />
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Part Number:</h4><span data-bind="text: parentCPd().Attributes.PrtNo.value" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Catalog/Material Description:</h4><span data-bind="text: parentCPd().Attributes.CtlgDesc.value" />
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Comments:</h4><span data-bind="text: parentCPd().Attributes.cmntTxt.value" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>CUID:</h4><span data-bind="text: $root.mtl.LstUid.value" />
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Date:</h4><span data-bind="text: $root.mtl.LstDt.value" />
+                    </div>
+                </div>
+            </div>
+            <h4>LOSDB Material:</h4>
+            <div class="table-responsive">
+                <table id="losdbTbl" style="width:100%" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Equipment Catalog Item ID</th>
+                            <th>Ordering Code</th>
+                            <th>Part Number</th>
+                            <th>Manufacturer</th>
+                            <th>CLEI</th>
+                            <th>CLEI Compatible 7</th>
+                            <th>List or Series</th>
+                            <th>Drawing</th>
+                            <th>Drawing Issue</th>
+                            <th>PCN</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:losdbChainedIn">
+                        <tr>
+                            <td><span data-bind="text: $data.Attributes.prdId.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.eqptCtlgItmId.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.ordrCd.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.prtNo.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.vndr.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.CLEI.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.compatibleequipmentclei7.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.lsOrSrs.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.drwg.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.drwgIss.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.pcnchange.value"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="highLevelPartsModal" class="modal" style="right:15px !important">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-bind="click: $data.cancelModalHLPN">&times;</button>
+            <h4 class="modal-title">High Level Parts</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row" style="padding-top:15px;">
+                <div class="col-sm-4">
+                    <label>HLP CDMMS ID:&nbsp;&nbsp;</label><span id="cdmmsIdHlpnTxt" data-bind="text: $data.mtl.id.value"></span>
+                </div>
+                <div class="col-sm-4">
+                    <label>HLP Part Number:&nbsp;&nbsp;</label> <span data-bind="text: $data.mtl.PrtNo.value"></span>
+                </div>
+                <div class="col-sm-4">
+                    <label>HLP CLMC:&nbsp;&nbsp;</label> <span data-bind="text: $data.mtl.Mfg.value"></span>
+                </div>
+            </div>
+            <div class="row" style="padding-top:10px; padding-bottom:15px;">
+                <div class="col-sm-4">
+                    <label>HLP Material Code:&nbsp;&nbsp;<font color="red"></font> </label><span id="materialCodeHlpnTxt" data-bind="text: $data.mtl.PrdctId.value">HLP Material Code</span>
+                </div>
+                <div class="col-sm-8">
+                    <label>HLP Description:&nbsp;&nbsp;<font color="red"></font> </label><span data-bind="text: $data.mtl.CtlgDesc.value">HLP Description Value</span>
+                </div>
+            </div>
+            <h4>Search Input:</h4>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label id="hlpncdmmslabel" for="idcdmmsrpHlpn" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmsrpHlpn" autocomplete="off" maxlength="40" data-bind="value: $data.hlpncdmmsid(), event:{ keypress: NumDecimal}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label id="hlpnprodidlabel" for="materialcoderpHlpn">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcoderpHlpn" autocomplete="off" maxlength="18" data-bind="value: $data.hlpnmtlcd()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label id="hlpnpartnumberlabel" for="partnumberrpHlpn">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumberrpHlpn" autocomplete="off" maxlength="40" data-bind="value: $data.hlpnpartno()">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label id="hlpnclmclabel" for="clmcrpHlpn">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcrpHlpn" autocomplete="off" maxlength="10" data-bind="value: $data.hlpnclmc()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptnrpHlpn">Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptnrpHlpn" autocomplete="off" data-bind="value: $data.hlpndesc()">
+                </div>
+                <div class="col-sm-2 form-group" style="padding-top: 25px;">
+                   <b>Record Only: </b> <input type="checkbox" id="ChbkSearchRecordOnly" data-bind="checked: $data.hlpnrecordonly()" />
+                </div>
+                <div class="col-sm-4 form-group" style="padding-top: 20px;">
+                    <button class="btn btn-success" data-bind="click: $data.searchModalHLPN">SEARCH</button>
+                    &nbsp;
+                    <button class="btn btn-success" data-bind="click: $data.clearMaterialSearchHLPN">CLEAR</button>
+                    &nbsp;
+                    <input type="radio" id="hlpnsearchFuzzy" value="Fuzzy Search" name="searchbuttonhlpn" data-bind="checked: hlpncheckSearchType, event: {change: $data.hlpnsearchMethod}"> <b>Fuzzy Search</b>
+                    &nbsp;
+                    <input type="radio" id="hlpnsearchExact" value="Exact Search" name="searchbuttonhlpn" data-bind="checked: hlpncheckSearchType, event: {change: $data.hlpnsearchMethod}"> <b>Exact Search</b>
+                    <div class="NoRecordhlp" style="display: none; color:red">No records found!</div>
+
+                </div>
+            </div>
+            <h4>Search Results:</h4>
+            <div class="table-responsive">
+                <table id="searchresultHlpn" style="width:100%" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>CDMMS ID</th>
+                            <th>Material Code</th>
+                            <th>CLMC</th>
+                            <th>Part Number</th>
+                            <th>Material Category</th>
+                            <th>Feature Type</th>
+                            <!--<th>UOM</th>       -->
+                            <th>Revisions?</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:searchHlpn">
+                        <tr>
+                            <td><input class="hlpnSearchCbk" type="checkbox" data-bind="checked: $data.Attributes.is_selected.bool"></td>
+                            <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.mtl_ctgry.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.ftr_typ.value"></span></td>
+                            <!-- <td><span data-bind="text: $data.Attributes.mtrlUOM.value"></span></td> -->
+                            <td><select data-bind="options: $data.Attributes.revisions.options, optionsText: 'text', optionsValue: 'value', value: $data.Attributes.revisions.value"></select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4>Contained-In Items :</h4>
+            <div class="table-responsive">
+                <table id="contaiedInPartsHlpn" style="width:100%" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                        <!--th>#</th-->
+                        <!--th></th-->
+                        <th>Seq#</th>
+                            <th>CDMMS ID</th>
+                            <th>Material Code</th>
+                            <th>CLMC</th>
+                            <th>Part Number</th>
+                        <th>Spec Name</th>
+                            <th>Material Category</th>
+                            <th>Feature Type</th>
+                            <th>UOM</th>
+                            <th>Related To</th>
+                            <th>Placement (Front/Rear)</th>
+                            <th>Revisions?</th>
+                            <th>EQDES</th>
+                            <th>HORZ DISP</th>
+                        	<th>Rack Mount<br/> Pos</th>
+                        	<th>Label</th>
+                            <th>QTY</th>
+                            <th>Spare QTY</th>
+                            <th>Total QTY</th>
+                            <th>Unselect to Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:getCITHlpn">
+                    <tr data-bind="attr: { id: $data.cin_cdmms_Id.value, 'data-seq-no': $data._seqNo.value, 'class': 'seq'+$data.cntnd_in_seq_no.value + $data.added_class.value }, visible : $data.is_visible.bool">
+                        <!--td class="dragger"><span class='seq-no' data-bind="text: $data._seqNo.value"></span><span>&nbsp;</span></td-->
+                        <!--td style="text-align: left;" data-bind="if: $data.has_level.bool">
+                                <span class="openMultiHlpn glyphicon glyphicon-plus-sign"
+                                      style="font-size:18px;color:green;cursor: pointer;"></span>
+                        </td-->
+
+                        <!-- ko if: $data.contained_in_part.bool === false -->
+                        <td class="dragger"><span class='seq-no' data-bind="text: $data.cntnd_in_seq_no.value" style="white-space:nowrap"></span></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.contained_in_part.bool === true -->
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.cntnd_in_seq_no.value" style="white-space:nowrap"></span></td>
+                        <!-- /ko -->
+
+                        <!-- ko if: $data.material_category.value !== 'High Level Part' && $data.contained_in_part.bool === false -->
+                        <td><span data-bind="text: $data.cin_cdmms_Id.value"></span></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.material_category.value !== 'High Level Part' && $data.contained_in_part.bool === true -->
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.cin_cdmms_Id.value"></span></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.material_category.value === 'High Level Part' && $data.contained_in_part.bool === false -->
+                        <td><a data-bind="event:{ click: $parent.onHlpClick }"><span data-bind="text: $data.cin_cdmms_Id.value"></span></a></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.material_category.value === 'High Level Part' && $data.contained_in_part.bool === true -->
+                        <td data-bind="attr:{'class': $data.level.value}"><a data-bind="event:{ click: $parent.onHlpClick }"><span data-bind="text: $data.cin_cdmms_Id.value"></span></a></td>
+                        <!-- /ko -->
+
+                        <!-- ko if: $data.contained_in_part.bool === false -->
+                            <td><span data-bind="text: $data.material_code.value"></span></td>
+                            <td><span data-bind="text: $data.clmc.value"></span></td>
+                            <td><span data-bind="text: $data.part_number.value"></span></td>
+                        <td><span data-bind="text: $data.specn_nm.value"></span></td>
+                            <td><span data-bind="text: $data.material_category.value"></span></td>
+                            <td><span data-bind="text: $data.feature_type.value"></span></td>
+                            <td><span data-bind="text: $data.mtrlUOM.value"></span></td>
+                        <td><select data-bind="options: $data.related_to.liststrings, attr: {id: $data.refDefId.value +'-ref-'+$data.part_number.value }, visible: $data.related_to.liststrings.length > 1, value: $data.parent_part.value,event: {change: $parent.UpdatePlacement}" style="width: 120px"></select></td>
+                            <td>
+                            <select class="form-control" data-bind="enable: $data.placement_front_rear.enable || $data.isLocatable.bool == true, value: $data.placement_front_rear.value">
+                                <option value=""></option>
+                                <option value="F">Front</option>
+                                <option value="R">Rear</option>
+                            </select>
+                            </td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.contained_in_part.bool === true -->
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.material_code.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.clmc.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.part_number.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.specn_nm.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.material_category.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.feature_type.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.mtrlUOM.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><select data-bind="options: $data.related_to.liststrings, enable:$data.is_enable_level.bool, attr: {id: $data.refDefId.value +'-ref-'+$data.part_number.value }, visible: $data.related_to.liststrings.length > 1, value: $data.parent_part.value,event: {change: $parent.UpdatePlacement}" style="width: 120px"></select></td>
+                        <td data-bind="attr:{'class': $data.level.value}">
+                            <select class="form-control" data-bind="enable: ($data.placement_front_rear.enable || $data.isLocatable.bool == true) && $data.is_enable_level.bool, value: $data.placement_front_rear.value">
+                                    <option value=""></option>
+                                    <option value="F">Front</option>
+                                    <option value="R">Rear</option>
+                                </select>
+                            </td>
+                        <!-- /ko -->
+
+                        <!-- ko if: $data.contained_in_part.bool === false -->
+                            <td>
+                                <select class="form-control" data-bind="enable: $data.is_revision.value.length > 0,value: $data.is_revision.value">
+                                    <option value=""></option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.contained_in_part.bool === true -->
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.is_revision.value=='Y'?'Yes':'No'"></span></td>
+                        <!-- /ko -->
+                        
+                        <!-- ko if: $data.contained_in_part.bool === false -->
+                        <td><input type="text" maxlength="6" data-bind="textInput: $data.ycoord.value, visible:$data.hasXY.bool" style="width:70px;text-align:center;" class="form-control" autocomplete="off" /></td>
+                        <td><input type="text" maxlength="6" data-bind="textInput: $data.xcoord.value, visible:$data.hasXY.bool" style="width:70px;text-align:center;" class="form-control" autocomplete="off" /></td>
+                        <td><input type="text" maxlength="6" data-bind="textInput: $data.rack_pos.value, visible:$data.rack_pos.bool, event:{ blur: $parent.onUpdateRackMountPos }" style="width:50px;text-align:center;" class="form-control rack_pos" autocomplete="off" /></td>
+                        <td><input type="text" maxlength="6" data-bind="textInput: $data.label_nm.value, visible:$data.label_nm.bool" style="width:70px;" class="form-control" autocomplete="off" /></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.contained_in_part.bool === true && $data.is_enable_level.bool === true -->
+                        <td data-bind="attr:{'class': $data.level.value}"><input type="text" maxlength="6" data-bind="textInput: $data.ycoord.value, visible:$data.hasXY.bool" style="width:70px;text-align:center;" class="form-control" autocomplete="off" /></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><input type="text" maxlength="6" data-bind="textInput: $data.xcoord.value, visible:$data.hasXY.bool" style="width:70px;text-align:center;" class="form-control" autocomplete="off" /></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><input type="text" maxlength="6" data-bind="textInput: $data.rack_pos.value, visible:$data.rack_pos.bool, event:{ blur: $parent.onUpdateRackMountPos }" style="width:50px;text-align:center;" class="form-control rack_pos" autocomplete="off" /></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><input type="text" maxlength="6" data-bind="textInput: $data.label_nm.value, visible:$data.label_nm.bool" style="width:70px;" class="form-control" autocomplete="off" /></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.contained_in_part.bool === true && $data.is_enable_level.bool === false -->
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.ycoord.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.xcoord.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><input type="text" maxlength="6" data-bind="textInput: $data.rack_pos.value, visible:$data.rack_pos.bool, event:{ blur: $parent.onUpdateRackMountPos }, enable:$data.is_enable_level.bool" style="width:50px;text-align:center;" class="form-control rack_pos" autocomplete="off" /></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><input type="text" maxlength="6" data-bind="textInput: $data.label_nm.value, visible:$data.label_nm.bool, enable:$data.is_enable_level.bool" style="width:70px;" class="form-control" autocomplete="off" /></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.contained_in_part.bool === false -->
+                            <td><input type="text" maxlength="6" data-bind="disable: $data.feature_type.value == 'Bay Extender',attr: { id: 'quana'+$data.refDefId.value },textInput: $data.quantity.value,event: {keyup: $parent.totalQuantity}" style="width:70px;" class="form-control" autocomplete="off"></td>
+                            <td><input type="text" maxlength="6" data-bind="disable: $data.feature_type.value == 'Bay Extender',attr: { id: 'spare'+$data.refDefId.value },textInput: $data.spare_quantity.value,event: {keyup: $parent.totalQuantitySpare}" style="width: 70px;" class="form-control" autocomplete="off"></td>
+                        <td><span class="form-control no-border" data-bind="attr: { id: 'total'+$data.refDefId.value, class: $data.added_class.value },text: $data.total_quantity.value"></span></td>
+                        <td><input class="containedInCheckHlpn" type="checkbox" id="deleteCheckbox" data-toggle="tooltip" data-placement="top" data-bind="checked:$data.is_selected.bool, event: {change:$parent.toggleStrikeout}" title="Unselect to delete"></td>
+                        <!-- /ko -->
+                        <!-- ko if: $data.contained_in_part.bool === true -->
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.quantity.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.spare_quantity.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"><span data-bind="text: $data.total_quantity.value"></span></td>
+                        <td data-bind="attr:{'class': $data.level.value}"></td>
+                        <!-- /ko -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" align="center" style="padding-top:10px;">
+                <button class="btn btn-success" data-bind="click: $data.saveHlpnClose">Save & Close</button>
+                <button class="btn btn-success" data-bind="click: $data.saveHlpn">Save</button>
+                <button class="btn btn-success" data-bind="click: $data.resequenceHlpn">Re-Sequence</button>
+                <button class="btn btn-success" data-dismiss="modal" data-bind="click: $data.cancelModalHLPN">Cancel</button>
+                <button type="button" data-bind="click: exportHlpnReport" class="btn btn-success">Export Report</button>
+                <div style="float:right">
+                    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#highLevelColorCodes">
+                        <span class="glyphicon glyphicon-info-sign"></span> Info
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row" style="background: #FCF5E8; padding: 15px 15px 15px 25px;">
+                <div class="col-sm-4" style="padding-top:8px">
+                    <label>Add from another HLPN (Material Code) : </label>&nbsp;&nbsp;
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="cloneInputHLPN" placeholder="Material Code" />
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-success" data-bind="click: $data.cloneHlpn">Clone</button>
+                </div>
+            </div>
+            <div style="text-align:left" id="cloneHlpnErrorMsg" class="row alert alert-danger" hidden="hidden"></div>
+            <div style="text-align:left" id="cloneHlpnSuccessMsg" class="row alert alert-success" hidden="hidden"></div>
+        </div>
+    </div>
+</div>
+<div id="highLevelColorCodes" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Color Significance</h4>
+            </div>
+            <div class="modal-body" style="">
+                <div class="row" style="background-color:gray;padding:20px">
+                    <div class="row">
+                        <label style="vertical-align:top;color:white;padding-right:40px;padding-top:3px;">Level (1+n)</label>
+                        <svg width="60" height="28">
+                            <rect x="0" y="0" width="56" height="24" style="fill:#F7E5E1;"></rect>
+                            Sorry, your browser does not support inline SVG.
+                        </svg>
+                    </div>
+                    <div class="row">
+                        <label style="vertical-align:top;color:white;padding-right:40px;padding-top:3px;">Level (2+n)</label>
+                        <svg width="60" height="28">
+                            <rect x="0" y="0" width="56" height="24" style="fill:#CDDCE8;"></rect>
+                        </svg>
+                    </div>
+                    <div class="row">
+                        <label style="vertical-align:top;color:white;padding-right:40px;padding-top:3px;">Level (3+n)</label>
+                        <svg width="60" height="28">
+                            <rect x="0" y="0" width="56" height="24" style="fill:#F7F3E1;"></rect>
+                        </svg>
+                    </div>
+                    <div class="row">
+                        <label style="vertical-align:top;color:white;padding-right:40px;padding-top:3px;">Level (4+n)</label>
+                        <svg width="60" height="28">
+                            <rect x="0" y="0" width="56" height="24" style="fill:#E4E1FC;"></rect>
+                        </svg>
+                    </div>
+                    <div class="row">
+                        <label style="vertical-align:top;color:white;padding-right:40px;padding-top:3px;">Level (5+n)</label>
+                        <svg width="60" height="28">
+                            <rect x="0" y="0" width="56" height="24" style="fill:#E6F7E1;"></rect>
+                        </svg>
+                    </div>
+                    <div class="row" style="color:white;padding-top:40px">
+                        <label>Note:</label>&nbsp;&nbsp;'n' can be any whole number which is a multiple of '5'.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

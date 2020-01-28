@@ -1,0 +1,86 @@
+﻿.cad-canvas { 
+    /*border: 1px solid dimgray;*/
+}
+.cad-button-bank { 
+    height: 36px;
+    padding: 2px;
+}
+.cad-button-bank .btn { 
+    padding: 4px;
+}
+.cad-equip-search { 
+    height: 30px;
+    width: 380px; 
+}
+
+.btn-enabled {
+    background-color: orange;
+}
+
+.gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-vertical {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    cursor: col-resize;
+    height: 1078px;
+    width: 3px;
+    float: left;
+ }
+
+.split {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+}
+
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid dimgray;
+    background: darkgray;
+    font-weight: normal;
+    color: lightgray;
+}
+
+#tabINFO_LOC tbody { 
+    font-size: smaller;
+}
+#tabINFO_LOC td {
+    text-align: center;
+}
+
+#tabINFO_LOC table a {
+    color: #00B7FF;
+    font-weight: bold;
+}
+#tabINFO_LOC table a:hover {
+    color: #2a6496;
+    font-weight: bold;
+}
+
+tr.equip-too-big td { 
+    color: red;
+}
+span.equip-too-big {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: small;
+    border: 1px solid #f1a899;
+    background: #fddfdf;
+    color: #5f3f3f;
+}
+
+
+#tabINFO_LOC td input.pos { 
+    text-align: center;
+    width: 50px;
+}

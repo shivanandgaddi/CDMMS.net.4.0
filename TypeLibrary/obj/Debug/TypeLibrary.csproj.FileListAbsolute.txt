@@ -1,0 +1,9 @@
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\bin\Debug\TypeLibrary.dll
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\bin\Debug\TypeLibrary.pdb
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\bin\Debug\Newtonsoft.Json.dll
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\bin\Debug\Newtonsoft.Json.xml
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\obj\Debug\TypeLibrary.dll
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\obj\Debug\TypeLibrary.pdb
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\obj\Debug\TypeLibrary.csprojAssemblyReference.cache
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\obj\Debug\TypeLibrary.csproj.CoreCompileInputs.cache
+C:\CDMMS\src\CDMMS.net.4.0\TypeLibrary\obj\Debug\TypeLibrary.csproj.CopyComplete

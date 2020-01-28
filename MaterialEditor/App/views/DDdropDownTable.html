@@ -1,0 +1,38 @@
+﻿<div id="interstitial">
+    <div class="center-block">Please wait as we are loading the details</div>
+</div>
+<div id="left">
+    <div class='row'>
+        <div><h3>Material Item Dropdown Tables</h3></div>
+        <div class="col-lg-9">
+            <div class="input-group input-group-sm">
+                <label>Select table:</label>
+                <select id="selectedtable" data-bind="options: tableOptions, optionsCaption: '--Select a table--',event:{change:$data.selectdropdown}"></select>
+            </div>
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
+    <div id="filterCategorytypeCD" style="visibility:hidden">
+        <div><h3>Filter by : </h3></div>
+        <center>
+            <label><input type="radio" value="All" data-bind="checked : filterOption" checked="checked" name="Filter" id="cd_ALL" />ALL</label>
+            <label><input type="radio" value="Approved" data-bind="checked : filterOption" name="Filter" id="rd_UNAPPROVED" />APPROVED</label>
+            <label><input type="radio" value="Unapproved" data-bind="checked : filterOption" name="Filter" id="rd_APPROVED" />UNAPPROVED</label>
+        </center>
+    </div>
+
+    <div id="filterCategoryflowthru" style="visibility:hidden">
+        <div><h3>Filter by : </h3></div>
+        <center>
+            <label><input type="radio" value="All" data-bind="checked : filterOption1" checked="checked" name="Filter1" id="ft_ALL" />ALL</label>
+            <label><input type="radio" value="Y" data-bind="checked : filterOption1" name="Filter1" id="rd_Y" />YES</label>
+            <label><input type="radio" value="N" data-bind="checked : filterOption1" name="Filter1" id="rd_N" />NO</label>
+        </center>
+    </div>
+
+</div>
+<div id="right">
+    <div data-bind="compose:DDviewDropdown,visible:showDDT" id="DDviewDropdownDiv"></div>
+    <div data-bind="compose:DDviewFlowthru, visible:showDDF" id="DDviewFlowthruDiv1"></div>
+</div>

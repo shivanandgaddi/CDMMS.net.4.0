@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16555537
+file-version=1
+checksum=ba60b4c754f5bc652cb7ae03a8aa10f6
+fetch-size=26710
+mtime=1532966858
+item-spec=43444D4D533A4B58504E4D20434F4E4E4543544F52495A45444341424C454442494E544552464143452043532D323831323931303435583335303732583338342E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/MaterialEditor/DbInterface/Material/ConnectorizedCableDbInterface.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

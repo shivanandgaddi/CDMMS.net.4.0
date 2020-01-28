@@ -1,0 +1,74 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <label>Saved Reports:</label>
+        <select class="form-control" data-bind="options: $data.savedReports, optionsCaption:'select', optionsText: 'text', optionsValue: 'value',event: { change: eventforSavedReports }"></select>
+    </div>
+</div>
+<div class="row" data-bind="visible: (selectedSavedReport() == 'LABOR ID')">
+    <div class="col-md-4" style="padding-top:20px;padding-bottom:20px">              
+               <label>Labor ID:</label>
+               <select class="form-control" data-bind="options: $data.assemblyLaborLt, optionsCaption:'select', optionsText: 'text', optionsValue: 'value',event: { change: getlaborTitleDescription }"></select>         
+    </div>
+</div>
+<div class='panel panel-default' data-bind="visible: (selectedSavedReport() == 'LABOR ID')">
+    <div class="panel-heading">Associated Assembly Units</div>
+    <div class="panel-body">
+        <table id="generateReportsSR" class="table table-striped">
+            <thead>             
+                <tr>
+                    <th>Assembly Unit Name</th>
+                    <th>Calculation</th>
+                    <th>Unit of Measurement</th>
+                    <th>Retired</th>
+                    <th>Muliplier Number</th>
+                    <th>Alternate</th>
+                    <th>Alternate to AU</th>                                    
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:assemblyReportList">
+                <tr>
+                    <td><span data-bind="text: aunm.value"></span></td>
+                    <td><span data-bind="text: calcnm.value"></span></td>
+                    <td><span data-bind="text: uomnm.value"></span></td>
+                    <td><span data-bind="text: retind.value=='Y' ? 'Yes' : 'No'"></span></td>
+                    <td><span data-bind="text: mtplrno.value"></span></td>
+                    <td><span data-bind="text: alternative.value=='Y' ? 'Yes' : 'No'"></span></td>
+                    <td><span data-bind="text: alttoau.value"></span></td>                                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class='panel panel-default' data-bind="visible: (selectedSavedReport() == 'LABOR ID')">
+    <div class="panel-heading">Associated Material Items</div>
+    <div class="panel-body">
+        <table id="generateReportsMaterial" class="table table-striped">
+            <thead>
+                <tr>                 
+                    <th>CDMMS ID</th>
+                    <th>Material Code</th>
+                    <th>Part Number</th>
+                    <th>Clmc</th>
+                    <th>Catalog Description</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:assemblyReportListMaterial">
+                <tr>
+                    <td><span data-bind="text: materialitemid.value"></span></td>
+                    <td><span data-bind="text: productid.value"></span></td>
+                    <td><span data-bind="text: mfgpartno.value"></span></td>
+                    <td><span data-bind="text: mfgid.value"></span></td>
+                    <td><span data-bind="text: ctlgdsc.value"></span></td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row" data-bind="visible: (selectedSavedReport() == 'LABOR ID')">
+    <button type="button" id="buttonclick" class="btn btn-success">Export Report</button>
+</div>

@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "fabric.js@1.7.22",
+      "destination": "Scripts/fabric.js/"
+    }
+  ]
+}

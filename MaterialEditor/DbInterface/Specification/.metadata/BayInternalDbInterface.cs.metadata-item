@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16555592
+file-version=1
+checksum=df5075134f53a3e82f3fc9f682405339
+fetch-size=19818
+mtime=1534545681
+item-spec=43444D4D533A4B58504E4D20424159494E5445524E414C4442494E544552464143452043532D323831323931303435583335303732583431302E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/MaterialEditor/DbInterface/Specification/BayInternalDbInterface.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

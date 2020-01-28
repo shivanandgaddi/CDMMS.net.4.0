@@ -1,0 +1,787 @@
+﻿<style>
+ .wide-msg-box { 
+     width: 800px;
+ }
+ .wide-msg-box div.scrollable { 
+     max-height: 200px;
+     overflow: auto;
+ }
+.btn-icon { 
+    font-size: 16pt;
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+
+    display: inline-block;
+    padding: 3px 3px;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+#ChangeLogDialog tbody th { text-align: left; padding-left: 2px; }
+#ChangeLogDialog tbody td { text-align: left; padding-left: 2px; }
+#SelectAssociatedPartDialog thead th { padding: 2px; }
+#SelectAssociatedPartDialog tbody td { text-align: center; }
+#CoordDialog thead th { padding: 2px; }
+#CoordDialog tbody td { text-align: center; padding-top: 2px; }
+.txt-hilite, .txt-hilite td span a, .txt-hilite input, .txt-hilite select { color: red; }
+.xy-coord-input { white-space: nowrap; }
+.xy-coord-input .form-control { display: inline-block; }
+.xy-coord-input input { width: 80px; text-align: center; }
+.LABEL_NM { width: 125px; }
+.RACK_POS { width: 50px; text-align: center; }
+#ComnCnfgItemsScreen .caption { font-weight: bold; }
+.expander a { font-weight: bold; color: #00B7FF; }
+#uiComnConfigItemList td.partno { text-align: left; }
+#uiComnConfigItemList .relatedto { width: 200px; font-family: Consolas; }
+#uiComnConfigItemList tr.to-be-removed { color: silver; }
+#uiComnConfigItemList tr.to-be-removed input { color: silver; }
+#uiComnConfigItemList tr.to-be-removed select { color: silver; }
+
+tr.dragging {
+    width: 100%;
+}
+tr.dragging td { 
+    background-color: lightsalmon;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+.dragger { cursor: move; }
+/*https://www.htmlcsscolor.com/hex/E09A88*/
+.table-striped > tbody > tr.depth1:nth-child(even) > td { background-color: #F8C189; }
+.table-striped > tbody > tr.depth1:nth-child(odd) > td { background-color: #F9CDA1; }
+
+.table-striped > tbody > tr.depth2:nth-child(even) > td { background-color: #cddce8; }
+.table-striped > tbody > tr.depth2:nth-child(odd) > td { background-color: #E6EEF4; }
+
+.table-striped > tbody > tr.depth3:nth-child(even) > td { background-color: #F8C189; }
+.table-striped > tbody > tr.depth3:nth-child(odd) > td { background-color: #F9CDA1; }
+
+.menu-add-items { display: none; padding: 0px; width: 250px; text-align: left; padding: 12px; }
+.menu-add-items .glyphicon { font-size: 12px; }
+.menu-add-items a { color: white; }
+.menu-add-items ul { text-align: left; padding-left: 34px; padding-top: 6px; }
+
+.terse-layout label { display: inline-block; width: 25%; text-align: right; }
+.terse-layout .form-control { width: 50%; display: initial;}
+.terse-layout .row { margin-bottom: 4px; }
+
+.btnVIEW_CHANGE_LOG, .btnCLONE, .btnEXPORT { display: inline; }
+   
+.btnVIEW_CHANGE_LOG .btn, .btnCLONE .btn, .btnEXPORT .btn { 
+    width: 125px;
+}
+.btnEXPORT_SEARCH_RESULTS { display: inline; float: right; position:relative; top: -9px; }
+
+.has-changed { color: red; }
+</style>
+<div class="main-screen"> <!-- START OF MAIN SCREEN -->
+    <div id="interstitial">
+        <div class="row interstitial">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+        </div>
+    </div>
+
+    <!-- BEGIN UPDATE EXISTING -->
+    <div id="PANEL_MAIN_SCREEN">
+        <div class='panel panel-default form' style="width: 50%; float: left; height: 444px">
+            <div class="panel-heading">Common Config Search</div>
+            <div class="panel-body nup search-form-cc" id="FormSearchForCommonConfig" data-pfx="srch" data-search="/search/all">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchCOMN_CNFG_ID">Common Config ID:</label>
+                        <input type="text" class="form-control" id="srchCOMN_CNFG_ID" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="srchCOMN_CNFG_NM">Name:</label>
+                        <input type="text" class="form-control" id="srchCOMN_CNFG_NM" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchCOMN_CNFG_DSC">Description:</label>
+                        <input type="text" class="form-control" id="srchCOMN_CNFG_DSC" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="srchSTATUS">Status:</label>
+                        <select class="form-control" id="srchSTATUS" data-bind="options: $data.srchStatusOptions"></select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchTMPLT_TYP_ID">Type:</label>
+                        <select id="srchTMPLT_TYP_ID" class="form-control" data-bind="options: $data.configTypeOptions, optionsText: 'text', optionsValue: 'value', event:{ keypress: onCheckEnter }"></select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="srchTMPLT_NM">Template Name:</label>
+                        <input type="text" class="form-control" id="srchTMPLT_NM" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='panel panel-default form' style="width: 49%; float: right;">
+            <div class="panel-heading">Part Number Search</div>
+            <div class="panel-body nup" id="FormSearchForCommonConfigViaPartNumber" data-pfx="srch" data-search="/search/parts">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchPART_NO">Part Number:</label>
+                        <input type="text" class="form-control" id="srchPART_NO" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                    <div class="col-lg-6" style="padding-top: 22px;">
+                        <label for="srchRCRD_ONLY">Record Only:</label>
+                        <input type="checkbox" id="srchRCRD_ONLY" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchMTL_CD">Material Code:</label>
+                        <input type="text" class="form-control" id="srchMTL_CD" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="srchCLMC">CLMC:</label>
+                        <input type="text" class="form-control" id="srchCLMC" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchMAT_CAT_ID">Material Type:</label>
+                        <select class="form-control" id="srchMAT_CAT_ID" data-bind="options: $data.mtrlTypeOptions, optionsText: 'text', optionsValue: 'value'"></select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="srcFEAT_TYP_ID">Feature Type:</label>
+                        <select class="form-control" id="srchFEAT_TYP_ID" data-bind="options: $data.srchFeatTypeOptions, optionsText: 'text', optionsValue: 'value'"></select>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchDSC">Description:</label>
+                        <input type="text" class="form-control" id="srchDSC" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="srchSTATUS">Status:</label>
+                        <select class="form-control" id="srchSTATUS" data-bind="options: $data.mtrlStatusOptions, optionsText: 'text', optionsValue: 'value'"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="srchCDMMS_ID">CDMMS ID:</label>
+                        <input type="text" class="form-control" id="srchCDMMS_ID" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="srchSPEC_NM">Specification Name:</label>
+                        <input type="text" class="form-control" id="srchSPEC_NM" data-bind="event:{ keypress: onCheckEnter }">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"><!-- no break --></div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="input-group input-group-sm">
+                    <button class="btn btn-success" id="btnSEARCH_FOR_CC" data-bind="click: $data.onSearchForCommonConfig">SEARCH</button>
+                    &nbsp;
+                    <button class="btn btn-success" id="btnSEARCH_FOR_CC_CLEAR" data-bind="click: $data.onClearSearchForCommonConfig">CLEAR</button>
+                    &nbsp;
+                    <button class="btn btn-success" id="btnNEW_CC" data-bind="click: $data.onNewCommonConfig">NEW</button>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+
+    <div id="PANEL_CC_SEARCH_RESULTS" class='panel panel-default' data-bind="visible: ccSearchResults().length > 0">
+        <div class="panel-heading">
+            Common Config List <span class="total"></span>
+            <div class="btnEXPORT_SEARCH_RESULTS" title="Export config data..." data-bind="event: { click: onExportComnCnfgSearchResults }">
+                <button class="btn btn-success">
+                    <span class="fa fa-external-link" /> <span>Export Search Results</span>
+                </button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Details</th>
+                            <th>Config ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Template Name</th>
+                            <th>Completed</th>
+                            <th>Propagated</th>
+                            <th>Deactivated</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:ccSearchResults">
+                        <tr>
+                            <td><a data-bind="click: $parent.onSelectCommonConfigEntry">Select</a></td>
+                            <td><span data-bind="text: $data.COMN_CNFG_ID"></span></td>
+                            <td><span data-bind="text: $data.COMN_CNFG_NM"></span></td>
+                            <td><span data-bind="text: $data.COMN_CNFG_DSC"></span></td>
+                            <td><span data-bind="text: $data.TMPLT_TYP"></span></td>
+                            <td><span data-bind="text: $data.TMPLT_NM"></span></td>
+                            <td><span data-bind="text: $data.DEF_CMPLT_IND"></span></td>
+                            <td><span data-bind="text: $data.DEF_PRPGT_IND"></span></td>
+                            <td><span data-bind="text: $data.RET_COMN_CNFG_IND"></span></td> <!-- needs to be defined in schema -->
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="PANEL_EDIT_COMMON_CONFIG" class='panel panel-default form' data-bind="visible: isEditing">
+        <div class="panel-heading">
+            <span>Common Configuration</span>
+            <div class="btnRESTORE_SEARCH btn btn-success" style="display: none; float: right; margin-top: -9px"><i class="fa fa-search"></i></div>
+        </div>
+        <div class="panel-body nup" id="EditCommonConfigDialog" data-pfx="edt" stlye="background-color: red;">
+            <div class="row options">
+                <div class="col-lg-2">Completed: <input type="checkbox" id="edtDEF_CMPLT_IND" /></div>
+                <div class="col-lg-2">Propagated: <input type="checkbox" id="edtDEF_PRPGT_IND" /></div>
+                <div class="col-lg-2">Deleted: <input type="checkbox" id="edtDEL_IND" data-bind="event: { click: onToggleComnCnfgIndicator }"/></div>
+                <div class="col-lg-2">Deactivated: <input type="checkbox" id="edtRET_COMN_CNFG_IND"  data-bind="event: { click: onToggleComnCnfgIndicator }" /></div>
+                <div class="col-lg-2">Update in Progress: <input type="checkbox" id="edtUPDT_IN_PRGS_IND"  data-bind="event: { click: onToggleComnCnfgIndicator }" /></div>
+            </div>
+            <div class="row" style="margin-bottom: 5px;">
+                <div class="col-lg-2">
+                    <label for="edtCOMN_CNFG_ID" class="reqd">Common Config ID:</label>
+                    <input type="text" class="form-control" id="edtCOMN_CNFG_ID" readonly="readonly" />
+                </div>
+                <div class="col-lg-1">
+                    <label for="edtTMPLT_TYP_ID" class="reqd">Type:</label>
+                    <select id="edtTMPLT_TYP_ID" class="form-control" data-bind="options: $data.configTypeOptions, optionsText: 'text', optionsValue: 'value', event: { change: sanityCheckConfigType }"></select>
+                </div>
+                <div class="col-lg-2">
+                    <label for="edtCOMN_CNFG_NM" class="reqd">Name:</label>
+                    <input type="text" class="form-control" id="edtCOMN_CNFG_NM">
+                </div>
+                <div class="col-lg-3">
+                    <label for="edtCOMN_CNFG_DSC">Description:</label>
+                    <input type="text" class="form-control" id="edtCOMN_CNFG_DSC" />
+                </div>
+                <div class="col-lg-2">
+                    <label for="edtTMPLT_NM">Template Name:</label>
+                    <input type="text" class="form-control" id="edtTMPLT_NM" />
+                </div>
+            </div>
+            <div class="row" style="display:none">
+                <div class="col-lg-10 msg-warn" style="padding: 4px 4px 4px 12px"></div>
+            </div>
+            <div class="row" style="display:none">
+                <div class="col-lg-10 msg-info" style="padding: 4px 4px 4px 12px"></div>
+            </div>
+            <div class="row" data-bind="visible: !isNewConfig()">
+                <div class="col-lg-10" style="text-align: right">
+                    <div class="btnCLONE" title="Clone config..." data-bind="event: { click: onCloneConfig }">
+                        <button class="btn btn-success">
+                            <span class="fa fa-copy" /> <span>Clone Config</span>
+                        </button>
+                    </div>
+                    &nbsp;
+                    <div class="btnVIEW_CHANGE_LOG" title="View Change Log..." data-bind="event: { click: onViewChangeLog }">
+                        <button class="btn btn-success">
+                            <span class="fa fa-list" /> <span>Change Log</span>
+                        </button>
+                    </div>
+                    &nbsp;
+                    <div class="btnEXPORT" title="Export config data..." data-bind="event: { click: onExportComnCnfg }">
+                        <button class="btn btn-success">
+                            <span class="fa fa-external-link" /> <span>Export Data</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- create new common config entry-->
+
+    <!-- START COMMON CONFIG ITEM LIST -->
+    <div id="ComnCnfgItemsScreen" class='panel panel-default form center-block' data-bind="visible: showConfigChildItems">
+        <div class="panel-heading">
+            <span>Common Configuration Items for:</span>
+            <span class="caption"></span>
+            <div class="btnADD_ITEM" style="float: right; margin: -9px 122px" title="Click to add item to common config record...">
+                <button class="btn btn-success">
+                <span class="glyphicon glyphicon-plus-sign" /> <span>ADD ITEMS</span>
+                </button>
+            </div>
+        </div>
+        <div class="panel-body nup">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>&nbsp;</th>
+                            <th>CDMMS ID/CC ID</th>
+                            <th>Material Code</th>
+                            <th>CLMC</th>
+                            <th style="text-align: left;">Part Number</th>
+                            <th>Spec Name</th>
+                            <th>Material Category</th>
+                            <th>Feature Type</th>
+                            <th>Related To</th>
+                            <th>EQDES</th>
+                            <th>HORZ DISP</th>
+                            <th title="Rack Mount Position">Rack Pos</th>
+                            <th>Placement<br/>(Front/Rear)</th>
+                            <th>Label</th>
+                            <th>Revisions?</th>
+                            <th>QTY</th>
+                            <th>Spare QTY</th>
+                            <th>Total QTY</th>
+                            <th>Unselect to Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody id='uiComnConfigItemList' data-bind="foreach:comnCnfgItemList">
+                        <tr data-bind='attr: { "id": "rec"+$data._guid, "data-guid": $data._guid, "data-cc-def-id": $data.COMN_CNFG_DEF_ID, "data-cntnd-in-id": $data.CNTND_IN_ID, "data-seq-no": $data.CNTND_IN_SEQ_NO, "data-expanded": "false", "class": ($data.FEAT_TYP||"").replace(/[ -\/]/g, "")+" "+($data.MTRL_CAT_TYP||"").replace(/ /g,"")+" ccDefId"+$data.COMN_CNFG_DEF_ID+" "+($data._css||"")+" "+($data._isChild ? "is-child" : "")+" "+$data._parentGUID+" is-readonly-"+$data.IS_READONLY }' class='text-center'>
+                            <td>
+                                <input type="text" style='width: 45px; text-align: center; display: inline-block;' data-bind="attr: { 'class': 'seq-no seq-no'+$data.CNTND_IN_SEQ_NO+' CNTND_IN_SEQ_NO form-control small', 'value': $data.CNTND_IN_SEQ_NO, 'data-curr-seq-no': $data.CNTND_IN_SEQ_NO }, event:{ keypress: $parent.onCheckEnter, blur: $parent.onUpdateSequence }" data-col="CNTND_IN_SEQ_NO"/>
+                               
+                            </td>
+                            <td class="dragger"><span>&nbsp;</span></td>
+                            <td><span class='expander' data-bind="text: $data.CNTND_IN_ID"></span></td>
+                            <td><span data-bind="text: $data.MTRL_CD"></span></td>
+                            <td><span data-bind="text: $data.CLMC"></span></td>
+                            <td class="partno"><span data-bind="text: $data.RT_PART_NO"></span></td>
+                            <td class="specnm"><span data-bind="text: $data.SPECN_NM"></span></td>
+                            <td><span data-bind="text: $data.MTRL_CAT_TYP"></span></td>
+                            <td class="featyp"><span data-bind="text: $data.FEAT_TYP"></span></td>
+                            <td style="text-align: left;">
+                                <!--<select class='relatedto form-control PRNT_COMN_CNFG_DEF_ID' data-bind='attr: {"data-val": ($data.CNTND_IN_PRNT_DEF_ID||$data.PRNT_COMN_CNFG_DEF_ID||"-1") }'></select> version 1-->
+                                <select class='relatedto form-control PRNT_COMN_CNFG_DEF_ID' 
+                                        data-bind='attr: {"data-prnt-ref-key-id": $data.PRNT_REF_KEY_ID}' data-col="_related_to"></select><!-- will be set programmatically -->
+                            </td>
+                            <td colspan="2">
+                                <span class="xy-coord-input">
+                                    <input type='text' class='form-control coord Y_COORD_NO' data-bind='value: $data.CNTND_IN_PRNT_Y_COORD_NO||$data.Y_COORD_NO' data-col="Y_COORD_NO"/>
+                                    <span>&nbsp;</span>
+                                    <input type='text' class='form-control coord X_COORD_NO' data-bind='value: $data.CNTND_IN_PRNT_X_COORD_NO||$data.X_COORD_NO' data-col="X_COORD_NO"/>
+                                </span>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control RACK_POS" data-bind='value: $data.CNTND_IN_PRNT_RACK_POS||$data.RACK_POS, event: {blur: $parent.onUpdateRackMountPos}' data-col="RACK_POS" maxlength="3" />
+                            </td>
+                            <td>
+                                <select class='form-control placement FRNT_RER_IND' data-bind='attr: {"data-val": $data.FRNT_RER_IND||$data.CNTND_IN_PRNT_FRNT_RER_IND}' data-col="FRNT_RER_IND">
+                                    <option></option>
+                                    <option>F</option>
+                                    <option>R</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control LABEL_NM" data-bind='value: $data.CNTND_IN_PRNT_LABEL_NM||$data.LABEL_NM, attr: { "title": $data.CNTND_IN_PRNT_LABEL_NM||$data.LABEL_NM }, event: {change: $parent.onUpdateLabelHint}' data-col="LABEL_NM" maxlength=" 20"/>
+                            </td>
+                            <td>
+                                <select class='form-control revisions CNTND_IN_REVSN_LVL_IND' data-bind='attr: {"data-val": $data.CNTND_IN_REVSN_LVL_IND}' data-col="CNTND_IN_REVSN_LVL_IND">
+                                    <option>Y</option>
+                                    <option>N</option>
+                                </select>
+                            </td>
+                            <!-- IDK: how to size the input with bootstrap -->
+                            <td>
+                                <input class='qty form-control CNTND_IN_MTRL_QTY'  style='width: 50px; text-align: center' data-bind='value: $data.CNTND_IN_MTRL_QTY, attr: {"data-val": $data.CNTND_IN_MTRL_QTY}, event: {change: $parent.onUpdateItemQuantity}' data-col="CNTND_IN_MTRL_QTY"/>
+                            </td>
+                            <td>
+                                <input class='spr-qty form-control CNTND_IN_MTRL_SPR_QTY' style='width: 50px; text-align: center' data-bind='value: $data.CNTND_IN_MTRL_SPR_QTY, attr: {"data-val": $data.CNTND_IN_MTRL_SPR_QTY}, event: {change: $parent.onUpdateItemQuantity}' data-col="CNTND_IN_MTRL_SPR_QTY"/>
+                            </td>
+                            <td><span class='total-qty' data-bind="text: $data.CNTND_IN_MTRL_TOTAL_QTY"></span></td>
+                            <td><input type="checkbox" class="ckDELETE" checked="checked" data-bind="event: { click: $parent.onRemoveConfigItem }" data-col="ckDELETE"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btnADD_ITEM footer" style="float: right; margin: -9px 122px" title="Click to add item to common config record...">
+                <button class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus-sign" /> <span>ADD ITEMS</span>
+                </button>
+            </div>
+        </div>
+    </div> 
+    <!-- END COMMON CONFIG ITEM LIST -->
+    <!-- END UPDATE EXISTING -->
+    
+    <div class="row" data-bind="visible: shouldDisplaySaveButtons">
+        <div class="center-block" style="width: 20%">
+            <!-- I don't know how else to center this-->
+            <button class="btn btn-success" data-bind="click: $data.onSaveAndClose, visible: false">Save & Close</button>
+
+            <button style="display: none" class="btn btn-success" title="Click to export item list..." data-bind="click: $data.onExportCommonConfigSearchResults">
+                <span class="glyphicon glyphicon-download" /> <span>Export</span>
+            </button>
+
+            <button class="btn btn-success" data-bind="click:  $data.onSave">Save</button>
+
+            <button class="btn btn-success" data-bind="click:  $data.onSaveCancel">Cancel</button>
+        </div>
+    </div>
+</div> <!-- END OF MAIN SCREEN -->
+
+<div id="SelectConfigItemDialog_PARTS" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 99%;top: -120px;">
+        <div class="modal-content" style="height: 680px;">
+            <div class="modal-header">
+                <button type="button" class="close btnX" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select Common Config Item: Part Number Search</h4>
+            </div>
+            <div class="modal-body" style="">
+                <div class="terse-layout nup search-form" data-pfx="srch" data-search="/search/specparts" data-results="ccAddChildPartItemResults">
+                    <div class="row">
+                            <div class="col-lg-4">
+                                <label for="srchPART_NO">Part Number:</label>
+                                <input type="text" class="form-control" id="srchPART_NO" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="srchMTRL_CD">Material Code:</label>
+                                <input type="text" class="form-control" id="srchMTRL_CD" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="srchCLMC">CLMC:</label>
+                                <input type="text" class="form-control" id="srchCLMC" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-lg-4">
+                                <label for="srchMTRL_CAT_ID">Material Type:</label>
+                                <select class="form-control" id="srchMTRL_CAT_ID" data-bind="options: $data.mtrlTypeOptions, optionsText: 'text', optionsValue: 'value'"></select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="srchFEAT_TYP_ID">Feature Type:</label>
+                                <select class="form-control" id="srchFEAT_TYP_ID" data-bind="options: $data.srchFeatTypeOptions, optionsText: 'text', optionsValue: 'value'"></select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="srchSTATUS">Status:</label>
+                                <select class="form-control" id="srchSTATUS" data-bind="options: $data.mtrlStatusOptions, optionsText: 'text', optionsValue: 'value'"></select>
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-4">
+                                <label for="srchDSC">Description:</label>
+                                <input type="text" class="form-control" id="srchDSC" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="srchSPEC_NM">Spec Name:</label>
+                                <input type="text" class="form-control" id="srchSPEC_NM" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="srchCDMMS_ID">CDMMS ID:</label>
+                                <input type="text" class="form-control" id="srchCDMMS_ID" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-11" style="text-align: right">
+                                <label for="srchRCRD_ONLY">Record Only:</label>
+                                <input type="checkbox" id="srchRCRD_ONLY" />    
+                            </div>
+                        </div>
+                    </div>
+                
+                <div style="clear: both;height:0px;"><br /></div>
+                <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-success btnSEARCH">SEARCH</button>
+                                &nbsp;
+                                <button class="btn btn-success btnCLEAR">CLEAR</button>
+                            </div>
+                        </div>
+                </div>
+                <div class="panel-body nup">
+                    <div class="table-responsive ko-table-panel" style="display: none">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>CDMMS ID</th>
+                                    <th>Material Code</th>
+                                    <th>CLMC</th>
+                                    <th>Part Number</th>
+                                    <th>Description</th>
+                                    <th>Material Category</th>
+                                    <th>Feature Type</th>
+                                    <th>QTY</th>
+                                    <th>Select</th>
+                                </tr>
+                            </thead>
+                            <tbody class='search-results' data-bind="foreach:ccAddChildPartItemResults">
+                                <tr data-bind="attr: { 'id': 'item'+$data.CDMMS_ID }" >
+                                    <td><span data-bind="text: $data.CDMMS_ID"></span></td>
+                                    <td><span data-bind="text: $data.MTRL_CD"></span></td>
+                                    <td><span data-bind="text: $data.CLMC"></span></td>
+                                    <td><span data-bind="text: $data.PART_NO"></span></td>
+                                    <td><span data-bind="text: $data.MTRL_DSC"></span></td>
+                                    <td><span data-bind="text: $data.MTRL_CAT_TYP"></span></td>
+                                    <td><span data-bind="text: $data.FEAT_TYP"></span></td>
+                                    <td><input type="text" class="qty form-control" style="width: 50px; text-align: center" value="1"/></td> <!-- TODO: what column specifies revisions -->
+                                    <td><input type="checkbox" data-bind="attr: { 'data-id': $data.CDMMS_ID }" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-response dt-table-panel"></div>
+                </div>
+                <div class="modal-footer" style="margin-top: 2px;">
+                    <button class="btn btn-success btnADD" data-dismiss="modal">Add Selected Items</button>
+                    &nbsp;
+                    <button class="btn btn-success btnCLOSE" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="CloneConfigDialog" class="modal" data-pfx="clone">
+    <div class="modal-dialog modal-lg" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btnX" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Clone Common Config</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-bottom: 5px;">
+                    <div class="col-lg-4">
+                        <label for="cloneCOMN_CNFG_NM" class="reqd">Common Config Name:</label>
+                        <input type="text" class="form-control" id="cloneCOMN_CNFG_NM">
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="cloneCOMN_CNFG_DSC">Description:</label>
+                        <input type="text" class="form-control" id="cloneCOMN_CNFG_DSC" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="cloneTMPLT_NM">Template Name:</label>
+                        <input type="text" class="form-control" id="cloneTMPLT_NM" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center"><hr/></div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-success btnOK">CLONE</button>
+                            &nbsp;
+                            <button class="btn btn-success btnCLOSE">CANCEL</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div id="AffectedCommonConfigsDialog" class="modal">
+    <div class="modal-dialog modal-lg" style="width: 90%;top: -100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btnX" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Affected Common Configs</h4>
+            </div>
+            <div class="modal-body" style="">
+                <div class="panel-body">
+                    <div class="table-responsive ko-panel" style="display: none">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Relationship</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:configRefItems">
+                                    <tr>
+                                        <td style="text-align: right"><span data-bind="text: $data.COMN_CNFG_ID"></span></td>
+                                        <td style="text-align: left"><span data-bind="text: $data.COMN_CNFG_NM"></span></td>
+                                        <td style="text-align: left"><span data-bind="text: $data.COMN_CNFG_DSC"></span></td>
+                                        <td style="text-align: left"><span data-bind="text: $data.REF_TYP"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    <div class="dt-panel"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btnCLOSE" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="SelectConfigItemDialog_CONFIGS" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 90%;top: -100px;">
+        <div class="modal-content" style="height: 685px;">
+            <div class="modal-header">
+                <button type="button" class="close btnX" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select Common Config Item: Common Config Search</h4>
+            </div>
+            <div class="modal-body" style="">
+                    <div class="terse-layout nup search-form" data-pfx="srch" data-search="/search/all" data-results="ccAddChildConfigItemResults">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="srchCOMN_CNFG_ID">Common Config ID:</label>
+                                <input type="text" class="form-control" id="srchCOMN_CNFG_ID" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="srchCOMN_CNFG_NM">Name:</label>
+                                <input type="text" class="form-control" id="srchCOMN_CNFG_NM" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="srchCOMN_CNFG_DSC">Description:</label>
+                                <input type="text" class="form-control" id="srchCOMN_CNFG_DSC" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="srchSTATUS">Status:</label>
+                                <select class="form-control" id="srchSTATUS" data-bind="options: $data.srchStatusOptions"></select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="srchTMPLT_TYP_ID">Type:</label>
+                                <select id="srchTMPLT_TYP_ID" class="form-control" data-bind="options: $data.configTypeOptions, optionsText: 'text', optionsValue: 'value', event:{ keypress: onCheckEnter }"></select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="srchTMPLT_NM">Template Name:</label>
+                                <input type="text" class="form-control" id="srchTMPLT_NM" data-bind="event:{ keypress: onCheckEnter }">
+                            </div>
+                        </div>
+                    </div>
+               
+                <div style="clear: both"><br /></div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-success btnSEARCH">SEARCH</button>
+                            &nbsp;
+                            <button class="btn btn-success btnCLEAR">CLEAR</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body nup">
+                       <div class="panel-body">
+                        <div class="table-responsive ko-table-panel" style="display: none">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Config ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Template Name</th>
+                                    <th>Completed</th>
+                                    <th>Propagated</th>
+                                    <th>Deactived</th>
+                                    <th>Select</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:ccAddChildConfigItemResults">
+                                <tr>
+                                    <td><span data-bind="text: $data.COMN_CNFG_ID"></span></td>
+                                    <td><span data-bind="text: $data.COMN_CNFG_NM"></span></td>
+                                    <td><span data-bind="text: $data.COMN_CNFG_DSC"></span></td>
+                                    <td><span data-bind="text: $data.TMPLT_TYP"></span></td>
+                                    <td><span data-bind="text: $data.TMPLT_NM"></span></td>
+                                    <td><span data-bind="text: $data.DEF_CMPLT_IND"></span></td>
+                                    <td><span data-bind="text: $data.DEF_PRPGT_IND"></span></td>
+                                    <td><span data-bind="text: $data.RET_COMN_CNFG_IND"></span></td> <!-- needs to be defined in schema -->
+                                    <td><input type="checkbox"  data-bind="attr: { 'data-id': $data.COMN_CNFG_ID }"/></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                        <div class="table-response dt-table-panel"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btnADD" data-dismiss="modal">Add Selected Items</button>
+                    &nbsp;
+                    <button class="btn btn-success btnCLOSE" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ChangeLogDialog" class="modal">
+    <div class="modal-dialog modal-lg"  style="width: 90%;top: -100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btnX" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Common Config Change Log</h4>
+            </div>
+            <div class="modal-body" style="">
+                <div class="panel-body">
+                    <div class="panel-body">
+                        <div class="table-responsive ko-panel" style="display: none">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>TS</th>
+                                        <th>CUID</th>
+                                        <th>Action</th>
+                                        <th>Attribute</th>
+                                        <th>Old Value</th>
+                                        <th>New Value</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:changeLogItems">
+                                    <tr data-bind="attr: { title: $data.CMNT_TXT }">
+                                        <td><span data-bind="text: $data.UPDATED_TS"></span></td>
+                                        <td style="text-align: center"><span data-bind="text: $data.UPDATED_BY"></span></td>
+                                        <td style="text-align: center"><span data-bind="text: $data.ACTN_CD"></span></td>
+                                        <td><span data-bind="text: $data.AUDIT_COL_NM"></span></td>
+                                        <td style="text-align: center"><span data-bind="text: $data.OLD_COL_VAL"></span></td>
+                                        <td style="text-align: center"><span data-bind="text: $data.NEW_COL_VAL"></span></td>
+                                        <!-- ko if: $data.DSC-->
+                                            <td>
+                                                <!-- ko if: $data.CNTND_IN_SEQ_NO -->
+                                                <span>item #</span>
+                                                <span data-bind="text: $data.CNTND_IN_SEQ_NO"></span>
+                                                <span>,</span>
+                                                <!-- /ko -->
+                                                <span data-bind="text: $data.TYP"></span>
+                                                <span>"</span><span data-bind="text: $data.DSC"></span><span>"</span>
+                                            </td>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: $data.DSC-->
+                                            <td><span data-bind="text: $data.CMNT_TXT"></span></td>
+                                        <!-- /ko -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="dt-panel"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btnCLOSE" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="menu-add-items btn btn-success" style="display: none;">
+    <a href="javascript:void(0)" data-cat="PARTS" title="Search for part numbers (Spec Parts, High Level Parts, Minor Materials) to add to list..."><span class="glyphicon glyphicon-wrench" /> <span>Add Part Number Items</span></a><br/>
+    <a href="javascript:void(0)" data-cat="CONFIGS" title="Search for other common configs to add to the list..."><span class="glyphicon glyphicon-list"  /> <span>Add Child Common Config Items</span></a>
+</div>
+

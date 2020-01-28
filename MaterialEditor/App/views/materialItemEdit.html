@@ -1,0 +1,230 @@
+﻿<div>
+    <!--  <div data-bind="searchBar: {searchFunction: searchForMaterial1, selectFunction: materialSelected, isVisible: true, optionVisible: true}"></div>-->
+    <div id="interstitial">
+        <div class="row interstitial">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+        </div>
+    </div>
+    <div class='panel panel-default' id="idMaterialSearch">
+        <div class="panel-heading">Material Search</div>
+        <div class="panel-body nup">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label id="prodidlabel" for="idPrdctId">Product Id/Material Code:</label>
+                        <input type="text" class="form-control" id="idPrdctId" data-bind="value: $data.mtlcd(), event:{ keypress: checkEnter }">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label id="partnumberlabel" for="idPrtNo">Part Number:</label>
+                        <input type="text" class="form-control" id="idPrtNo" data-bind="value: $data.partno(), event:{ keypress: checkEnter }">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="idMtlDesc">Description:</label>
+                        <input type="text" class="form-control" id="idMtlDesc" data-bind="value: $data.desc(), event:{ keypress: checkEnter }">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label id="clmclabel" for="idclmc">CLMC:</label>
+                        <input type="text" class="form-control" id="idclmc" data-bind="value: $data.clmc(), event:{ keypress: checkEnter }">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label id="cdmmslabel" for="idcdmmsid">CDMMS ID:</label>
+                        <input type="text" class="form-control" id="idcdmmsid" maxlength="40" data-bind="value: $data.cdmmsid(), event:{ keypress: checkEnter }, event:{ keypress: NumDecimal}">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="idstatus">Status:</label>
+                        <select id="statusSearchDropdown" class="form-control" data-bind="options: $data.statusOptions, optionsText: 'text', optionsValue: 'value', value: $data.selectedStatus,event:{ keypress: checkEnter }"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="mtlCtgrySearchDropdown">Material Category:</label>
+                        <select id="mtlCtgrySearchDropdown" class="form-control" data-bind="options: $data.mtlCtgryOptions, optionsText: 'text', optionsValue: 'value', value: $data.selectedMtlCtgry,event:{ keypress: checkEnter }"></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="ftrTypSearchDropdown">Feature Type:</label>
+                        <select id="ftrTypSearchDropdown" class="form-control" style="z-index: 1" data-bind="options: $data.featureTypeOptions, optionsText: 'text', optionsValue: 'value', value: $data.selectedFeatureType,event:{ keypress: checkEnter }"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="cabltypSearchdrpdown">Cable Type:</label>
+                        <select id="cabltypSearchdrpdown" class="form-control" style="z-index: 1" data-bind="options: $data.cableTypeOptions, optionsText: 'text', optionsValue: 'value', value: $data.selectedCableType,event:{ keypress: checkEnter }"></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="idSpecificationName">Specification Name:</label>
+                        <input type="text" class="form-control" id="idSpecificationName" style="z-index: 1" data-bind="value: $data.specname(), event:{ keypress: checkEnter }">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label id="useridlabel" for="userid">User ID:</label>
+                        <input type="text" class="form-control" id="userid" style="z-index: 1" data-bind="value: $data.cuid(), event:{ keypress: checkEnter }">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="lastupdatedt">HECI/CLEI:</label><br />
+                        <input type="text" maxlength="18" class="form-control" id="idHeciClei" style="z-index: 1" data-bind="value: $data.heciclei(), event:{ keypress: checkEnter }">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label for="idItemStatusCheckbox">Item Status (Delete):</label>
+                        <input type="checkbox" id="idItemStatusCheckbox" data-bind="checked: $data.itemStatus()" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <label>Show Data Between These Dates:</label>
+                        <div>
+                            <input type="text" name="mydate1" data-bind="value: $data.startdt(), datePicker:StartDate" id="startdate" /> and
+                            <input type="text" name="mydate2" data-bind="value: $data.enddt(), datePicker:EndDate" id="enddate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <button class="btn btn-success" data-bind="click: $data.searchForMaterial">SEARCH</button>
+                        &nbsp;
+                        <button class="btn btn-success" data-bind="click: $data.clearMaterialSearch">CLEAR</button>
+                        &nbsp;
+                        <input type="radio" id="searchFuzzy" value="Fuzzy Search" name="searchbutton" data-bind="checked: checkSearchType, event: {change: $data.searchMethod}"> <b>Fuzzy Search</b>
+                        &nbsp;
+                        <input type="radio" id="searchExact" value="Exact Search" name="searchbutton" data-bind="checked: checkSearchType, event: {change: $data.searchMethod}"> <b>Exact Search</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='panel panel-default' id="idMaterialList">
+        <div class="panel-heading">Material List</div>
+        <div class="panel-body">
+            <div class="table-responsive text-nowrap">
+                <table id="idMTList" class="table table-striped table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Choose</th>
+                            <th>CDMMS ID</th>
+                            <th>Material Code</th>
+                            <th>Part Number</th>
+                            <th>Description</th>
+                            <th>CLMC</th>
+                            <th>Status</th>
+                            <th>Material Category</th>
+                            <th>Feature Type</th>
+                            <th>Cable Type</th>
+                            <th>Item Status</th>
+                            <th>Specification Name</th>
+                            <th>Last Update Date</th>
+                            <th>User ID</th>
+
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:MIList">
+                        <tr>
+                            <td><a data-bind="click: $parent.materialSelectCall">Select</a></td>
+                            <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.item_desc.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.stts.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.mtl_ctgry.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.ftr_typ.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.cbl_typ.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.item_current_status.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.spec_nm.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.lastupdt.value"></span></td>
+                            <td><span data-bind="text: $data.Attributes.userid.value"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+    </div>
+    <div id="idMaterialheader" style="visibility:hidden; background-color: white">
+        <div class='header-1'>Material Inventory</div>
+        <div class="btn btn-success btnSHOW_SEARCH_PANEL" title="Click to search for new Material Item..." style="float: right;display:none" ><i class="fa fa-search"></i></div>
+        <form data-bind="submit: $data.save" name="saveMIE">
+            <div>
+                <div class='row'>
+                    <button type="submit" class="btn btn-success" id="idSave" data-bind="enable: saveValidation">Save</button>
+                    <button class="btn btn-success" id="idSendToNDS" data-bind="click: $data.sendToNDS">Update NDS</button>
+                </div>
+                <div class='col-sm-6' data-bind="compose:workingMaterial" id="workingDiv" style="background-color:white"></div>
+                <div class='col-sm-6' style="background-color:white">
+                    <div class="row" data-bind="compose:sapMaterial" id="sapDiv"></div>
+                    <div class="row" data-bind="compose:losdbMaterial" id="losdbDiv"></div>
+                </div>
+            </div>
+        </form>
+    </div>   
+</div>
+<div id="enterRtPrtNoModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>A material already exists with the same Root Part Number.</b></h4></td>
+                    <!--<td><span class="close">&times;</span></td>-->
+                </tr>
+            </table>
+            <table style="width:75%">
+                <tr>
+                    <td><h4><b>Enter a unique Root Part Number:</b></h4></td>
+                    <td>
+                        <input type="text" class="form-control" id="identerrtprtnbrtxt" data-bind="event: {keyup: $data.enableSaveRtPrtNbrBtn}">
+                    </td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>
+                        <button class="btn btn-success" data-bind="click: $data.saveMaterialWithUpdatedRtPrtNo, enable: enableModalSaveRtPrtNbrBtn">Save Root Part Number</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" id="cancelenterrtprtnbr" data-bind="click: $data.cancelEnterRtPrtNbrModal">Cancel</button>
+                    </td>
+                </tr>
+            </table>
+            <!--<div class="row">
+                <div class="col-sm-4 form-group">
+                    <label for="identerrtprtnbrtxt" class="control-label">Enter a unique Root Part Number:</label>
+                    <input type="text" class="form-control" id="identerrtprtnbrtxt" data-bind="event: {keyup: $data.enableSaveRtPrtNbrBtn}">
+                </div>
+                <div class="col-sm-4 form-group">
+                    <button class="btn btn-success" data-bind="click: $data.saveMaterialWithUpdatedRtPrtNo, enable: enableModalSaveRtPrtNbrBtn">Save Root Part Number</button>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>

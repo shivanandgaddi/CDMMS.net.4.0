@@ -1,0 +1,12 @@
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.dll
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.pdb
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.dll
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\bin\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.pdb
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManagerInstaller.resources
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManagerText.resources
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.csproj.GenerateResource.Cache
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.dll
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.pdb
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.csprojAssemblyReference.cache
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.csproj.CoreCompileInputs.cache
+C:\CDMMS\src\CDMMS.net.4.0\Microsoft.ApplicationBlocks.ExceptionManagement\obj\Debug\Microsoft.ApplicationBlocks.ExceptionManagement.csproj.CopyComplete

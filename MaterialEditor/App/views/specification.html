@@ -1,0 +1,151 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+<div id="PANEL_EXISTING_NEW_BUTTONS" class="row" style="padding-bottom:20px">
+    <div class="btn-group col-sm-offset-4 col-sm-4 col-sm-offset-4">
+        <label class="btn btn-default" style="width:150px" data-bind="css: { specRadioStyle: selectRadioSpec()=='existSpec'}">
+            <input type="radio" name="searchBySpec" class="specRadioStyleInput" value="existSpec" data-bind="checked: selectRadioSpec, event: { change: onchangeRadioSpec }" /> Existing
+        </label>
+        <label class="btn btn-default" style="width:150px" data-bind="css: { specRadioStyle: selectRadioSpec()=='newSpec'}">
+            <input type="radio" name="searchBySpec" class="specRadioStyleInput" value="newSpec" data-bind="checked: selectRadioSpec, event: { change: onchangeRadioSpec }" /> Create New
+        </label>
+    </div>
+</div>
+<div class="row" style="padding-bottom:20px" data-bind="visible: (selectRadioSpec() == 'newSpec')">
+    <div class="col-sm-4">
+        <label>Specification Type</label><font color="red">*</font>
+        <select class="form-control" id="newSpecResetVal" data-bind="options: $data.newspecificationTypes, optionsText: 'text', optionsValue: 'value', event: { change: selectNewSpecification }"></select>
+    </div>
+</div>
+<div id="PANEL_SEARCH" class='panel panel-default' data-bind="visible: (selectRadioSpec() == 'existSpec')">
+    <div class="panel-heading">Specification Search</div>
+    <div class="panel-body">
+        <form>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idProductID">Specification ID</label>
+                        <input type="text" id="idProductID" class="form-control" data-bind="event:{ keypress: NumDecimal}" />
+                        <input type="hidden" id="idExactSearchId" name="idExactSearchId" value="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idName">Specification Name</label>
+                        <input type="text" id="idName" class="form-control" />                        
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idDesc">Description</label>
+                        <input type="text" id="idDesc" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idstatuspec">Status</label>
+                        <select class="form-control" id="idstatuspec" data-bind="options: $data.statusSpecs"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idspectype">Specification Type</label>
+                        <select class="form-control" id="idspectype" data-bind="options: $data.specificationTypes, optionsText: 'text', optionsValue: 'value'"></select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idType">RO/Generic</label>
+                        <select class="form-control" id="idType" data-bind="options: $data.typeSpecs"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:15px">
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idModelName">Model Name</label>
+                        <input type="text" id="idModelName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idModelName">Material Code</label>
+                        <input type="text" id="idMaterialCode" maxlength="18" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group input-group-sm">
+                        <button type="submit" class="btn btn-success" data-bind="click: $data.Searchspec">SEARCH</button>
+                        <button type="submit" class="btn btn-success" data-bind="click: $data.ClearSpecSearch">CLEAR</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class='panel panel-default' id="idSpecsearchlist" data-bind="visible: (selectRadioSpec() == 'existSpec')">
+    <div class="panel-heading">Specification Search Result</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table id="idSpecList" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Details</th>
+                        <th>Specification ID</th>
+                        <th>Material Code</th>
+                        <th>Specification Name</th>
+                        <th>Model Name</th>
+                        <th>Description</th>
+                        <th>Completed</th>
+                        <th>Propagated</th>
+                        <th>Unusable in NDS</th>
+                        <th>Specification Type</th>
+                        <th>Specification Class</th>
+
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:SpecList">
+                    <tr>
+                        <td><a data-bind="click: $parent.specificationSelectCall">Select</a></td>
+                        <td><span data-bind="text: $data.specn_id.value"></span></td>
+                        <td><span data-bind="text: $data.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.specn_nm.value"></span></td>
+                        <td><span data-bind="text: $data.specn_model_nm.value"></span></td>
+                        <td><span data-bind="text: $data.specn_dsc.value"></span></td>
+                        <td><span data-bind="text: $data.cmplt_ind.value"></span></td>
+                        <td><span data-bind="text: $data.prpgt_ind.value"></span></td>
+                        <td><span data-bind="text: $data.del_ind.value"></span></td>
+                        <td><span data-bind="text: $data.specTyp.value"></span></td>
+                        <td><span data-bind="text: $data.specClss.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row" id="specificationDetailsInnerDiv">
+            <span id="scrollAnchor"></span>
+        </div>
+    </div>
+</div>
+
+<div id="idSpecificationdetails">
+
+    <div class="row" data-bind="compose:baySpecification" id="bayDiv"></div>
+    <div class="row" data-bind="compose:bayInternalSpecification" id="bayInternalDiv"></div>
+    <div class="row" data-bind="compose:pluginSpecification" id="plugInSpec"></div>
+    <div class="row" data-bind="compose:shelfSpecification" id="shelfSpec"></div>
+    <div class="row" data-bind="compose:slotSpecification" id="slotSpec"></div>
+    <div class="row" data-bind="compose:cardSpecification" id="cardSpec"></div>
+    <div class="row" data-bind="compose:nodeSpecification" id="nodeSpec"></div>
+    <div class="row" data-bind="compose:bayExtenderSpecification" id="bayextenderspec"></div>
+    <div class="row" data-bind="compose:portSpecification" id="portSpec"></div>
+    <a href="#" class="scrollup"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>

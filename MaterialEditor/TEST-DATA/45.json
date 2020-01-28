@@ -1,0 +1,2532 @@
+﻿{
+  "bsTmpltId": 43,
+  "rtnAnglDgrNo": 90,
+  "BayExtSpecRevAltId": 1542,
+  "specRvsnId": 284,
+  "specId": 285,
+  "typ": "BAY",
+  "assctdSpec": {
+    "Attributes": {
+      "BayItnlLst": {
+        "bool": false,
+        "enable": true,
+        "list": [
+          {
+            "BayItnlDpthId": {
+              "value": "6",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthId": {
+              "value": "1",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpth": {
+              "value": "24",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpthUomId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpthUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdth": {
+              "value": "19",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthUomId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "Nmnl": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlHght": {
+              "value": "70",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlHghtUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosQty": {
+              "value": "35",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosDistId": {
+              "value": "2",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlUseTypId": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosDist": {
+              "value": "2 in",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlWllMnt": {
+              "value": "N",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlStrghtThru": {
+              "value": "Y",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlMidPln": {
+              "value": "N",
+              "bool": false,
+              "enable": false
+            },
+            "NdsMfr": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "Typ": {
+              "value": "BAY_INTERNAL",
+              "bool": false,
+              "enable": false
+            },
+            "Desc": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "ShelfNDSUseTyp": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "Nm": {
+              "value": "BI-19\"_70.00x19.00x24.00_MP35x2.00",
+              "bool": false,
+              "enable": false
+            },
+            "id": {
+              "value": "5200",
+              "bool": false,
+              "enable": false
+            },
+            "NdsSpecId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "Cmplt": {
+              "bool": false,
+              "enable": true
+            },
+            "Prpgtd": {
+              "bool": false,
+              "enable": false
+            },
+            "Dltd": {
+              "bool": false,
+              "enable": true
+            }
+          },
+          {
+            "BayItnlDpthId": {
+              "value": "2",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthId": {
+              "value": "2",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpth": {
+              "value": "15",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpthUomId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpthUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdth": {
+              "value": "23",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthUomId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "Nmnl": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlHght": {
+              "value": "57.75",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlHghtUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosQty": {
+              "value": "33",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosDistId": {
+              "value": "1",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlUseTypId": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosDist": {
+              "value": "1.75 in",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlWllMnt": {
+              "value": "N",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlStrghtThru": {
+              "value": "Y",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlMidPln": {
+              "value": "Y",
+              "bool": false,
+              "enable": false
+            },
+            "NdsMfr": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "Typ": {
+              "value": "BAY_INTERNAL",
+              "bool": false,
+              "enable": false
+            },
+            "Desc": {
+              "value": "RELEASE NIGHT TEST",
+              "bool": false,
+              "enable": false
+            },
+            "ShelfNDSUseTyp": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "Nm": {
+              "value": "BI-23\"_57.75x23.00x15.00_MP33x1.75_M",
+              "bool": false,
+              "enable": false
+            },
+            "id": {
+              "value": "5190",
+              "bool": false,
+              "enable": false
+            },
+            "NdsSpecId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "Cmplt": {
+              "bool": true,
+              "enable": false
+            },
+            "Prpgtd": {
+              "bool": true,
+              "enable": false
+            },
+            "Dltd": {
+              "bool": false,
+              "enable": true
+            }
+          },
+          {
+            "BayItnlDpthId": {
+              "value": "2",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthId": {
+              "value": "2",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpth": {
+              "value": "15",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpthUomId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlDpthUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdth": {
+              "value": "23",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthUomId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlWdthUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "Nmnl": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlHght": {
+              "value": "63.00",
+              "bool": false,
+              "enable": false
+            },
+            "BayItnlHghtUom": {
+              "value": "in",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosQty": {
+              "value": "36",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosDistId": {
+              "value": "1",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlUseTypId": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "MntngPosDist": {
+              "value": "1.75 in",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlWllMnt": {
+              "value": "N",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlStrghtThru": {
+              "value": "Y",
+              "bool": false,
+              "enable": false
+            },
+            "BayIntlMidPln": {
+              "value": "Y",
+              "bool": false,
+              "enable": false
+            },
+            "NdsMfr": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "Typ": {
+              "value": "BAY_INTERNAL",
+              "bool": false,
+              "enable": false
+            },
+            "Desc": {
+              "value": "RELEASE NIGHT TEST",
+              "bool": false,
+              "enable": false
+            },
+            "ShelfNDSUseTyp": {
+              "value": "",
+              "bool": false,
+              "enable": false
+            },
+            "Nm": {
+              "value": "BI-23\"_63.00x23.00x15.00_MP36x1.75_M",
+              "bool": false,
+              "enable": false
+            },
+            "id": {
+              "value": "5240",
+              "bool": false,
+              "enable": false
+            },
+            "NdsSpecId": {
+              "value": "0",
+              "bool": false,
+              "enable": false
+            },
+            "Cmplt": {
+              "bool": true,
+              "enable": false
+            },
+            "Prpgtd": {
+              "bool": true,
+              "enable": false
+            },
+            "Dltd": {
+              "bool": false,
+              "enable": true
+            }
+          }
+        ]
+      },
+      "DimUom": {
+        "value": "22",
+        "bool": false,
+        "enable": false
+      },
+      "MntngPosOfst": {
+        "value": "0",
+        "bool": false,
+        "enable": false
+      },
+      "StrtLbl": {
+        "value": "B",
+        "bool": false,
+        "enable": false
+      },
+      "WllMnt": {
+        "value": "Y",
+        "bool": false,
+        "enable": false
+      },
+      "StrghtThru": {
+        "value": "Y",
+        "bool": false,
+        "enable": false
+      },
+      "MidPln": {
+        "value": "N",
+        "bool": false,
+        "enable": false
+      },
+      "Gnrc": {
+        "bool": false,
+        "enable": false
+      },
+      "DualSd": {
+        "value": "N",
+        "bool": false,
+        "enable": false
+      },
+      "BayRlTypId": {
+        "value": "2",
+        "bool": false,
+        "enable": false
+      },
+      "BayUseTypId": {
+        "value": "mit_bay",
+        "bool": false,
+        "enable": false
+      },
+      "XtnlDpth": {
+        "value": "0",
+        "bool": false,
+        "enable": false
+      },
+      "XtnlHgt": {
+        "value": "0",
+        "bool": false,
+        "enable": false
+      },
+      "XtnlWdth": {
+        "value": "0",
+        "bool": false,
+        "enable": false
+      },
+      "XtnlDimUom": {
+        "value": "22",
+        "bool": false,
+        "enable": false
+      },
+      "RvsnNm": {
+        "value": "PLSE-106630-4-1",
+        "bool": false,
+        "enable": false
+      },
+      "NdsMfr": {
+        "value": "",
+        "bool": false,
+        "enable": false
+      },
+      "RvsnId": {
+        "value": "284",
+        "bool": false,
+        "enable": false
+      },
+      "MxWght": {
+        "value": "12",
+        "bool": false,
+        "enable": false
+      },
+      "MxWghtUom": {
+        "value": "4",
+        "bool": false,
+        "enable": false
+      },
+      "RO": {
+        "bool": false,
+        "enable": false
+      },
+      "BayItnlId": {
+        "value": "5190",
+        "bool": false,
+        "enable": false
+      },
+      "Typ": {
+        "value": "BAY",
+        "bool": false,
+        "enable": false
+      },
+      "Desc": {
+        "value": "ASBY-MANF-BAY,NON-SMAS,E/W 4 D4 CH BKS 7 X 13-1",
+        "bool": false,
+        "enable": false
+      },
+      "ShelfNDSUseTyp": {
+        "value": "",
+        "bool": false,
+        "enable": false
+      },
+      "Nm": {
+        "value": "PLSE-106630-4-model",
+        "bool": false,
+        "enable": false
+      },
+      "id": {
+        "value": "284",
+        "bool": false,
+        "enable": false
+      },
+      "NdsSpecId": {
+        "value": "0",
+        "bool": false,
+        "enable": false
+      },
+      "Cmplt": {
+        "bool": true,
+        "enable": false
+      },
+      "Prpgtd": {
+        "bool": false,
+        "enable": true
+      },
+      "Dltd": {
+        "bool": false,
+        "enable": true
+      },
+      "Bay": {
+        "bool": false,
+        "enable": false,
+        "list": [
+          {
+            "CbntInd": {
+              "bool": false,
+              "enable": false
+            },
+            "Hght": {
+              "value": "84",
+              "bool": false,
+              "enable": true
+            },
+            "Wdth": {
+              "value": "26",
+              "bool": false,
+              "enable": true
+            },
+            "Dpth": {
+              "value": "15",
+              "bool": false,
+              "enable": true
+            },
+            "DimUom": {
+              "value": "22",
+              "bool": false,
+              "enable": true
+            },
+            "HtDssptn": {
+              "value": "11",
+              "bool": false,
+              "enable": false
+            },
+            "HtDssptnUom": {
+              "value": "1",
+              "bool": false,
+              "enable": false
+            },
+            "ElcCurrDrnNrm": {
+              "value": "10",
+              "bool": false,
+              "enable": false
+            },
+            "ElcCurrDrnNrmUom": {
+              "value": "11",
+              "bool": false,
+              "enable": false
+            },
+            "ElcCurrDrnMx": {
+              "value": "25",
+              "bool": false,
+              "enable": false
+            },
+            "ElcCurrDrnMxUom": {
+              "value": "11",
+              "bool": false,
+              "enable": false
+            },
+            "Wght": {
+              "value": "12",
+              "bool": false,
+              "enable": false
+            },
+            "WghtUom": {
+              "value": "4",
+              "bool": false,
+              "enable": false
+            },
+            "HtGntn": {
+              "value": "12",
+              "bool": false,
+              "enable": false
+            },
+            "HtGntnUom": {
+              "value": "1",
+              "bool": false,
+              "enable": false
+            },
+            "IntrlDpth": {
+              "value": "15",
+              "bool": false,
+              "enable": false
+            },
+            "IntrlHght": {
+              "value": "57.75",
+              "bool": false,
+              "enable": false
+            },
+            "IntrlWdth": {
+              "value": "23",
+              "bool": false,
+              "enable": false
+            },
+            "HvSpec": {
+              "bool": false,
+              "enable": false
+            },
+            "SpecTyp": {
+              "value": "BAY",
+              "bool": false,
+              "enable": false
+            },
+            "FtrTyp": {
+              "value": "2",
+              "bool": false,
+              "enable": false
+            },
+            "MtlCtgry": {
+              "value": "3",
+              "bool": false,
+              "enable": false
+            },
+            "HasRvsns": {
+              "bool": false,
+              "enable": false
+            },
+            "BaseRvsnInd": {
+              "value": "Y",
+              "bool": false,
+              "enable": false
+            },
+            "CurrRvsnInd": {
+              "value": "Y",
+              "bool": false,
+              "enable": false
+            },
+            "RetRvsnInd": {
+              "value": "N",
+              "bool": false,
+              "enable": false
+            },
+            "OrdblId": {
+              "value": "11",
+              "bool": false,
+              "enable": false
+            },
+            "id": {
+              "value": "50664",
+              "bool": false,
+              "enable": false
+            },
+            "MtrlId": {
+              "value": "100094861",
+              "bool": false,
+              "enable": false
+            },
+            "MfgId": {
+              "value": "1818",
+              "bool": false,
+              "enable": false
+            },
+            "PrdctId": {
+              "value": "1154410",
+              "bool": false,
+              "enable": false
+            },
+            "Mfg": {
+              "value": "PLSE",
+              "bool": false,
+              "enable": false
+            },
+            "MfgNm": {
+              "value": "PULSE COMMUNICATIONS INC",
+              "bool": false,
+              "enable": false
+            },
+            "LbrId": {
+              "value": "2",
+              "bool": false,
+              "enable": false
+            },
+            "RtPrtNbr": {
+              "value": "106630-4",
+              "bool": false,
+              "enable": false
+            },
+            "CtlgDesc": {
+              "value": "ASBY-MANF-BAY,NON-SMAS,E/W 4 D4 CH BKS 7 X 13",
+              "bool": false,
+              "enable": false
+            },
+            "SpecNm": {
+              "value": "PLSE-106630-4-1",
+              "bool": false,
+              "enable": false
+            },
+            "SpecRvsnNm": {
+              "value": "PLSE-106630-4-1",
+              "bool": false,
+              "enable": false
+            },
+            "SpecId": {
+              "value": "285",
+              "bool": false,
+              "enable": false
+            },
+            "SpecPrpgt": {
+              "bool": false,
+              "enable": false
+            },
+            "SpecRvsnId": {
+              "value": "284",
+              "bool": false,
+              "enable": false
+            },
+            "RO": {
+              "bool": false,
+              "enable": false
+            },
+            "ROPblshd": {
+              "bool": false,
+              "enable": false
+            },
+            "ItmDesc": {
+              "value": "MFD BAY D4 CO WITH 3 D4 CHASSIS. 13IN BASE 7FT 106630-4 PULSECOMMU",
+              "bool": false,
+              "enable": false
+            },
+            "PrtNo": {
+              "value": "106630-4",
+              "bool": false,
+              "enable": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "BayChoices": {
+    "value": "",
+    "optionVals": [
+      {
+        "value": "0",
+        "text": ""
+      },
+      {
+        "value": "1",
+        "text": "Bay Extender"
+      },
+      {
+        "value": "5",
+        "text": "Node"
+      },
+      {
+        "value": "6",
+        "text": "Shelf"
+      }
+    ]
+  },
+  "drwng": {
+    "Groupings": [
+      {
+        "tmpltId": 45,
+        "bsTmpltId": 45,
+        "specRvsnId": 284,
+        "typ": "BAY",
+        "uId": "6567",
+        "tmpltCtgry": "OVERALL",
+        "hoverCursor": "default",
+        "lockMovementX": "false",
+        "lockMovementY": "false",
+        "lockUniScaling": "false",
+        "selectable": "true",
+        "canBeMoved": true,
+        "objcts": [
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY",
+            "uId": "7581",
+            "attributes": {
+              "radius": 0.0,
+              "left": 40.0,
+              "top": 10.0,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 602.1120,
+              "height": 401.4080,
+              "strokeWidth": 5.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "white",
+              "stroke": "red",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_EXTENDER",
+            "uId": "2509",
+            "attributes": {
+              "radius": 0.0,
+              "left": 0.0,
+              "top": 0.0,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "5895",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 218.7040,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "0 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "4706",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 219.7040,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "8100",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 198.6336,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "1 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "6515",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 199.6336,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "4003",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 178.5632,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "2 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "5636",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 179.5632,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "2269",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 158.4928,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "3 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "1019",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 159.4928,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "1865",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 138.4224,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "4 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "4899",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 139.4224,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "7395",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 118.3520,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "5 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "5024",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 119.3520,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "3653",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 98.2816,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "6 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "8519",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 99.2816,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "3700",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 78.2112,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "7 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "4124",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 79.2112,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "8394",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 58.1408,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "8 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "0775",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 59.1408,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_SPACER",
+            "uId": "5136",
+            "attributes": {
+              "radius": 0.0,
+              "left": 60.0,
+              "top": 38.0704,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "9 Bay",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "3906",
+            "attributes": {
+              "radius": 0.0,
+              "left": 70.7520,
+              "top": 39.0704,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_INTERNAL",
+            "uId": "6335",
+            "attributes": {
+              "radius": 0.0,
+              "left": 230.0,
+              "top": 110.0000,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "0 SLOT",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "2399",
+            "attributes": {
+              "radius": 0.0,
+              "left": 240.0,
+              "top": 115.0000,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_INTERNAL",
+            "uId": "4163",
+            "attributes": {
+              "radius": 0.0,
+              "left": 230.0,
+              "top": 89.9296,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "1 SLOT",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "7561",
+            "attributes": {
+              "radius": 0.0,
+              "left": 240.0,
+              "top": 94.9296,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_INTERNAL",
+            "uId": "9092",
+            "attributes": {
+              "radius": 0.0,
+              "left": 230.0,
+              "top": 69.8592,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "2 SLOT",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "2195",
+            "attributes": {
+              "radius": 0.0,
+              "left": 240.0,
+              "top": 74.8592,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          },
+          {
+            "tmpltId": 45,
+            "typ": "RECTANGLE",
+            "actlTyp": "BAY_INTERNAL",
+            "uId": "6116",
+            "attributes": {
+              "radius": 0.0,
+              "left": 230.0,
+              "top": 49.7888,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 80.2816,
+              "height": 40.1408,
+              "strokeWidth": 1.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 0,
+              "fill": "",
+              "stroke": "green",
+              "lockMovementX": "false",
+              "lockMovementY": "false",
+              "lockUniScaling": "false",
+              "selectable": "true",
+              "canBeMoved": true
+            }
+          },
+          {
+            "tmpltId": 0,
+            "txt": "3 SLOT",
+            "typ": "TEXT",
+            "actlTyp": "NOT_SET",
+            "uId": "1941",
+            "attributes": {
+              "radius": 0.0,
+              "left": 240.0,
+              "top": 54.7888,
+              "x": 0.0,
+              "y": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "strokeWidth": 0.0,
+              "scaleX": 1.0,
+              "scaleY": 1.0,
+              "fontSize": 12,
+              "stroke": "black",
+              "fontFamily": "Courier New",
+              "lockMovementX": "true",
+              "lockMovementY": "true",
+              "lockUniScaling": "true",
+              "selectable": "false",
+              "canBeMoved": false
+            }
+          }
+        ],
+        "attributes": {
+          "radius": 0.0,
+          "left": 10.0,
+          "top": 60.0,
+          "x": 0.0,
+          "y": 0.0,
+          "width": 602.1120,
+          "height": 401.4080,
+          "strokeWidth": 0.0,
+          "scaleX": 1.0,
+          "scaleY": 1.0,
+          "fontSize": 12,
+          "fontFamily": "Courier New",
+          "lockMovementX": "false",
+          "lockMovementY": "false",
+          "lockUniScaling": "false",
+          "selectable": "false",
+          "canBeMoved": true
+        }
+      }
+    ]
+  },
+  "hiLvlPrt": false,
+  "comnCnfg": false,
+  "baseTmplt": false,
+  "bsTmplt": {
+    "rtnAngl": {
+      "value": "3",
+      "optionVals": [
+        {
+          "value": "4",
+          "text": "-180",
+          "dflt": "N"
+        },
+        {
+          "value": "2",
+          "text": "-90",
+          "dflt": "Y"
+        },
+        {
+          "value": "1",
+          "text": "0",
+          "dflt": "N"
+        },
+        {
+          "value": "3",
+          "text": "90",
+          "dflt": "N"
+        },
+        {
+          "value": "5",
+          "text": "180",
+          "dflt": "N"
+        }
+      ]
+    },
+    "frntRr": {
+      "value": "R",
+      "optionVals": [
+        {
+          "value": "",
+          "text": ""
+        },
+        {
+          "value": "F",
+          "text": "Front"
+        },
+        {
+          "value": "R",
+          "text": "Rear"
+        }
+      ]
+    },
+    "typ": "BAY",
+    "hiLvlPrt": false,
+    "comnCnfg": false,
+    "specRvsnId": 284,
+    "specId": 285,
+    "baseTmplt": true,
+    "assctdSpec": {
+      "Attributes": {
+        "BayItnlLst": {
+          "bool": false,
+          "enable": true,
+          "list": [
+            {
+              "BayItnlDpthId": {
+                "value": "6",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthId": {
+                "value": "1",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpth": {
+                "value": "24",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpthUomId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpthUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdth": {
+                "value": "19",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthUomId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "Nmnl": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlHght": {
+                "value": "70",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlHghtUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosQty": {
+                "value": "35",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosDistId": {
+                "value": "2",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlUseTypId": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosDist": {
+                "value": "2 in",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlWllMnt": {
+                "value": "N",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlStrghtThru": {
+                "value": "Y",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlMidPln": {
+                "value": "N",
+                "bool": false,
+                "enable": false
+              },
+              "NdsMfr": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "Typ": {
+                "value": "BAY_INTERNAL",
+                "bool": false,
+                "enable": false
+              },
+              "Desc": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "ShelfNDSUseTyp": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "Nm": {
+                "value": "BI-19\"_70.00x19.00x24.00_MP35x2.00",
+                "bool": false,
+                "enable": false
+              },
+              "id": {
+                "value": "5200",
+                "bool": false,
+                "enable": false
+              },
+              "NdsSpecId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "Cmplt": {
+                "bool": false,
+                "enable": true
+              },
+              "Prpgtd": {
+                "bool": false,
+                "enable": false
+              },
+              "Dltd": {
+                "bool": false,
+                "enable": true
+              }
+            },
+            {
+              "BayItnlDpthId": {
+                "value": "2",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthId": {
+                "value": "2",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpth": {
+                "value": "15",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpthUomId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpthUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdth": {
+                "value": "23",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthUomId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "Nmnl": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlHght": {
+                "value": "57.75",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlHghtUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosQty": {
+                "value": "33",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosDistId": {
+                "value": "1",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlUseTypId": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosDist": {
+                "value": "1.75 in",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlWllMnt": {
+                "value": "N",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlStrghtThru": {
+                "value": "Y",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlMidPln": {
+                "value": "Y",
+                "bool": false,
+                "enable": false
+              },
+              "NdsMfr": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "Typ": {
+                "value": "BAY_INTERNAL",
+                "bool": false,
+                "enable": false
+              },
+              "Desc": {
+                "value": "RELEASE NIGHT TEST",
+                "bool": false,
+                "enable": false
+              },
+              "ShelfNDSUseTyp": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "Nm": {
+                "value": "BI-23\"_57.75x23.00x15.00_MP33x1.75_M",
+                "bool": false,
+                "enable": false
+              },
+              "id": {
+                "value": "5190",
+                "bool": false,
+                "enable": false
+              },
+              "NdsSpecId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "Cmplt": {
+                "bool": true,
+                "enable": false
+              },
+              "Prpgtd": {
+                "bool": true,
+                "enable": false
+              },
+              "Dltd": {
+                "bool": false,
+                "enable": true
+              }
+            },
+            {
+              "BayItnlDpthId": {
+                "value": "2",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthId": {
+                "value": "2",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpth": {
+                "value": "15",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpthUomId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlDpthUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdth": {
+                "value": "23",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthUomId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlWdthUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "Nmnl": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlHght": {
+                "value": "63.00",
+                "bool": false,
+                "enable": false
+              },
+              "BayItnlHghtUom": {
+                "value": "in",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosQty": {
+                "value": "36",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosDistId": {
+                "value": "1",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlUseTypId": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "MntngPosDist": {
+                "value": "1.75 in",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlWllMnt": {
+                "value": "N",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlStrghtThru": {
+                "value": "Y",
+                "bool": false,
+                "enable": false
+              },
+              "BayIntlMidPln": {
+                "value": "Y",
+                "bool": false,
+                "enable": false
+              },
+              "NdsMfr": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "Typ": {
+                "value": "BAY_INTERNAL",
+                "bool": false,
+                "enable": false
+              },
+              "Desc": {
+                "value": "RELEASE NIGHT TEST",
+                "bool": false,
+                "enable": false
+              },
+              "ShelfNDSUseTyp": {
+                "value": "",
+                "bool": false,
+                "enable": false
+              },
+              "Nm": {
+                "value": "BI-23\"_63.00x23.00x15.00_MP36x1.75_M",
+                "bool": false,
+                "enable": false
+              },
+              "id": {
+                "value": "5240",
+                "bool": false,
+                "enable": false
+              },
+              "NdsSpecId": {
+                "value": "0",
+                "bool": false,
+                "enable": false
+              },
+              "Cmplt": {
+                "bool": true,
+                "enable": false
+              },
+              "Prpgtd": {
+                "bool": true,
+                "enable": false
+              },
+              "Dltd": {
+                "bool": false,
+                "enable": true
+              }
+            }
+          ]
+        },
+        "DimUom": {
+          "value": "22",
+          "bool": false,
+          "enable": false
+        },
+        "MntngPosOfst": {
+          "value": "0",
+          "bool": false,
+          "enable": false
+        },
+        "StrtLbl": {
+          "value": "B",
+          "bool": false,
+          "enable": false
+        },
+        "WllMnt": {
+          "value": "Y",
+          "bool": false,
+          "enable": false
+        },
+        "StrghtThru": {
+          "value": "Y",
+          "bool": false,
+          "enable": false
+        },
+        "MidPln": {
+          "value": "N",
+          "bool": false,
+          "enable": false
+        },
+        "Gnrc": {
+          "bool": false,
+          "enable": false
+        },
+        "DualSd": {
+          "value": "N",
+          "bool": false,
+          "enable": false
+        },
+        "BayRlTypId": {
+          "value": "2",
+          "bool": false,
+          "enable": false
+        },
+        "BayUseTypId": {
+          "value": "mit_bay",
+          "bool": false,
+          "enable": false
+        },
+        "XtnlDpth": {
+          "value": "0",
+          "bool": false,
+          "enable": false
+        },
+        "XtnlHgt": {
+          "value": "0",
+          "bool": false,
+          "enable": false
+        },
+        "XtnlWdth": {
+          "value": "0",
+          "bool": false,
+          "enable": false
+        },
+        "XtnlDimUom": {
+          "value": "22",
+          "bool": false,
+          "enable": false
+        },
+        "RvsnNm": {
+          "value": "PLSE-106630-4-1",
+          "bool": false,
+          "enable": false
+        },
+        "NdsMfr": {
+          "value": "",
+          "bool": false,
+          "enable": false
+        },
+        "RvsnId": {
+          "value": "284",
+          "bool": false,
+          "enable": false
+        },
+        "MxWght": {
+          "value": "12",
+          "bool": false,
+          "enable": false
+        },
+        "MxWghtUom": {
+          "value": "4",
+          "bool": false,
+          "enable": false
+        },
+        "RO": {
+          "bool": false,
+          "enable": false
+        },
+        "BayItnlId": {
+          "value": "5190",
+          "bool": false,
+          "enable": false
+        },
+        "Typ": {
+          "value": "BAY",
+          "bool": false,
+          "enable": false
+        },
+        "Desc": {
+          "value": "ASBY-MANF-BAY,NON-SMAS,E/W 4 D4 CH BKS 7 X 13-1",
+          "bool": false,
+          "enable": false
+        },
+        "ShelfNDSUseTyp": {
+          "value": "",
+          "bool": false,
+          "enable": false
+        },
+        "Nm": {
+          "value": "PLSE-106630-4-model",
+          "bool": false,
+          "enable": false
+        },
+        "id": {
+          "value": "284",
+          "bool": false,
+          "enable": false
+        },
+        "NdsSpecId": {
+          "value": "0",
+          "bool": false,
+          "enable": false
+        },
+        "Cmplt": {
+          "bool": true,
+          "enable": false
+        },
+        "Prpgtd": {
+          "bool": false,
+          "enable": true
+        },
+        "Dltd": {
+          "bool": false,
+          "enable": true
+        },
+        "Bay": {
+          "bool": false,
+          "enable": false,
+          "list": [
+            {
+              "CbntInd": {
+                "bool": false,
+                "enable": false
+              },
+              "Hght": {
+                "value": "84",
+                "bool": false,
+                "enable": true
+              },
+              "Wdth": {
+                "value": "26",
+                "bool": false,
+                "enable": true
+              },
+              "Dpth": {
+                "value": "15",
+                "bool": false,
+                "enable": true
+              },
+              "DimUom": {
+                "value": "22",
+                "bool": false,
+                "enable": true
+              },
+              "HtDssptn": {
+                "value": "11",
+                "bool": false,
+                "enable": false
+              },
+              "HtDssptnUom": {
+                "value": "1",
+                "bool": false,
+                "enable": false
+              },
+              "ElcCurrDrnNrm": {
+                "value": "10",
+                "bool": false,
+                "enable": false
+              },
+              "ElcCurrDrnNrmUom": {
+                "value": "11",
+                "bool": false,
+                "enable": false
+              },
+              "ElcCurrDrnMx": {
+                "value": "25",
+                "bool": false,
+                "enable": false
+              },
+              "ElcCurrDrnMxUom": {
+                "value": "11",
+                "bool": false,
+                "enable": false
+              },
+              "Wght": {
+                "value": "12",
+                "bool": false,
+                "enable": false
+              },
+              "WghtUom": {
+                "value": "4",
+                "bool": false,
+                "enable": false
+              },
+              "HtGntn": {
+                "value": "12",
+                "bool": false,
+                "enable": false
+              },
+              "HtGntnUom": {
+                "value": "1",
+                "bool": false,
+                "enable": false
+              },
+              "IntrlDpth": {
+                "value": "15",
+                "bool": false,
+                "enable": false
+              },
+              "IntrlHght": {
+                "value": "57.75",
+                "bool": false,
+                "enable": false
+              },
+              "IntrlWdth": {
+                "value": "23",
+                "bool": false,
+                "enable": false
+              },
+              "HvSpec": {
+                "bool": false,
+                "enable": false
+              },
+              "SpecTyp": {
+                "value": "BAY",
+                "bool": false,
+                "enable": false
+              },
+              "FtrTyp": {
+                "value": "2",
+                "bool": false,
+                "enable": false
+              },
+              "MtlCtgry": {
+                "value": "3",
+                "bool": false,
+                "enable": false
+              },
+              "HasRvsns": {
+                "bool": false,
+                "enable": false
+              },
+              "BaseRvsnInd": {
+                "value": "Y",
+                "bool": false,
+                "enable": false
+              },
+              "CurrRvsnInd": {
+                "value": "Y",
+                "bool": false,
+                "enable": false
+              },
+              "RetRvsnInd": {
+                "value": "N",
+                "bool": false,
+                "enable": false
+              },
+              "OrdblId": {
+                "value": "11",
+                "bool": false,
+                "enable": false
+              },
+              "id": {
+                "value": "50664",
+                "bool": false,
+                "enable": false
+              },
+              "MtrlId": {
+                "value": "100094861",
+                "bool": false,
+                "enable": false
+              },
+              "MfgId": {
+                "value": "1818",
+                "bool": false,
+                "enable": false
+              },
+              "PrdctId": {
+                "value": "1154410",
+                "bool": false,
+                "enable": false
+              },
+              "Mfg": {
+                "value": "PLSE",
+                "bool": false,
+                "enable": false
+              },
+              "MfgNm": {
+                "value": "PULSE COMMUNICATIONS INC",
+                "bool": false,
+                "enable": false
+              },
+              "LbrId": {
+                "value": "2",
+                "bool": false,
+                "enable": false
+              },
+              "RtPrtNbr": {
+                "value": "106630-4",
+                "bool": false,
+                "enable": false
+              },
+              "CtlgDesc": {
+                "value": "ASBY-MANF-BAY,NON-SMAS,E/W 4 D4 CH BKS 7 X 13",
+                "bool": false,
+                "enable": false
+              },
+              "SpecNm": {
+                "value": "PLSE-106630-4-1",
+                "bool": false,
+                "enable": false
+              },
+              "SpecRvsnNm": {
+                "value": "PLSE-106630-4-1",
+                "bool": false,
+                "enable": false
+              },
+              "SpecId": {
+                "value": "285",
+                "bool": false,
+                "enable": false
+              },
+              "SpecPrpgt": {
+                "bool": false,
+                "enable": false
+              },
+              "SpecRvsnId": {
+                "value": "284",
+                "bool": false,
+                "enable": false
+              },
+              "RO": {
+                "bool": false,
+                "enable": false
+              },
+              "ROPblshd": {
+                "bool": false,
+                "enable": false
+              },
+              "ItmDesc": {
+                "value": "MFD BAY D4 CO WITH 3 D4 CHASSIS. 13IN BASE 7FT 106630-4 PULSECOMMU",
+                "bool": false,
+                "enable": false
+              },
+              "PrtNo": {
+                "value": "106630-4",
+                "bool": false,
+                "enable": false
+              }
+            }
+          ]
+        }
+      }
+    },
+    "tmpltId": 43,
+    "nm": "PLSE-106630-4 BASE",
+    "dsc": "PLSE-106630-4 BASE TEST DESCRIPTION    ",
+    "cmpltd": true,
+    "prpgtd": false,
+    "dltd": false,
+    "rtrd": false,
+    "updtInPrgss": false
+  },
+  "tmpltId": 45,
+  "nm": "PLSE-106630-4 OVERALL",
+  "dsc": "PLSE-106630-4 OVERALL DESCRIPTION 22",
+  "cmpltd": true,
+  "prpgtd": true,
+  "dltd": false,
+  "rtrd": false,
+  "updtInPrgss": false
+}

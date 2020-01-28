@@ -1,0 +1,404 @@
+﻿<div id="searchaddOption">
+    <p>
+        To add new record please click ->
+        <button type="button" class="btn btn-link" data-bind="click: $data.ADD">ADD</button>
+    </p>
+</div>
+<div>
+    <p> To Search please click -><button type="button" class="btn btn-link" data-bind="click: $data.SEARCH">SEARCH</button>
+</div>
+<div id="idsearchBar">
+    <span>
+        <input type="radio" id="idRbBoth" name="spGroup" value="BOTH" data-bind="checked: recordtype" /> 
+        <label for="idRbBoth">BOTH</label>
+        <input type="radio" id="idRbISP" name="spGroup" value="COE" data-bind="checked: recordtype" /> 
+        <label for="idRbISP">ISP</label>
+        <input type="radio" id="idRbOSP" name="spGroup" value="OSP" data-bind="checked: recordtype" /> 
+        <label for="idRbOSP">OSP</label> &nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+    <span>
+        <input type="radio" id="idRbSbMtlCd" name="searchByGroup" value="MtlCd" data-bind="checked: searchBy" /> 
+        <label for="idRbSbMtlCd">Search by Material Code</label>
+        <input type="radio" id="idRbSbPrtNbr" name="searchByGroup" value="PrtNbr" data-bind="checked: searchBy" /> 
+        <label for="idRbSbPrtNbr">Search by Part Number</label>&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+    <!--<label>Search by Material Code : </label>-->
+    <div data-bind="searchBar: {searchFunction: searchForPart, selectFunction: partSelected, isVisible: true, optionVisible: false}"></div>
+</div>
+<div class='panel panel-default' id="addOption" data-bind="if : selectedElement">
+    <div class="panel-heading">Give inputs and click Save</div>
+    <div class="panel-body nup">
+        <form data-bind="submit: $data.Save">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idProductID">Material Code</label>
+                        <input type="text" class="form-control" id="idProductID" data-bind="textInput: selectedElement().ProductID" readonly maxlength="18" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idMaterialID">CDMMS ID</label>
+                        <input type="text" class="form-control" id="idMaterialID" data-bind="textInput: selectedElement().MaterialID" readonly />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Material Category</label><font color="red">*</font>
+                        <select id="idMaterialCategory" class="form-control" data-bind="options: $data.MatCat, optionsText: 'text', optionsValue: 'value', value: selectedElement().MaterialCategory, event: {change: changeMtlCtgry}" required></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Feature Type</label><font color="red">*</font>
+                        <select id="idFeatureType" class="form-control" disabled="disabled" data-bind="options: $data.FeatureTypeDD, optionsText: 'text', optionsValue: 'value', value: selectedElement().FeatureType, event: {change: changeFtrTyp}" required></select>
+                    </div>
+                    <div class="col-lg-12 col-xs-offset-1">
+                        <button type="button" class="btn btn-success" disabled="disabled" id="btnassociate" data-bind="click:$root.associatecablepopup.bind($root,$root)">Associated Set Length Cables</button>
+                        <h6 id="associateCblBtnMsg" style="display:none;"><b>(Save the record to enable this button)</b></h6>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Specification Name</label>
+                        <input type="text" class="form-control" id="idSpecificationName" data-bind="textInput: selectedElement().SpecificationName" maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="col-lg-12 col-xs-offset-1">
+                            <label>Set Length</label>
+                            <input type="text" class="form-control" id="idSetLength" disabled="disabled" data-bind="textInput: selectedElement().SetLength, event: {change: $root.ReqSetLengthUOM}" maxlength="4000" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="col-lg-12 col-lg-pull-1">
+                            <label>Unit</label>
+                            <select class="form-control" id="idSetLengthUomDD" disabled="disabled" data-bind="options: $data.SetLengthUomDD, optionsText: 'text', optionsValue: 'value', value: selectedElement().SetLengthUOM,event: {change: $data.changeCableType}" maxlength="4000"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Labor ID</label>
+                        <select class="form-control" id="idLaborID" data-bind="options: $data.LaborIdDD, optionsText: 'text', optionsValue: 'value', value: selectedElement().LaborID" maxlength="4000"></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Part Number</label><font color="red">*</font>
+                        <input type="text" class="form-control" id="idPartNumber" data-bind="textInput: selectedElement().PartNumber" required maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Manufacturer CLMC</label><font color="red">*</font>
+                        <input type="text" class="form-control" id="idManufacturer" data-bind="textInput: selectedElement().Manufacturer" required maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>APCL</label>
+                        <input type="text" class="form-control" id="idApcl" data-bind="textInput: selectedElement().APCL" maxlength="4000" readonly />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Unit of Measurement</label>
+                        <input type="text" class="form-control" id="idUnitofMeasurement" data-bind="textInput: selectedElement().UnitofMeasurement" maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Catalog Description</label><font color="red">*</font>
+                        <input type="text" class="form-control" id="idCatalogDescription" data-bind="textInput: selectedElement().CatalogDescription,event: {change: $root.getfirstword}" required maxlength="47" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Hazardous Material Indicator</label><font color="red">*</font>
+                        <input type="text" class="form-control" id="idHazardousMaterialIndicator" data-bind="textInput: selectedElement().HazardousMaterialIndicator" required maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Height</label>
+                        <input type="text" class="form-control" id="idHeight" data-bind="textInput: selectedElement().Height,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Width</label>
+                        <input type="text" class="form-control" id="idWidth" data-bind="textInput: selectedElement().Width,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Depth</label>
+                        <input type="text" class="form-control" id="idDepth" data-bind="textInput: selectedElement().Depth,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Material Type</label>
+                        <input type="text" class="form-control" id="idMaterialType" data-bind="textInput: selectedElement().MaterialType" maxlength="4000" />
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Status</label><font color="red">*</font>
+                        <select id="idStatus" class="form-control" data-bind="options: $data.StatusDD, optionsText: 'text', optionsValue: 'value', value: selectedElement().Status" required></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Amps Drain</label>
+                        <input type="text" class="form-control" id="idAmpsDrain" data-bind="textInput: selectedElement().AmpsDrain,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Number Mounting Spaces</label>
+                        <input type="text" class="form-control" id="idNumberMountingSpecs" data-bind="textInput:selectedElement().NumberMountingSpecs,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Mounting Plate Size</label>
+                        <input type="text" class="form-control" id="idMountingPlateSize" data-bind="textInput:selectedElement().MountingPlateSize,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Max Equipment Positions</label>
+                        <input type="text" class="form-control" id="idMaxEquipmentPositions" data-bind="textInput:selectedElement().MaxEquipmentPositions,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Gauge</label>
+                        <input type="text" class="form-control" id="idGauge" data-bind="textInput: selectedElement().Gauge" maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Gauge Unit</label>
+                        <select class="form-control" id="idGaugeUnit" data-bind="options: $data.GaugeUnitDD, optionsCaption: '', value: selectedElement().GaugeUnit" required></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Equipment Weight</label>
+                        <input type="text" class="form-control" id="idEquipmentWeight" data-bind="textInput: selectedElement().EquipmentWeight,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Account Code</label><font color="red">*</font>
+                        <input type="text" class="form-control" id="idAccountCode" data-bind="textInput: selectedElement().AccountCode" required maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Prod Type</label><font color="red">*</font>
+                        <select class="form-control" id="idProdType" data-bind="options: $data.ProdTypeDD,optionsCaption: '',value: selectedElement().ProdType" required></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Equipment Class</label><font color="red">*</font>
+                        <input type="text" class="form-control" id="idEquipmentClass" data-bind="textInput: selectedElement().EquipmentClass" required maxlength="30" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Location Position Indicator</label><font color="red">*</font>
+                        <select class="form-control" id="lctnPosIndDropdown" data-bind="options: $data.LctnPosIndDD, optionsText: 'text', optionsValue: 'value', value: selectedElement().LocationPositionIndicator" required></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Part Number Type Code</label><font color="red">*</font>
+                        <select class="form-control" id="idPartNumberTypeCode" required data-bind="options: $data.PartNumberTypeCodeDD,optionsCaption: '', value: selectedElement().PartNumberTypeCode"></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Default Position Scheme</label>
+                        <select class="form-control" id="idDefaultPositionScheme" data-bind="options: $data.DefaultPositionSchemeDD,optionsCaption: '', value: selectedElement().DefaultPositionScheme"></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>First Mount Position Height</label>
+                        <input type="text" class="form-control" id="idFirstMountPositionHeight" data-bind="textInput: selectedElement().FirstMountPositionHeight,event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Orderability Indicator</label>
+                        <input type="text" class="form-control" id="idOrderabilityIndicator" data-bind="textInput: selectedElement().OrderabilityIndicator" maxlength="4000" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Internal Height</label>
+                        <input type="text" class="form-control" id="idtxtIntrlHght" data-bind="textInput: selectedElement().InternalHeight, event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Internal Width</label>
+                        <input type="text" class="form-control" id="idtxtIntrlWdth" data-bind="textInput: selectedElement().InternalWidth, event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Internal Depth</label>
+                        <input type="text" class="form-control" id="idtxtIntrlDpth" data-bind="textInput: selectedElement().InternalDepth, event:{ keypress: NumDecimal}" maxlength="9" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Last Updated User ID</label>
+                        <input type="text" class="form-control" id="idLastUpdatedUserID" data-bind="textInput: selectedElement().LastUpdatedUserID" readonly />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label>Last Updated Date</label>
+                        <input type="text" class="form-control" id="idLastUpdatedDate" data-bind="textInput: selectedElement().LastUpdatedDate" readonly />
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-5">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="isPublish" id="idPublish" data-bind="checked: selectedElement().Publish">Publish</label>
+                        <button type="submit" class="btn btn-success" id="idSave">SAVE</button>
+                        <button type="submit" class="btn btn-primary" id="idUpdate">UPDATE</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Associated Cables Info:</b></h4></td>
+                    <td><span class="close">&times;</span></td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-sm-2 form-group">
+                    <h4><b> CLMC: </b></h4>
+                    <span style="font-weight:normal;" id="clcmcpopup"></span>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <h4><b> Description:</b> </h4>
+                    <span style="font-weight:normal;" id="descpopup"></span>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <h4><b>Part Number:</b> </h4>
+                    <span style="font-weight:normal;" id="partnumberpopup"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="idcdmmsidmodal" class="control-label">CDMMS ID:</label>
+                    <input type="text" class="form-control" id="idcdmmsidmodal" data-bind="event:{ keypress: checkEnterVCmodifiedPart}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="materialcodemodal">Material Code:</label>
+                    <input type="text" class="form-control" id="materialcodemodal" data-bind="event:{ keypress: checkEnterVCmodifiedPart}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="partnumbermodal">Part Number:</label>
+                    <input type="text" class="form-control" id="partnumbermodal" data-bind="event:{ keypress: checkEnterVCmodifiedPart}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="clmcmodal">CLMC:</label>
+                    <input type="text" class="form-control" id="clmcmodal" data-bind="event:{ keypress: checkEnterVCmodifiedPart}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="catlogdsptn">Catalog Description:</label>
+                    <input type="text" class="form-control" id="catlogdsptn" data-bind="event:{ keypress: checkEnterVCmodifiedPart}">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <button class="btn btn-success" data-bind="click: $data.searchmtl">SEARCH</button>
+                    <div class="NoRecord" style="display: none; color:red">No records found!</div>
+                </div>
+            </div>
+            <h4>Search Results:</h4>
+            <table id="searchresults" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th><input class="chkbxsearchAll" type="checkbox" /></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>Part Number</th>
+                        <th>CLMC</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:searchtbl">
+                    <tr>
+                        <td><input class="chkbxsearch" type="checkbox" data-bind="value: $data.Attributes.material_item_id.value" /></td>
+                        <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mat_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Associated Cables</h4>
+            <table id="associatedcables" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CDMMS ID</th>
+                        <th>Material Code</th>
+                        <th>Part Number</th>
+                        <th>CLMC</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:associatetbl">
+                    <tr>
+                        <td><input class="chktblasc" type="checkbox" checked="checked" data-bind="value:$data.Attributes.material_item_id.value" /></td>
+                        <td><span data-bind="text: $data.Attributes.material_item_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.product_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_id.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mat_desc.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width:100%" align="center">
+                <tr>
+                    <td>
+                        <button class="btn btn-success" data-bind="click: $data.saveAssociateCable">Save</button>
+                        <button class="btn btn-success" id="cancelmodal" data-bind="click: $data.cancelmodal">Cancel</button>
+                        <span class="errorAssociateCableModal" style="display: none; color:red;">Error while saving.! Please try again.</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="interstitial" class="mpinterstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+

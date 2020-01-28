@@ -1,0 +1,143 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CenturyLink.ApplicationBlocks.Data", "CenturyLink.ApplicationBlocks.Data\CenturyLink.ApplicationBlocks.Data.csproj", "{B6E2E887-B926-4D5A-91C9-94CA63D76A69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CenturyLink.ApplicationBlocks.ExceptionManagement", "CenturyLink.ApplicationBlocks.ExceptionManagement\CenturyLink.ApplicationBlocks.ExceptionManagement.csproj", "{968F3462-58AA-4C31-A550-A647ADB92B69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CenturyLink.ApplicationBlocks.ExceptionManager", "CenturyLink.ApplicationBlocks.ExceptionManager\CenturyLink.ApplicationBlocks.ExceptionManager.csproj", "{93336B1A-876D-4BE8-9647-C6928F4194AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{0E7B2A1E-5598-48C9-BD69-52AA436EAE66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOSDBWindowsService", "LOSDBWindowsService\LOSDBWindowsService.csproj", "{0A09114F-F983-46EF-8553-BEAD60916B3E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0E7B2A1E-5598-48C9-BD69-52AA436EAE66} = {0E7B2A1E-5598-48C9-BD69-52AA436EAE66}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialEditor", "MaterialEditor\MaterialEditor.csproj", "{606AB836-A960-4B76-B6CD-776D85253B11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialManagement", "MaterialManagement\MaterialManagement.csproj", "{9C0F3C45-B5DA-4A32-9FB4-D501BB100EF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ApplicationBlocks.ExceptionManagement", "Microsoft.ApplicationBlocks.ExceptionManagement\Microsoft.ApplicationBlocks.ExceptionManagement.csproj", "{386CBF50-F4A9-4F05-98CB-B387D2D8F357}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces", "Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.csproj", "{5F25F8C2-DA02-46C6-A6CA-01E719EAD35D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAPCatalogFileService", "SAPCatalogFileService\SAPCatalogFileService.csproj", "{7F93DE39-9410-4C86-A87E-C251DA2EF05A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeLibrary", "TypeLibrary\TypeLibrary.csproj", "{D05580D0-1474-4545-B9BD-72AD0DF67DE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestMaterialEditor", "UnitTestMaterialEditor\UnitTestMaterialEditor.csproj", "{B922D8D6-728C-462D-B87A-F6A9D26D6939}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseObjects", "DatabaseObjects\DatabaseObjects.csproj", "{89412553-E67D-485E-9333-81FF7CBBF361}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6E2E887-B926-4D5A-91C9-94CA63D76A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6E2E887-B926-4D5A-91C9-94CA63D76A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6E2E887-B926-4D5A-91C9-94CA63D76A69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{968F3462-58AA-4C31-A550-A647ADB92B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{968F3462-58AA-4C31-A550-A647ADB92B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{968F3462-58AA-4C31-A550-A647ADB92B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93336B1A-876D-4BE8-9647-C6928F4194AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93336B1A-876D-4BE8-9647-C6928F4194AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93336B1A-876D-4BE8-9647-C6928F4194AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E7B2A1E-5598-48C9-BD69-52AA436EAE66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E7B2A1E-5598-48C9-BD69-52AA436EAE66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E7B2A1E-5598-48C9-BD69-52AA436EAE66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A09114F-F983-46EF-8553-BEAD60916B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A09114F-F983-46EF-8553-BEAD60916B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A09114F-F983-46EF-8553-BEAD60916B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606AB836-A960-4B76-B6CD-776D85253B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606AB836-A960-4B76-B6CD-776D85253B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606AB836-A960-4B76-B6CD-776D85253B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606AB836-A960-4B76-B6CD-776D85253B11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C0F3C45-B5DA-4A32-9FB4-D501BB100EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0F3C45-B5DA-4A32-9FB4-D501BB100EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0F3C45-B5DA-4A32-9FB4-D501BB100EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386CBF50-F4A9-4F05-98CB-B387D2D8F357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386CBF50-F4A9-4F05-98CB-B387D2D8F357}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386CBF50-F4A9-4F05-98CB-B387D2D8F357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F25F8C2-DA02-46C6-A6CA-01E719EAD35D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F25F8C2-DA02-46C6-A6CA-01E719EAD35D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F25F8C2-DA02-46C6-A6CA-01E719EAD35D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F93DE39-9410-4C86-A87E-C251DA2EF05A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F93DE39-9410-4C86-A87E-C251DA2EF05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F93DE39-9410-4C86-A87E-C251DA2EF05A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05580D0-1474-4545-B9BD-72AD0DF67DE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05580D0-1474-4545-B9BD-72AD0DF67DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05580D0-1474-4545-B9BD-72AD0DF67DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B922D8D6-728C-462D-B87A-F6A9D26D6939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B922D8D6-728C-462D-B87A-F6A9D26D6939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B922D8D6-728C-462D-B87A-F6A9D26D6939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89412553-E67D-485E-9333-81FF7CBBF361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89412553-E67D-485E-9333-81FF7CBBF361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89412553-E67D-485E-9333-81FF7CBBF361}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48C011CD-FA73-41D4-8D37-411F1394EC86}
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 13
+		SccProjectUniqueName0 = CenturyLink.ApplicationBlocks.ExceptionManagement\\CenturyLink.ApplicationBlocks.ExceptionManagement.csproj
+		SccProjectName0 = IT3000@PCMS:14136615:16554480
+		SccLocalPath0 = CenturyLink.ApplicationBlocks.ExceptionManagement
+		SccProvider0 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName1 = CenturyLink.ApplicationBlocks.Data\\CenturyLink.ApplicationBlocks.Data.csproj
+		SccProjectName1 = IT3000@PCMS:14136615:16554504
+		SccLocalPath1 = CenturyLink.ApplicationBlocks.Data
+		SccProvider1 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName2 = CenturyLink.ApplicationBlocks.ExceptionManager\\CenturyLink.ApplicationBlocks.ExceptionManager.csproj
+		SccProjectName2 = IT3000@PCMS:14136615:16554554
+		SccLocalPath2 = CenturyLink.ApplicationBlocks.ExceptionManager
+		SccProvider2 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName3 = Common\\Common.csproj
+		SccProjectName3 = IT3000@PCMS:14136615:16554581
+		SccLocalPath3 = Common
+		SccProvider3 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName4 = DatabaseObjects\\DatabaseObjects.csproj
+		SccProjectName4 = IT3000@PCMS:14136615:16554692
+		SccLocalPath4 = DatabaseObjects
+		SccProvider4 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName5 = LOSDBWindowsService\\LOSDBWindowsService.csproj
+		SccProjectName5 = IT3000@PCMS:14136615:16554714
+		SccLocalPath5 = LOSDBWindowsService
+		SccProvider5 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName6 = MaterialEditor\\MaterialEditor.csproj
+		SccProjectName6 = IT3000@PCMS:14136615:16554825
+		SccLocalPath6 = MaterialEditor
+		SccProvider6 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName7 = MaterialManagement\\MaterialManagement.csproj
+		SccProjectName7 = IT3000@PCMS:14136615:16556213
+		SccLocalPath7 = MaterialManagement
+		SccProvider7 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName8 = Microsoft.ApplicationBlocks.ExceptionManagement\\Microsoft.ApplicationBlocks.ExceptionManagement.csproj
+		SccProjectName8 = IT3000@PCMS:14136615:16556305
+		SccLocalPath8 = Microsoft.ApplicationBlocks.ExceptionManagement
+		SccProvider8 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName9 = Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.csproj
+		SccProjectName9 = IT3000@PCMS:14136615:16556364
+		SccLocalPath9 = Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces
+		SccProvider9 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName10 = SAPCatalogFileService\\SAPCatalogFileService.csproj
+		SccProjectName10 = IT3000@PCMS:14136615:16556387
+		SccLocalPath10 = SAPCatalogFileService
+		SccProvider10 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName11 = TypeLibrary\\TypeLibrary.csproj
+		SccProjectName11 = IT3000@PCMS:14136615:16556428
+		SccLocalPath11 = TypeLibrary
+		SccProvider11 = MSSCCI:Dimensions\u0020SCC
+		SccProjectUniqueName12 = UnitTestMaterialEditor\\UnitTestMaterialEditor.csproj
+		SccProjectName12 = IT3000@PCMS:14136615:16556486
+		SccLocalPath12 = UnitTestMaterialEditor
+		SccProvider12 = MSSCCI:Dimensions\u0020SCC
+	EndGlobalSection
+EndGlobal

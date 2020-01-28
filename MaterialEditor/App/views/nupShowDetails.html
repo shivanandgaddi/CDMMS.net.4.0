@@ -1,0 +1,197 @@
+﻿<div class='panel panel-default' id="sap1" data-bind="visible: showsap">
+    <div class="panel-heading">Show SAP Details</div>
+    <div class="panel-body" id="nupShowDetailspanel" >       
+        <div class="table-responsive">
+            <table id="nupShowDetails" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>PART NO</th>
+                        <th>MATERIAL CODE</th>
+                        <th>HECI</th>
+                        <th>ITEM STATUS</th>
+                        <th>MATERIAL GROUP</th>
+                        <th>CLMC</th>
+                        <th>MFG NAME</th>
+                        <th>ICC CODE</th>
+                        <th>STANDARD UOM</th>
+                        <th>MOVING AVERAGE PRICE</th>
+                        <th>MATERIAL DESCRIPTION</th>
+                        <th>PO TEXT</th>
+                        <th>HAZARDOUS MATERIAL</th>
+                        <th>AIC CODE</th>
+                        <th>PLANNED DELIVERY TIME</th>
+                        <th>LAST CHANGED DATE</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:NupShowlist">
+                    <tr>
+                        <td><span data-bind="text:$data.Attributes.source.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.mfg_part_no.value,css:{newcss:$data.Attributes.mfg_part_no.bool}"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.materialcode.bool}"><span data-bind="text: $data.Attributes.materialcode.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.heci.bool}"><span data-bind="text: $data.Attributes.heci.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.item_status.bool}"><span data-bind="text: $data.Attributes.item_status.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.mtl_grp.bool}"><span data-bind="text: $data.Attributes.mtl_grp.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.clmc.bool}"><span data-bind="text: $data.Attributes.clmc.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.mfg_name.bool}"><span data-bind="text: $data.Attributes.mfg_name.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.icc_cd.bool}"><span data-bind="text: $data.Attributes.icc_cd.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.uom.bool}"><span data-bind="text: $data.Attributes.uom.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.mvg_avg_price_amt.bool}"><span data-bind="text: $data.Attributes.mvg_avg_price_amt.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.mtl_desc.bool}"><span data-bind="text: $data.Attributes.mtl_desc.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.po_text.bool}"><span data-bind="text: $data.Attributes.po_text.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.hazard_ind.bool}"><span data-bind="text: $data.Attributes.hazard_ind.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.aic_cd.bool}"><span data-bind="text: $data.Attributes.aic_cd.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.pland_del_tm.bool}"><span data-bind="text: $data.Attributes.pland_del_tm.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.last_chg_dt.value"></span></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div class="panel-heading">Possible Matching LOSDB Material</div>
+            <div class="table-responsive">
+                <table id="posblematchlosdb" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>CLEI</th>
+                            <th>CLMC</th>
+                            <th>PART NO</th>
+                            <th>PCN</th>
+                            <th>MATERIAL DESCRIPTION</th>
+                            <th hidden="hidden">Porduct id</th>
+                            <th hidden="hidden">Equipment Catalog ID</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:PossiblematchLosdb">
+                        <tr>
+                            <td><input type="checkbox" class="mike" id="possiblematchchklosdb" data-bind="checked: $data.Attributes.checkmatched.value, event: {click: $parent.clickPossibleMatch(this)}" /></td>
+                            <td><span data-bind="text:$data.Attributes.clei_cd_pbl.value"></span></td>
+                            <td><span data-bind="text:$data.Attributes.vendor_cd_pbl.value"></span></td>
+                            <td><span data-bind="text:$data.Attributes.part_no_pbl.value"></span></td>
+                            <td><span data-bind="text:$data.Attributes.pcnchange.value"></span></td>
+                            <td><span data-bind="text:$data.Attributes.descpbl.value"></span></td>
+                            <td hidden="hidden"><span data-bind="text:$data.Attributes.prodt_id.value"></span></td>
+                            <td hidden="hidden"><span data-bind="text:$data.Attributes.ies_eqpt_ctlg_item_id.value"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <!--<button id="associatbtn" class="btn btn-success" type="button" data-bind="click:$data.Associatesaptolosdb">Associate Part and Accept</button>
+                    -->
+            </div>
+    </div>
+
+
+</div>
+<div class='panel panel-default' id="losdb1" data-bind="visible: showlosdb">
+    <div class="panel-heading">Show LOSDB Details</div>
+    <div class="panel-body" id="nupShowDetailspanellosdb">       
+        <div class="table-responsive">
+            <table id="nupShowDetailslosdb" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ACTION</th>
+                        <th>PART NO</th>
+                        <th>CLEI</th>
+                        <th>COMPATIBLE EQUIPMENT CLEI</th>
+                        <th>CLMC</th>
+                        <th>HECI</th>
+                        <th>HEIGHT</th>
+                        <th>HEIGHT UOM</th>
+                        <th>WIDTH</th>
+                        <th>WIDTH UOM</th>
+                        <th>DEPTH</th>
+                        <th>DEPTH UOM</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:NupShowlistlosdb">
+                    <tr>
+                        <td><span data-bind="text:$data.Attributes.source.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.actncd.value"></span></td>
+                        <td><span data-bind="text: $data.Attributes.part_no.value,css:{newcss:$data.Attributes.part_no.bool}"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.clei_cd.bool}"><span data-bind="text: $data.Attributes.clei_cd.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.clei7.bool}"><span data-bind="text: $data.Attributes.clei7.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.mfg_part_no.bool}"><span data-bind="text: $data.Attributes.mfg_part_no.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.vendor_cd.bool}"><span data-bind="text: $data.Attributes.vendor_cd.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.height_unit.bool}"><span data-bind="text: $data.Attributes.height_unit.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.height_uom.bool}"><span data-bind="text: $data.Attributes.height_uom.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.width_unit.bool}"><span data-bind="text: $data.Attributes.width_unit.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.width_uom.bool}"><span data-bind="text: $data.Attributes.width_uom.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.depth_unit.bool}"><span data-bind="text: $data.Attributes.depth_unit.value"></span></td>
+                        <td data-bind="css:{newcss:$data.Attributes.depth_uom.bool}"><span data-bind="text: $data.Attributes.depth_uom.value"></span></td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <div class="panel-heading">Possible Matching SAP Material</div>
+                <table id="posblematchsap" class="table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>CLEI/HECI</th>
+                            <th>CLMC</th>
+                            <th>PART NO</th>
+                            <th>MATERIAL DESCRIPTION</th>
+                            <th hidden="hidden">MATERIAL DESCRIPTION</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:PossiblematchSap">
+                        <tr>
+                            <td><input type="checkbox" id="posblemtchchksap" /></td>
+                            <td><span data-bind="text:$data.Attributes.clei_cd_pbl.value"></span></td>
+                            <td><span data-bind="text:$data.Attributes.vendor_cd_pbl.value"></span></td>
+                            <td><span data-bind="text:$data.Attributes.part_no_pbl.value"></span></td>
+                            <td><span data-bind="text:$data.Attributes.descpbl.value"></span></td>
+                            <td hidden="hidden" id="prodt_id"><span data-bind="text:$data.Attributes.prodt_id.value"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="associatbtn" class="btn btn-success" data-bind="click: $data.Associatelosdbtosap">Associate Part</button>
+            </div>
+            <br />
+
+            <button id="revsionbtn" class="btn btn-success" data-bind="click: $data.Insertrevision">Add Revision</button>
+            <br />
+            <br />
+            <div class="panel-heading">Possible Related Revisions</div>
+
+            <table id="posblerevsn" class="table">
+                <thead>
+                    <tr>
+                        <th>CDMMS ID</th>
+                        <th>MATERIAL CODE</th>
+                        <th>CLMC</th>
+                        <th>CLEI</th>
+                        <th>PART NUMBER</th>
+                        <th>CATALOG/MATERIAL DESCRIPTION</th>
+                        <th>SPECIFICATION NAME</th>
+                        <th>REVISION NUMBER</th>
+                        <th>BASE REVISION</th>
+                        <th>CURRENT REVISION</th>
+                        <th hidden="hidden">Revision type</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:Addrevision">
+                    <tr>
+                        <td><span data-bind="text:$data.Attributes.mfridr.value"></span></td>.
+                        <td><span data-bind="text:$data.Attributes.materialcoder.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.mfrcdr.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.clei_coder.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.partnor.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.mtrl_descr.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.specnamer.value"></span></td>
+                        <td><span data-bind="text:$data.Attributes.revsnor.value"></span></td>
+                        <td><input class="chkbx_baservsn" type="checkbox" data-bind="checked: $data.Attributes.base_rev.value=='Y' ? true : false" /></td>
+                        <td><input class="chkbx_currvsn" type="checkbox" data-bind="checked: $data.Attributes.curr_revrr.value=='Y' ? true : false" /></td>
+                        <td hidden="hidden"><span data-bind="text:$data.Attributes.typer.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,13 @@
+version=10.2
+item-uid=16556241
+file-version=1
+checksum=0cd977690b860188dbe901dc22e71f1a
+fetch-size=6241
+mtime=1489088724
+item-spec=43444D4D533A4B5852334420434154414C4F47455843455054494F4E2043532D32383132393135313158333835303558382E412D5352433B31
+item-status=4F50454E
+is-extracted=0
+is-headersubst=0
+relpath=CDMMS.net.4.0/MaterialManagement/Business/Exceptions/CatalogException.cs
+project=43444D4D533A43444D4D53
+project-uid=14136615

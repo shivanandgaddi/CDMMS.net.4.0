@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{606AB836-A960-4B76-B6CD-776D85253B11}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CenturyLink.Network.Engineering.Material.Editor</RootNamespace>
+    <AssemblyName>MaterialEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CenturyLink.ApplicationBlocks.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CenturyLink.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CenturyLink.ApplicationBlocks.ExceptionManagement, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CenturyLink.ApplicationBlocks.ExceptionManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="CenturyLink.ApplicationBlocks.ExceptionManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CenturyLink.ApplicationBlocks.ExceptionManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.11\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\Utility\CadAddEquipDialog.js" />
+    <Content Include="App\Utility\CadComponentBay.js" />
+    <Content Include="App\Utility\CadComponentNotImplemented.js" />
+    <Content Include="App\Utility\CadComponentShelf.js" />
+    <Content Include="App\Utility\CadEquipPropertiesDialog.js" />
+    <Content Include="App\Utility\cadHelper.js" />
+    <Content Include="App\Utility\CadUtils.js" />
+    <Content Include="App\Utility\helper.js" />
+    <Content Include="App\Utility\RackUnitLabel.js" />
+    <Content Include="App\Utility\referenceDataHelper.js" />
+    <Content Include="App\Utility\user.js" />
+    <Content Include="App\viewmodels\assemblyUnits.js" />
+    <Content Include="App\viewmodels\authorize.js" />
+    <Content Include="App\viewmodels\bayExtenderSpecification.js" />
+    <Content Include="App\viewmodels\bayInternalSpecification.js" />
+    <Content Include="App\viewmodels\baySpecification.js" />
+    <Content Include="App\viewmodels\cardSpecification.js" />
+    <Content Include="App\viewmodels\categoryManagement.js" />
+    <Content Include="App\viewmodels\commonConfig.js" />
+    <Content Include="App\viewmodels\DDviewDropdown.js" />
+    <Content Include="App\viewmodels\DDdropDownTable.js" />
+    <Content Include="App\viewmodels\DDviewFlowthru.js" />
+    <Content Include="App\viewmodels\generateReports.js" />
+    <Content Include="App\viewmodels\goto.js" />
+    <Content Include="App\viewmodels\losdbMaterialItem.js" />
+    <Content Include="App\viewmodels\materialItem.js" />
+    <Content Include="App\viewmodels\materialItemEdit.js" />
+    <Content Include="App\viewmodels\modifiedPart.js" />
+    <Content Include="App\viewmodels\newUpdatedParts.js" />
+    <Content Include="App\viewmodels\nodeSpecification.js" />
+    <Content Include="App\viewmodels\notAuthorized.js" />
+    <Content Include="App\viewmodels\nupSearchResults.js" />
+    <Content Include="App\viewmodels\nupShowDetails.js" />
+    <Content Include="App\viewmodels\nupShowPossibleMatches.js" />
+    <Content Include="App\viewmodels\PlugInAssociations.js" />
+    <Content Include="App\viewmodels\pluginSpecification.js" />
+    <Content Include="App\viewmodels\portAssignment.js" />
+    <Content Include="App\viewmodels\portSpecification.js" />
+    <Content Include="App\viewmodels\recordOnly.js" />
+    <Content Include="App\viewmodels\sapMaterialItem.js" />
+    <Content Include="App\viewmodels\cardAssignment.js" />
+    <Content Include="App\viewmodels\shelfModel.js" />
+    <Content Include="App\viewmodels\shelfSpecification.js" />
+    <Content Include="App\viewmodels\slotAssignment.js" />
+    <Content Include="App\viewmodels\slotSpecification.js" />
+    <Content Include="App\viewmodels\specification.js" />
+    <Content Include="App\viewmodels\template.js" />
+    <Content Include="App\viewmodels\templateViewer.js" />
+    <Content Include="App\viewmodels\viewCategory.js" />
+    <Content Include="App\views\assemblyUnits.html" />
+    <Content Include="App\views\authorize.html" />
+    <Content Include="App\views\bayExtenderSpecification.html" />
+    <Content Include="App\views\bayInternalSpecification.html" />
+    <Content Include="App\views\baySpecification.html" />
+    <Content Include="App\views\cardSpecification.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App\views\categoryManagement.html" />
+    <Content Include="App\views\commonConfig.html" />
+    <Content Include="App\views\DDviewDropdown.html" />
+    <Content Include="App\views\DDdropDownTable.html" />
+    <Content Include="App\views\DDviewFlowthru.html" />
+    <Content Include="App\views\generateReports.html" />
+    <Content Include="App\views\goto.html" />
+    <Content Include="App\views\losdbMaterialItem.html" />
+    <Content Include="App\views\materialItem.html" />
+    <Content Include="App\views\materialItemEdit.html" />
+    <Content Include="App\views\modifiedPart.html" />
+    <Content Include="App\views\newUpdatedParts.html" />
+    <Content Include="App\views\nodeSpecification.html" />
+    <Content Include="App\views\notAuthorized.html" />
+    <Content Include="App\views\nupSearchResults.html" />
+    <Content Include="App\views\nupShowDetails.html" />
+    <Content Include="App\views\nupShowPossibleMatches.html" />
+    <Content Include="App\views\PlugInAssociations.html" />
+    <Content Include="App\views\pluginSpecification.html" />
+    <Content Include="App\views\portAssignment.html" />
+    <Content Include="App\views\portSpecification.html" />
+    <Content Include="App\views\recordOnly.html" />
+    <Content Include="App\views\sapMaterialItem.html" />
+    <Content Include="App\views\cardAssignment.html" />
+    <Content Include="App\views\shelfModel.html" />
+    <Content Include="App\views\shelfSpecification.html" />
+    <Content Include="App\views\slotAssignment.html" />
+    <Content Include="App\views\slotSpecification.html" />
+    <Content Include="App\views\specification.html" />
+    <Content Include="App\views\template.html" />
+    <Content Include="App\views\templateViewer.html" />
+    <Content Include="App\views\viewCategory.html" />
+    <Content Include="App\widgets\searchBar\dropdown.html" />
+    <Content Include="App\widgets\searchBar\dropdown.js" />
+    <Content Include="App\widgets\searchBar\item.js" />
+    <Content Include="App\widgets\searchBar\view.html" />
+    <Content Include="App\widgets\searchBar\viewmodel.js" />
+    <Content Include="App\main.js" />
+    <Content Include="App\viewmodels\shell.js" />
+    <Content Include="App\views\shell.html" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\CenturyLink.ApplicationBlocks.Data.dll" />
+    <Content Include="bin\CenturyLink.ApplicationBlocks.ExceptionManagement.dll" />
+    <Content Include="bin\CenturyLink.ApplicationBlocks.ExceptionManager.dll" />
+    <Content Include="bin\Common.dll" />
+    <Content Include="bin\Microsoft.ApplicationBlocks.ExceptionManagement.dll" />
+    <Content Include="bin\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\NLog.dll" />
+    <Content Include="bin\Oracle.ManagedDataAccess.dll" />
+    <Content Include="bin\RestSharp.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\TypeLibrary.dll" />
+    <Content Include="bin\WebActivator.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CAD.css" />
+    <Content Include="Content\durandal.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\icons\add-equip.png" />
+    <Content Include="Content\icons\add-label.png" />
+    <Content Include="Content\icons\align-bottom.png" />
+    <Content Include="Content\icons\align-center.png" />
+    <Content Include="Content\icons\align-left.png" />
+    <Content Include="Content\icons\align-middle.png" />
+    <Content Include="Content\icons\align-right.png" />
+    <Content Include="Content\icons\align-top.png" />
+    <Content Include="Content\icons\audit-log.png" />
+    <Content Include="Content\icons\auto-number.png" />
+    <Content Include="Content\icons\copy.png" />
+    <Content Include="Content\icons\cut.png" />
+    <Content Include="Content\icons\dist-horz.png" />
+    <Content Include="Content\icons\dist-vert.png" />
+    <Content Include="Content\icons\font-larger.png" />
+    <Content Include="Content\icons\font-settings.png" />
+    <Content Include="Content\icons\font-smaller.png" />
+    <Content Include="Content\icons\panning.png" />
+    <Content Include="Content\icons\paste - Copy.png" />
+    <Content Include="Content\icons\paste.png" />
+    <Content Include="Content\icons\resize-container.png" />
+    <Content Include="Content\icons\rotate-left.png" />
+    <Content Include="Content\icons\rotate-right.png" />
+    <Content Include="Content\icons\set-container.png" />
+    <Content Include="Content\icons\toggle-grid.png" />
+    <Content Include="Content\icons\trail-point.png" />
+    <Content Include="Content\ie10mobile.css" />
+    <Content Include="Content\images\Background.jpg" />
+    <Content Include="Content\images\centurylink-logo.png" />
+    <Content Include="Content\starterkit.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="dummy.aspx" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="index.html" />
+    <Content Include="readme.md" />
+    <Content Include="Scripts\almond-custom.js" />
+    <Content Include="Scripts\AppPopoutWindow.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dataTables.cellEdit.js" />
+    <Content Include="Scripts\durandal\activator.js" />
+    <Content Include="Scripts\durandal\app.js" />
+    <Content Include="Scripts\durandal\binder.js" />
+    <Content Include="Scripts\durandal\composition.js" />
+    <Content Include="Scripts\durandal\events.js" />
+    <Content Include="Scripts\durandal\plugins\dialog.js" />
+    <Content Include="Scripts\durandal\plugins\history.js" />
+    <Content Include="Scripts\durandal\plugins\http.js" />
+    <Content Include="Scripts\durandal\plugins\observable.js" />
+    <Content Include="Scripts\durandal\plugins\router.js" />
+    <Content Include="Scripts\durandal\plugins\serializer.js" />
+    <Content Include="Scripts\durandal\plugins\widget.js" />
+    <Content Include="Scripts\durandal\system.js" />
+    <Content Include="Scripts\durandal\transitions\entrance.js" />
+    <Content Include="Scripts\durandal\viewEngine.js" />
+    <Content Include="Scripts\durandal\viewLocator.js" />
+    <Content Include="libman.json" />
+    <Content Include="Scripts\fabric.js\fabric.require.min.js.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\fabric.js\fabric.js" />
+    <Content Include="Scripts\fabric.js\fabric.min.js" />
+    <Content Include="Scripts\fabric.js\fabric.require.js" />
+    <Content Include="Scripts\fabric.js\fabric.require.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\FileSaver.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.tmpl.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout.mapping.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\myexcel.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\split-1.5.11.min.js" />
+    <Content Include="Scripts\text.js" />
+    <Content Include="Web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Durandal\_splash.cshtml" />
+    <Content Include="Views\Durandal\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="TEST-DATA\43.json" />
+    <Content Include="TEST-DATA\45.json" />
+    <None Include="web.e2e.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="web.prod.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="web.test1.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\DurandalBundleConfig.cs" />
+    <Compile Include="App_Start\DurandalConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AssemblyUnitController.cs" />
+    <Compile Include="Controllers\AssignmentController.cs" />
+    <Compile Include="Controllers\CadAttrController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommonConfigController.cs" />
+    <Compile Include="Controllers\dropDownController.cs" />
+    <Compile Include="Controllers\HighLevelPartNumberController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\ModifiedPartController.cs" />
+    <Compile Include="Controllers\NewUpdatedPartsController.cs" />
+    <Compile Include="Controllers\ReferenceController.cs" />
+    <Compile Include="Controllers\ReplacementPartController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\RevisionsController.cs" />
+    <Compile Include="Controllers\SpecificationController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VariableLengthCableController.cs" />
+    <Compile Include="DbInterface\AssemblyUnitDbInterface.cs" />
+    <Compile Include="DbInterface\AuditDbInterface.cs" />
+    <Compile Include="DbInterface\CommonConfig\DbInterface.cs" />
+    <Compile Include="DbInterface\Material\AssignmentDbInterface.cs" />
+    <Compile Include="DbInterface\Material\BayDbInterface.cs" />
+    <Compile Include="DbInterface\Material\BayExtenderDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\BayExtenderSpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\BayInternalDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\BaySpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Material\BulkCableDbInterface.cs" />
+    <Compile Include="DbInterface\Material\CardDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\CardSpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\CategoryDbInterface.cs" />
+    <Compile Include="DbInterface\Material\ConnectorizedCableDbInterface.cs" />
+    <Compile Include="DbInterface\dropDownDbInterface.cs" />
+    <Compile Include="DbInterface\Material\HighLevelPartDbInterface.cs" />
+    <Compile Include="DbInterface\Material\IMaterialDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\ISpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Material\MaterialDbInterface.cs" />
+    <Compile Include="DbInterface\Material\MaterialDbInterfaceImpl.cs" />
+    <Compile Include="DbInterface\Material\MinorMaterialDbInterface.cs" />
+    <Compile Include="DbInterface\MockDataDbInterface.cs" />
+    <Compile Include="DbInterface\Material\ModifiedPartDbInterface.cs" />
+    <Compile Include="DbInterface\Material\NewUpdatedPartsDbInterface.cs" />
+    <Compile Include="DbInterface\Material\NodeDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\NodeSpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Material\NonRackMountedEquipmentDbInterface.cs" />
+    <Compile Include="DbInterface\Material\PlugInDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\PlugInSpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\ReferenceDbInterface.cs" />
+    <Compile Include="DbInterface\ReportsDbinterface.cs" />
+    <Compile Include="DbInterface\Material\ShelfDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\PortSpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\ShelfSpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\SlotSpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\SpecificationDbInterface.cs" />
+    <Compile Include="DbInterface\Specification\SpecificationDbInterfaceImpl.cs" />
+    <Compile Include="DbInterface\Material\VariableLengthCableDbInterface.cs" />
+    <Compile Include="DbInterface\Template\CadAttributesDbInterface.cs" />
+    <Compile Include="DbInterface\Template\PlugInTemplateDbInterface.cs" />
+    <Compile Include="DbInterface\Template\BayTemplateDbInterface.cs" />
+    <Compile Include="DbInterface\Template\ITemplateDbInterface.cs" />
+    <Compile Include="DbInterface\Template\CardTemplateDbInterface.cs" />
+    <Compile Include="DbInterface\Template\HlpTemplateDbInterface.cs" />
+    <Compile Include="DbInterface\Template\ShelfTemplateDbInterface.cs" />
+    <Compile Include="DbInterface\Template\TemplateDbInterface.cs" />
+    <Compile Include="DbInterface\Template\TemplateDbInterfaceImpl.cs" />
+    <Compile Include="dummy.aspx.cs">
+      <DependentUpon>dummy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dummy.aspx.designer.cs">
+      <DependentUpon>dummy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssemblyUnit.cs" />
+    <Compile Include="Models\Attribute.cs" />
+    <Compile Include="Models\AutocompleteOption.cs" />
+    <Compile Include="Models\Material\Bay.cs" />
+    <Compile Include="Models\Material\BayExtender.cs" />
+    <Compile Include="Models\Specification\assignmentModel.cs" />
+    <Compile Include="Models\Specification\BayExtenderSpecification.cs" />
+    <Compile Include="Models\Specification\BayInternalDepth.cs" />
+    <Compile Include="Models\Specification\BayInternalHeight.cs" />
+    <Compile Include="Models\Specification\BayInternalSpecification.cs" />
+    <Compile Include="Models\Specification\BayInternalWidth.cs" />
+    <Compile Include="Models\Specification\BaySpecification.cs" />
+    <Compile Include="Models\Material\BulkCable.cs" />
+    <Compile Include="Models\Material\Card.cs" />
+    <Compile Include="Models\Specification\CardPluginAssignment.cs" />
+    <Compile Include="Models\Specification\CardSpecification.cs" />
+    <Compile Include="Models\CategoryItem.cs" />
+    <Compile Include="Models\Material\ConnectorizedCable.cs" />
+    <Compile Include="Models\Drop.cs" />
+    <Compile Include="Models\FeatureType.cs" />
+    <Compile Include="Models\Material\HighLevelPart.cs" />
+    <Compile Include="Models\Material\IMaterial.cs" />
+    <Compile Include="Models\Specification\PortAssignment.cs" />
+    <Compile Include="Models\Specification\ISpecification.cs" />
+    <Compile Include="Models\Material\Material.cs" />
+    <Compile Include="Models\Material\MaterialCategory.cs" />
+    <Compile Include="Models\Material\MaterialRevision.cs" />
+    <Compile Include="Models\Material\MaterialItem.cs" />
+    <Compile Include="Models\Material\MinorMaterial.cs" />
+    <Compile Include="Models\Material\ModifiedPart.cs" />
+    <Compile Include="Models\Material\NewUpdatedParts.cs" />
+    <Compile Include="Models\Material\Node.cs" />
+    <Compile Include="Models\Specification\NodeSpecification.cs" />
+    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\Material\PlugIn.cs" />
+    <Compile Include="Models\Material\NonRackMountedEquipment.cs" />
+    <Compile Include="Models\Specification\PlugInRoleTypeSpecification.cs" />
+    <Compile Include="Models\Specification\PlugInSpecification.cs" />
+    <Compile Include="Models\Reports.cs" />
+    <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\Material\Shelf.cs" />
+    <Compile Include="Models\Specification\PortSpecification.cs" />
+    <Compile Include="Models\Specification\ShelfSpecification.cs" />
+    <Compile Include="Models\Specification\SlotAssignment.cs" />
+    <Compile Include="Models\Specification\SlotSpecification.cs" />
+    <Compile Include="Models\Specification\Specification.cs" />
+    <Compile Include="Models\SpecificationAttribute.cs" />
+    <Compile Include="Models\Specification\SpecificationAlias.cs" />
+    <Compile Include="Models\Specification\SpecificationRevision.cs" />
+    <Compile Include="Models\Material\VariableLengthCable.cs" />
+    <Compile Include="Models\Specification\SpecificationRole.cs" />
+    <Compile Include="Models\Template\BaseCardTemplate.cs" />
+    <Compile Include="Models\Template\BasePlugInTemplate.cs" />
+    <Compile Include="Models\Template\BaseBayTemplate.cs" />
+    <Compile Include="Models\Template\BaseHlpTemplate.cs" />
+    <Compile Include="Models\Template\BaseShelfTemplate.cs" />
+    <Compile Include="Models\Template\BaseTemplate.cs" />
+    <Compile Include="Models\Template\CadAttributes.cs" />
+    <Compile Include="Models\Template\ComplexTemplate.cs" />
+    <Compile Include="Models\Template\Drawing.cs" />
+    <Compile Include="Models\Template\ITemplate.cs" />
+    <Compile Include="Models\Template\OverAllHlpTemplate.cs" />
+    <Compile Include="Models\Template\OverAllShelfTemplate.cs" />
+    <Compile Include="Models\Template\OverAllCardTemplate.cs" />
+    <Compile Include="Models\Template\OverAllBayTemplate.cs" />
+    <Compile Include="Models\Template\OverAllTemplate.cs" />
+    <Compile Include="Models\Template\Scale.cs" />
+    <Compile Include="Models\Template\Slot.cs" />
+    <Compile Include="Models\Template\TemplateAttribute.cs" />
+    <Compile Include="Models\Template\TemplateImpl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\AssemblyUnitType.cs" />
+    <Compile Include="Utility\CategoryType.cs" />
+    <Compile Include="Utility\DropdownType.cs" />
+    <Compile Include="Utility\HighLevelPartNDSHelper.cs" />
+    <Compile Include="Utility\JsonHelper.cs" />
+    <Compile Include="Utility\LOSDBMaterialManager.cs" />
+    <Compile Include="Utility\MaterialEditorException.cs" />
+    <Compile Include="Utility\MaterialFactory.cs" />
+    <Compile Include="Utility\MaterialItemManager.cs" />
+    <Compile Include="Utility\MaterialJsonProperty.cs" />
+    <Compile Include="Utility\MaterialType.cs" />
+    <Compile Include="Utility\MockDataHelper.cs" />
+    <Compile Include="Utility\ModifiedPartType.cs" />
+    <Compile Include="Utility\NewUpdatedPartsType.cs" />
+    <Compile Include="Utility\ReportsType.cs" />
+    <Compile Include="Utility\SpecificationFactory.cs" />
+    <Compile Include="Utility\SpecificationManager.cs" />
+    <Compile Include="Utility\SpecificationType.cs" />
+    <Compile Include="Utility\TemplateManager.cs" />
+    <Compile Include="Utility\TemplateType.cs" />
+    <Compile Include="Utility\UnitConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\jquery-2.0.3.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="web.dev.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="bin\roslyn\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.Data\CenturyLink.ApplicationBlocks.Data.csproj">
+      <Project>{b6e2e887-b926-4d5a-91c9-94ca63d76a69}</Project>
+      <Name>CenturyLink.ApplicationBlocks.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.ExceptionManagement\CenturyLink.ApplicationBlocks.ExceptionManagement.csproj">
+      <Project>{968f3462-58aa-4c31-a550-a647adb92b69}</Project>
+      <Name>CenturyLink.ApplicationBlocks.ExceptionManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.ExceptionManager\CenturyLink.ApplicationBlocks.ExceptionManager.csproj">
+      <Project>{93336b1a-876d-4be8-9647-c6928f4194aa}</Project>
+      <Name>CenturyLink.ApplicationBlocks.ExceptionManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0e7b2a1e-5598-48c9-bd69-52aa436eae66}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0e7b2a1e-5598-48c9-bd69-52aa436eae66}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOSDBWindowsService\LOSDBWindowsService.csproj">
+      <Project>{0a09114f-f983-46ef-8553-bead60916b3e}</Project>
+      <Name>LOSDBWindowsService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.csproj">
+      <Project>{5f25f8c2-da02-46c6-a6ca-01e719ead35d}</Project>
+      <Name>Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.csproj">
+      <Project>{5f25f8c2-da02-46c6-a6ca-01e719ead35d}</Project>
+      <Name>Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.ApplicationBlocks.ExceptionManagement\Microsoft.ApplicationBlocks.ExceptionManagement.csproj">
+      <Project>{386cbf50-f4a9-4f05-98cb-b387d2d8f357}</Project>
+      <Name>Microsoft.ApplicationBlocks.ExceptionManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.ApplicationBlocks.ExceptionManagement\Microsoft.ApplicationBlocks.ExceptionManagement.csproj">
+      <Project>{386cbf50-f4a9-4f05-98cb-b387d2d8f357}</Project>
+      <Name>Microsoft.ApplicationBlocks.ExceptionManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeLibrary\TypeLibrary.csproj">
+      <Project>{d05580d0-1474-4545-b9bd-72ad0df67de9}</Project>
+      <Name>TypeLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>41368</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3268/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

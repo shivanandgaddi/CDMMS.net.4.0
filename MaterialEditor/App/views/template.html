@@ -1,0 +1,561 @@
+﻿<style>
+    #interstitial {
+        height: 100%;
+    }
+
+    #viewer {
+        border: 0.02em solid #000;
+        background-color: white;
+    }
+
+    #divSpecSearchRes {
+        overflow-y: auto;
+        height: 180px;
+    }
+
+        #divSpecSearchRes th {
+            position: sticky;
+            top: 0;
+        }
+
+    /* Just common table stuff. Really. */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px 16px;
+    }
+
+    th {
+        background: #eee;
+    }
+
+    #idlblBaseTmpNm :after {
+        color: #d00;
+        content: "*";
+        position: absolute;
+        margin-left: 8px;
+        top: 7px;
+    }
+
+    #divCreateBasetmplt .input-group {
+        width: 99%;
+    }
+
+    #PANEL_DETAILS {
+        background-color: white;
+    }
+
+    #tmpltCanvas {
+        background-color: white;
+    }
+</style>
+<script type="text/javascript" src="Scripts/fabricjs/fabric.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
+<div class="main-screen">
+    <!-- START OF MAIN SCREEN -->
+
+    <div id="interstitial">
+        <div class="row interstitial">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+        </div>
+    </div>
+
+    <div id="PANEL_MAIN_SCREEN" class='panel panel-default' data-bind="">
+        <!--visible: (selectRadioSpec() == 'existSpec')-->
+        <div class="panel-heading">Template Search</div>
+        <div class="panel-body">
+            <form>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <label for="idTmpltID">CDMMS ID</label>
+                            <input type="text" id="idTmpltID" class="form-control" />
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-6">
+                        <div class="input-group input-group-sm">
+                            <label for="mtlCtgrySearchDropdown">Material Category:</label>
+                            <select id="mtlCtgrySearchDropdown" class="form-control" data-bind="options: $data.mtlCtgryOptions, optionsText: 'text', optionsValue: 'value', value: $data.selectedMtlCtgry,event:{ keypress: checkEnter }"></select>
+                        </div>
+                    </div>-->
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <label for="idTmpDesc">Description</label>
+                            <input type="text" id="idTmpDesc" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-lg-6">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <label for="idTmpName">Name</label>
+                            <input type="text" id="idTmpName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0" data-bind="">
+                            <label for="idTmpltType">Template Type</label>
+                            <select class="form-control" id="idTmpltType" data-bind="options: $data.specificationTypes, optionsText:'text', optionsValue:'value', value: specTypeVal, event: { change:  onChngTmpltTyp }"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <label for="idstatusTmp">Status</label>
+                            <select class="form-control" id="idstatusTmp" data-bind="options: $data.drpstatus, value: statusVal,event: { change: onChngStatus }"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <label for="idTmpType">Template Category</label>
+                            <select class="form-control" id="idTmpType" data-bind="options: $data.TemplateType, value: tempTypeVal,event: { change: onChngTmpltTyp }"></select>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row" style="padding-bottom:15px">
+                   
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-offset-5 col-sm-3" style="padding-left:55px">
+                        <button class="btn btn-success" data-bind="click: $data.onSearchTemplate">SEARCH</button>
+                        <button class="btn btn-success" data-bind="click: $data.onClearSearchForm">CLEAR</button>
+                        <button class="btn btn-success" data-bind="click: $data.onNewTemplate">NEW</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="divCreateNewTmplt" class="modal" data-bind="visible: false">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class='panel panel-default' data-bind="">
+                    <div class="panel-heading">
+                        Create New Template:
+                        <span class="close" id="idNewTemplateclose">&times;</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm">
+                                    <label for="mtlCtgryNewDropdown">Material Category:</label>
+                                    <select id="mtlCtgryNewDropdown" class="form-control" data-bind="options: $data.mtlCtgryOptions, optionsText: 'text', optionsValue: 'value', value: $data.selectedNewMtlCtgry,event:{ keypress: checkEnter,change: onChngNewMtlCtgry  }"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-bind="visible: selectedNewMtlCtgry() == 3 ">
+                            <div class="row" style="padding-bottom:15px">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <label for="idTmpltID">Specification ID</label>
+                                        <input type="text" id="idSpecID" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <label for="idSpecName">Specification Name</label>
+                                        <input type="text" id="idSpecName" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom:15px">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <label for="idSpecDesc">Description</label>
+                                        <input type="text" id="idSpecDesc" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <label for="idstatusTmp">Status</label>
+                                        <select class="form-control" id="idSpecStatus" data-bind="options: $data.drpstatus, value: searchSpecStatusVal,event: { change: onChngStatusNewtmplt }"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom:15px">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <label for="idTmpltSpecType">Specification Type</label>
+                                        <select class="form-control" id="idTmpltSpecType" data-bind="options: $data.specificationTypes, optionsText:'text', optionsValue:'text',value: searchSpecType,event: { change:  onChngNewTmpSpecTyp }"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <label for="idTmpType">RO/Generic</label>
+                                        <select class="form-control" id="idNewTmpType" data-bind="options: $data.RoGenerictype, value: RoGenTypeVal,event: { change: onChngNewTmpTyp }"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom:15px">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <label for="idTmpModel">Model Name</label>
+                                        <input type="text" id="idTmpModel" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom:15px">
+                            <div class="col-sm-offset-5 col-sm-3" style="padding-left:55px">
+                                <button class="btn btn-success" data-bind="click: $data.SearchSpec">SEARCH</button>
+                                <button class="btn btn-success" data-bind="click: $data.onClearSearch">CLEAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='panel panel-default' id="idHlpMnrMtlsearchlist" data-bind="visible: (selectedNewMtlCtgry() < 3 && selectedNewMtlCtgry() !='')">
+                    <div class="panel-heading">High Level Part/Minor Search Result</div>
+                    <div class="panel-body">
+                        <div class="table-responsive" id="divHlpSearchRes">
+                            <table id="idHlpList" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Details</th>
+                                        <th>CDMMS ID</th>
+                                        <th>HLP Revision <br /> Id</th>
+                                        <th>Part Number</th>
+                                        <th>Description</th>
+                                        <th>CLMC</th>
+                                        <th>Status</th>
+                                        <th>Material <br />Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:HlpMnrMtlList">
+                                    <tr>
+                                        <td>
+                                            <a data-bind="click: $parent.specificationSelectCall">Select</a>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.PRODUCT_ID"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.MATERIAL_ITEM_ID"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.MFG_PART_NO"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.ITEM_DESC"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.MFG_ID"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.STTS"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.MTL_CTGRY"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row" id="specificationDetailsInnerDiv">
+                            <span id="scrollAnchor"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='panel panel-default' id="idSpecsearchlist" data-bind="visible: selectedNewMtlCtgry() == 3">
+                    <div class="panel-heading">Specification Search Result</div>
+                    <div class="panel-body">
+                        <div class="table-responsive" id="divSpecSearchRes">
+                            <table id="idSpecList" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Details</th>
+                                        <th>Specification ID</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Completed</th>
+                                        <th>Propagated</th>
+                                        <th>Unusable in NDS</th>
+                                        <th>Specification Type</th>
+                                        <th>Specification Class</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:SpecList">
+                                    <tr>
+                                        <td>
+                                            <a data-bind="click: $parent.specificationSelectCall">Select</a>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.SPECN_ID"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.SPECN_NM"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.SPECN_DSC"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.CMPLT_IND"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.PRPGT_IND"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.DEL_IND"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.SPECTYP"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: $data.SPECCLSS"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row" id="specificationDetailsInnerDiv">
+                            <span id="scrollAnchor"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="divCreateBasetmplt" class="modal" data-bind="visible: false">
+        <div class="modal-content" style="width: 690px;">
+            <div class="modal-body">
+                <h4 id="idBaseTmpHeader"></h4>
+                <hr />
+                This specification does not have a Base Template defined for it yet.
+                <br /><br />
+                To start building a new Base Template fill out the form below and click the Create button.
+                <br /> <br />
+                <!--<span class="close" id="idBaseTemplateclose">&times;</span>-->
+                <input type="text" id="hiddenCreateBaseSpecId" hidden />
+                <input type="text" id="hiddenCreateBaseSpecTyp" hidden />
+                <div class="row" style="padding-bottom:15px">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label id="idlblBaseTmpNm">Name *</label>
+                        <input type="text" id="idBaseTmpNm" class="form-control" data-bind="event: { blur: onChngBaseTmpltName }" maxlength="80" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idBaseTmpDsc">Description *</label>
+                        <input type="text" id="idBaseTmpDsc" class="form-control" maxlength="50" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-12" style="text-align: right;">
+                        <button class="btn btn-success" data-bind="click: $data.btnCreateBaseTmp,enable: btnEnableBase" id="idCreateBaseTmp">Create Base Template</button>
+                        <button class="btn btn-default" data-bind="click: $data.onCancelBaseTmp">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divCreateOveralltmplt" class="modal" data-bind="visible: false">
+        <div class="modal-content" style="width: 690px;">
+            <div class="modal-body">
+                <h4 id="idOverallTmpHeader"></h4>
+                <hr />
+                This specification already has a Base Template defined for it.
+                <br /><br />
+                To start building a new Overall Template fill out the form below and click the Create button.
+                <br /><br />
+                <!--<span class="close" id="idBaseTemplateclose">&times;</span>-->
+                <input type="text" id="hiddenCreateOverAllBaseTmpltId" hidden />
+                <input type="text" id="hiddenCreateOverAllSpecTyp" hidden />
+                <div class="row" style="padding-bottom:15px">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idOverallTmpNm">Name *</label>
+                        <input type="text" id="idOverallTmpNm" class="form-control" data-bind="event: { blur: onChngOverallTmpltName }" maxlength="80" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:15px">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label for="idOverallTmpDsc">Description *</label>
+                        <input type="text" id="idOverallTmpDsc" class="form-control" maxlength="50" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row" style="padding-bottom:15px">
+                    <div class="col-sm-12" style="text-align: right;">
+                        <button class="btn btn-success" data-bind="click: $data.onCreateOverallTmplt,enable: btnEnableBase" id="idCreateOverallTmplt">Create Overall Template</button>
+                        <button class="btn btn-default" data-bind="click: $data.onEditBaseTmp">Edit Base Template</button>
+                        <button class="btn btn-default" data-bind="click: $data.onCancelOverallTmp">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="PANEL_SEARCH_RESULTS" class='panel panel-default' data-bind="visible: searchResults().length > 0">
+        <div class="panel-heading">
+            <span>Records Found:  </span><span data-bind="text: searchResults().length"></span>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Template ID</th>
+                            <th style="text-align: left">Template Name</th>
+                            <th>Template <br /> Type</th>
+                            <th style="text-align: left">Template <br /> Category</th>
+                            <th style="text-align: left">Specification</th>
+                            <th style="text-align: left">Description</th>
+                            <th style="text-align: left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:searchResults">
+                        <tr>
+                            <!--<a data-bind="click: $parent.specificationSelectCall">Select</a>-->
+                            <td style="text-align: center">
+                                <a data-bind="text: $data.TMPLT_ID,click: $parent.onSelectTemplate"></a>
+                            </td>
+                            <td style="text-align: left"><span data-bind="text: $data.TMPLT_NM"></span></td>
+                            <td style="text-align: left"><span data-bind="text: $data.TMPLT_TYP"></span></td>
+                            <td style="text-align: left"><span data-bind="text: $data.TMPLT_CAT"></span></td>
+                            <td style="text-align: left"><span data-bind="text: $data.SPECN_NM"></span></td>
+                            <td style="text-align: left"><span data-bind="text: $data.TMPLT_DSC"></span></td>
+                            <td style="text-align: left"><span data-bind="text: $data.TMPLT_STATUS"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF MAIN SCREEN -->
+
+<div id="PANEL_DETAILS" class="panel panel-default" data-bind="event: { change: onChangeBaseTmpltDetails }" hidden>
+    <input type="text" id="hiddenTempId" hidden />
+    <input type="text" id="hiddenTempTyp" hidden />
+
+    <div class="panel-heading">
+        Base Template
+        <div style="float: right;margin-top: -9px;display:none" class="btn btn-success btnRESTORE_SEARCH"><i class="fa fa-search"></i></div>
+    </div>
+    <div class="panel-body">
+        <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-2">
+                <label>Completed:</label>
+                <input id="chkCompletedBase" type="checkbox" data-bind="checked: $data.baseTmplt().CompletedInd, enable: $data.tmplt().BaseTemplateInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>Propagated:</label>
+                <input id="chkPropagatedBase" type="checkbox" data-bind="checked: $data.baseTmplt().PropagatedInd, enable: $data.tmplt().BaseTemplateInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>Deleted:</label>
+                <input id="chkDeletedBase" type="checkbox" data-bind="checked: $data.baseTmplt().DeletedInd, enable: $data.tmplt().BaseTemplateInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>De-Activated:</label>
+                <input id="chkRetiredBase" type="checkbox" data-bind="checked: $data.baseTmplt().RetiredTemplateInd, enable: $data.tmplt().BaseTemplateInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>Update In Progress:</label>
+                <input id="chkUpdInPrgBase" type="checkbox" data-bind="checked: $data.baseTmplt().UpdateInProgressInd, enable: $data.tmplt().BaseTemplateInd" />
+            </div>
+        </div>
+
+        <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-2">
+                <label>Template ID:</label>
+                <input type="text" id="tmpltIdBase" class="form-control" data-bind="enable: false, value : $data.baseTmplt().TemplateID" />
+            </div>
+            <div class="col-sm-6">
+                <label>Name:</label>
+                <input type="text" id="tmpltNmBase" class="form-control" data-bind="enable: $data.tmplt().BaseTemplateInd, value : $data.baseTmplt().TemplateName" maxlength="80" />
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:5px">
+            <div class="col-sm-8">
+                <label for="tmpltDescBase">Description</label>
+                <input type="text" id="tmpltDescBase" class="form-control" data-bind="enable: $data.tmplt().BaseTemplateInd, value: $data.baseTmplt().TemplateDescription" maxlength="50" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="overAllTmpltDtls" class="panel panel-default" data-bind="event: { change: onChangeOverAllTmpltDetails }" hidden>
+    <input type="text" id="hiddenTempId" hidden />
+    <input type="text" id="hiddenTempTyp" hidden />
+    <div class="panel-heading">Complex Template</div>
+    <div class="panel-body">
+        <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-2">
+                <label>Completed:</label>
+                <input id="chkCompletedOverAll" type="checkbox" data-bind="checked: $data.tmplt().CompletedInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>Propagated:</label>
+                <input id="chkPropagatedOverAll" type="checkbox" data-bind="checked: $data.tmplt().PropagatedInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>Deleted:</label>
+                <input id="chkDeletedOverAll" type="checkbox" data-bind="checked: $data.tmplt().DeletedInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>De-Activated:</label>
+                <input id="chkRetiredOverAll" type="checkbox" data-bind="checked: $data.tmplt().RetiredTemplateInd" />
+            </div>
+            <div class="col-sm-2">
+                <label>Update In Progress:</label>
+                <input id="chkUpdInPrgOverAll" type="checkbox" data-bind="checked: $data.tmplt().UpdateInProgressInd" />
+            </div>
+        </div>
+
+        <div class="row" style="padding-bottom:15px">
+            <div class="col-sm-2">
+                <label>Template ID:</label>
+                <input type="text" id="tmpltIdOverAll" class="form-control" data-bind="enable: false, value : $data.tmplt().TemplateID" />
+            </div>
+            <div class="col-sm-6">
+                <label>Name:</label>
+                <input type="text" id="tmpltNmOverAll" class="form-control" data-bind="value : $data.tmplt().TemplateName" maxlength="80" />
+            </div>
+            <!-- ko if: $data.tmplt().RotationAngleDegreeNumber != undefined -->
+            <div class="col-sm-2">
+                <label>Rotation Angle:</label>
+                <select class="form-control" id="rttnAngl" data-bind="options: $data.rotationAngleOptions, optionsText:'text', optionsValue:'value', value : $data.tmplt().RotationAngleID"></select>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="row" style="padding-bottom:5px">
+            <div class="col-sm-8">
+                <label for="tmpltDescOverAll">Description</label>
+                <input type="text" id="tmpltDescOverAll" class="form-control" data-bind="value : $data.tmplt().TemplateDescription" maxlength="50" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="row" style="padding-bottom:5px" align="center" id="divTmpltSave">
+    <!--<div class="col-sm-6">
+        <div class="row" data-bind="compose:templateViewer" id="tempView"></div>
+      </div>-->
+    <!--*********************************************************************************-->
+    <!--******THIS IS A TEMPORARY BUTTON ONLY!!!!!!!!!!!!!!!!!***************************-->
+    <!--******DO NOT REMOVE UNTIL THE LOGIC IS IN PLACE TO ACTIVATE THE TEMPLATE VIEWER**-->
+    <button class="btn btn-success" data-bind="click: $data.activateTemplateViewer" style="display: none">View Drawing</button>
+    <button class="btn btn-success" data-bind="click: $data.onSaveTemplateData" id="btnSaveTmplt">Save</button>
+    <!--*********************************************************************************-->
+</div>
+
+<div id="tmpltViewerArea">
+    <div class="row" data-bind="compose:templateViewer" id="tmpltViewerDiv"></div>
+</div>

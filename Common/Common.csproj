@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0E7B2A1E-5598-48C9-BD69-52AA436EAE66}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CenturyLink.Network.Engineering.Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.7\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QwestIBAPI, Version=2.2.1.1, Culture=neutral, PublicKeyToken=d028444aa970930d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\QwestIBBase\QwestIBAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="QwestIBBase, Version=2.2.1.1, Culture=neutral, PublicKeyToken=596a43305e2f2e29, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\QwestIBBase\QwestIBBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\ConfigurationManager.cs" />
+    <Compile Include="DbInterface\ConfigurationDbInterface.cs" />
+    <Compile Include="DbInterface\LOSDBDbInterface.cs" />
+    <Compile Include="DbInterface\MaterialFlowThruDbInterface.cs" />
+    <Compile Include="DbInterface\MaterialItemDBInterface.cs" />
+    <Compile Include="DbInterface\WorkDbInterface.cs" />
+    <Compile Include="InformationBus\BusRequestor.cs" />
+    <Compile Include="InformationBus\IBusObject.cs" />
+    <Compile Include="Logging\EventLogger.cs" />
+    <Compile Include="Polling\Poller.cs" />
+    <Compile Include="Polling\PollingTimer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestApi\IRestConnector.cs" />
+    <Compile Include="RestApi\JsonSerializer.cs" />
+    <Compile Include="RestApi\RestConnector.cs" />
+    <Compile Include="Utility\Constants.cs" />
+    <Compile Include="Utility\DateTimeGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ReferenceDlls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.Data\CenturyLink.ApplicationBlocks.Data.csproj">
+      <Project>{b6e2e887-b926-4d5a-91c9-94ca63d76a69}</Project>
+      <Name>CenturyLink.ApplicationBlocks.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.ExceptionManagement\CenturyLink.ApplicationBlocks.ExceptionManagement.csproj">
+      <Project>{968f3462-58aa-4c31-a550-a647adb92b69}</Project>
+      <Name>CenturyLink.ApplicationBlocks.ExceptionManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CenturyLink.ApplicationBlocks.ExceptionManager\CenturyLink.ApplicationBlocks.ExceptionManager.csproj">
+      <Project>{93336b1a-876d-4be8-9647-c6928f4194aa}</Project>
+      <Name>CenturyLink.ApplicationBlocks.ExceptionManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.ApplicationBlocks.ExceptionManagement\Microsoft.ApplicationBlocks.ExceptionManagement.csproj">
+      <Project>{386cbf50-f4a9-4f05-98cb-b387d2d8f357}</Project>
+      <Name>Microsoft.ApplicationBlocks.ExceptionManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeLibrary\TypeLibrary.csproj">
+      <Project>{d05580d0-1474-4545-b9bd-72ad0df67de9}</Project>
+      <Name>TypeLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

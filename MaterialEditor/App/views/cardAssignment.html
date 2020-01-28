@@ -1,0 +1,187 @@
+﻿<!--  <div data-bind="searchBar: {searchFunction: searchForMaterial1, selectFunction: materialSelected, isVisible: true, optionVisible: true}"></div>-->
+<div id="interstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+
+<div class='panel panel-default' id="idMaterialSearch">
+    <div class="panel-heading">Card Assignment</div>
+    <div class="row">
+        <div class="col-lg-6">
+            <table style="width:100%;margin:2%;" cellspacing="10" cellpadding="10">
+                <tr>
+                    <td width="10%"><button type="button" class="btn btn-success">Back</button></td>
+                    <td width="35%"><button type="button" id="btnCrdDisplayAlias" class="btn btn-success" data-bind="click: getCardAlias">Display Alias</button></td>
+                    <td width="50%" align="right">
+                        <table style="width:100%;">
+                            <tr>
+                                <td width="22%"><button type="button" id="btnPlugIn" class="btn btn-success" data-bind="click: getPlugindtls">Plug-in</button></td>
+                                <td width="18%"><button type="button" id="btnSlot" class="btn btn-success" data-bind="click: getSlotdtls">Slot</button></td>
+                                <td width="50%"><button type="button" id="btnport" class="btn btn-success" data-bind="click: getPortdtls">Ports</button></td>                                
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="row" style="padding-top:10px;">
+        <div class="col-lg-6">
+            <div class="input-group input-group-sm">
+                <label for="idNodename">Node Name:</label>
+                <input type="text" class="form-control" id="idNode" data-bind="event: { change: getNodeName },value: node_value">
+            </div>
+        </div>
+    </div>
+    <div align="center">
+        <table style="width:20%;margin:2%;" cellspacing="5" cellpadding="10">
+            <tr>
+                <td align="right"><button type="submit" class="btn btn-success" data-bind="click: $data.addCard">Search</button></td>
+
+                <td align="center"><button type="submit" class="btn btn-success" data-bind="click: $data.AddCardtoSlot">Add</button></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <div style="padding-top:15px;margin-right:5%;margin-left:5%;">
+        <div class="table-responsive" id="divCrdAliasdtls" hidden="hidden">
+            <table style="width:100%">
+                <tr>
+                    <td><h6><b>Alias Details:</b></h6></td>
+                </tr>
+            </table>
+            <table class="table table-striped" id="idCardAliasDtls">
+                <thead>
+                    <tr>
+                        <th>Alias Name</th>
+                        <th>Alias Value</th>
+                        <th>NTE Value</th>
+                        <th>Application Name</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: CardAliasList">
+                    <tr>
+                        <td><span data-bind="text: $data.aliasName"></span></td>
+                        <td><span data-bind="text: $data.aliasValue"></span></td>
+                        <td><span data-bind="text: $data.nteVal"></span></td>
+                        <td><span data-bind="text: $data.appName"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <div class="row" id="CardDetailsInnerDiv">
+            <span id="scrollAnchor"></span>
+        </div>
+    </div>
+
+</div>
+<div class="modal" id="idSpecsearchlist">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Specification Search</b></h4></td>
+                    <td><span class="close" id="idCardclose">&times;</span></td>
+                </tr>
+            </table>
+            <div class="panel-body">
+                <form>
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idProductID">Specification ID</label>
+                                <input type="text" id="idProductID" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idName">Name</label>
+                                <input type="text" id="idName" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idDesc">Description</label>
+                                <input type="text" id="idDesc" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idstatuspec">Status</label>
+                                <select class="form-control" id="idstatuspec" data-bind="options: $data.statusSpecs"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-6">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <label for="idType">Type</label>
+                                <select class="form-control" id="idType" data-bind="options: $data.typeSpecs"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:15px">
+                        <div class="col-sm-offset-5 col-sm-2" style="padding-left:55px">
+                            <button type="submit" class="btn btn-success" data-bind="click: $data.Searchspec">SEARCH</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class='panel panel-default'>
+                <div class="panel-heading">Specification Search Result</div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="idSpecList" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Details</th>
+                                    <th>Specification ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Completed</th>
+                                    <th>Propagated</th>
+                                    <th>Unusable in NDS</th>
+                                    <th>Specification Type</th>
+                                    <th>Specification Class</th>
+
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:SpecList">
+                                <tr>
+                                    <td><a data-bind="click: $parent.selectedCard">Select</a></td>
+                                    <td><span data-bind="text: $data.specn_id.value"></span></td>
+                                    <td><span data-bind="text: $data.specn_nm.value"></span></td>
+                                    <td><span data-bind="text: $data.specn_dsc.value"></span></td>
+                                    <td><span data-bind="text: $data.cmplt_ind.value"></span></td>
+                                    <td><span data-bind="text: $data.prpgt_ind.value"></span></td>
+                                    <td><span data-bind="text: $data.del_ind.value"></span></td>
+                                    <td><span data-bind="text: $data.specTyp.value"></span></td>
+                                    <td><span data-bind="text: $data.specClss.value"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="specificationDetailsInnerDiv">
+            <span id="scrollAnchor"></span>
+        </div>
+    </div>
+</div>
+
+
+<div id="idCarddetails">
+    <div class="row" data-bind="compose:cardSpecification" id="cardSpec"></div>
+    <div class="row" data-bind="compose:slotAssignment" id="slotSpecAssign"></div>
+    <div class="row" data-bind="compose:pluginAssociations" id="plgSpecAssoc"></div>
+    <div class="row" data-bind="compose:portAssignment" id="portAssisg"></div>
+    <a href="#" class="scrollup"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>
+
+

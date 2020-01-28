@@ -1,0 +1,90 @@
+﻿<div id="interstitial">
+    <div class="row interstitial">Please wait for details to load</div>
+</div>
+
+<div class='panel panel-default'>
+    <div class="panel-heading">Give inputs and click Search</div>
+    <div class="panel-body nup">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label for="MaterialCode">MATERIAL CODE:</label>
+                    <input type="text" class="form-control" id="MaterialCode" data-bind="textInput: MaterialCode,event:{ keypress: checkEnter }">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label for="SapPartNo">PART NUMBER:</label>
+                    <input type="text" class="form-control" id="SapPartNo" data-bind="textInput: SapPartNo,event:{ keypress: checkEnter }">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label for="SapDescr">DESCRIPTION:</label>
+                    <input type="text" class="form-control" id="SapDescr" data-bind="textInput: SapDescr,event:{ keypress: checkEnter }">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label for="cleihci">CLEI/HECI:</label>
+                    <input type="text" class="form-control" id="Heci" data-bind="textInput: Heci,event:{ keypress: checkEnter }" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label>SHOW DATA BETWEEN:</label>
+                    <div>
+                        <input type="text" data-bind="datePicker:StartDate" id="startdate" /> and
+                        <input type="text" data-bind="datePicker:EndDate" id="enddate" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <div>
+                        <label>MIN SEARCH:</label>
+                        <input type="text" id="minnumber" value="1" />
+                    </div>
+                    <div>
+                        <label>MAX SEARCH:</label>
+                        <input type="text" id="maxnumber" value="100" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label class="paddingRightAlign">
+                        <input type="checkbox" value="New" data-bind="checked: isNew"> &nbsp;NEW &nbsp;&nbsp;&nbsp;&nbsp;
+                    </label>
+                    <span>
+                        <input type="radio" name="spGroup" value="" data-bind="checked: recordtype" /> BOTH
+                        <input type="radio" name="spGroup" value="COEFM" data-bind="checked: recordtype" /> ISP
+                        <input type="radio" name="spGroup" value="OSPFM" data-bind="checked: recordtype" /> OSP&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" data-bind="checked: viewrejected" value="View Rejected" /> &nbsp;View Rejected&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <label class="paddingRightAlign">
+                        <input data-bind="textInput: rejectedcuid" type="text" maxlength="8" size="8"/>&nbsp;CUID
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <button class="btn btn-success" data-bind="click: $data.Search">SEARCH</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-bind="compose:nupSearchResults" id="nupSearchResultsDiv"></div>
+<div data-bind="compose:nupShowDetails,visible:shownupShowDetails" id="nupShowDetailsDiv"></div>
+
+
+
+

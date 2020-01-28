@@ -1,0 +1,158 @@
+﻿<!--  <div data-bind="searchBar: {searchFunction: searchForMaterial1, selectFunction: materialSelected, isVisible: true, optionVisible: true}"></div>-->
+<div id="interstitial">
+    <div class="row interstitial">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+
+<div class='panel panel-default' id="idMaterialSearch">
+    <div class="panel-heading">Shelf Assignment</div>
+        <div class="row">
+            <div class="col-lg-6">
+                <table style="width:40%;margin:2%;" cellspacing="10" cellpadding="10">
+                    <tr>
+                        <td><button type="button" class="btn btn-success">Back</button></td>
+                        <td><button type="button" class="btn btn-success" data-bind="enable: ShelfList().length > 0 && $data.selectedShelfId != '',click: $data.getSlotdtls">Slot</button></td>
+                        <td><button type="button" id="btnShfDisplayAlias" class="btn btn-success" data-bind="click: getShelfAlias">Display Alias</button></td>
+                </table>
+            </div>
+        </div>
+       
+        <div class="row" style="padding-top:10px;">
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label for="idNodename">Node Name:</label>
+                    <input type="text" class="form-control" id="idNode" data-bind="event: { change: searchForShelfDtl }, value: node_value,valueUpdate: 'afterkeydown'">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-group-sm">
+                    <label for="idShelfStartno">Shelf Start Number:</label>
+                    <select id="selectStartNumber" class="form-control" style="z-index: 1" data-bind="options: availableStartno, value: selectedoption, event: { change: shelfStartno },enable: ShelfList().length > 0"></select>
+                </div>
+            </div>
+        </div>
+
+        <div id="saveShelfDetails" style="padding-top:15px;margin-right:20px;margin-left:20px">
+            <div class="table-responsive">
+                <table id="idShelfList" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Details</th>
+                            <th>Shelf Id</th>
+                            <th>Shelf Name</th>
+                            <th>Sequence Number</th>
+                            <th>Quantity</th>
+                            <th>Shelf Number Offset</th>
+                            <th>Extra Shelves Allowed</th>
+                            <th>Function</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:ShelfList">
+                        <tr>
+                            <td><a data-bind="click: $parent.selectedShelf">Select</a></td>
+                            <td><span data-bind="text: $data.specn_id"></span></td>
+                            <td><span data-bind="text: $data.shelf_nm"></span></td>
+                            <td><input type="number" data-bind="value: $data.seq_num, enable: false" /></td>
+                            <td><input type="number" data-bind="value: $data.shelf_qty,event: { change: $parent.calculateSequence },valueUpdate: 'afterkeydown'," /></td>
+                            <td><input type="number" data-bind="value: $data.shelf_no_offset" /></td>
+                            <td><input type="checkbox" class="checkextrashlvs" id="idchkshelf" data-bind="value: $data.specn_shlvsdef_id, checked: $data.extra_shelves == 'Y' ? true : false , click: $parent.onchangeExtraShelvs" /></td>
+                            <td><a data-bind="click: $root.removeShelfspec">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" id="shelfDetailsInnerDiv">
+                <span id="scrollAnchor"></span>
+            </div>
+        </div>
+       
+        <div align="center">
+            <table style="width:20%;margin:2%;" cellspacing="5" cellpadding="10">
+                <tr>
+                    <td align="right"><button type="submit" class="btn btn-success" data-bind="click: $data.addShelf">Add</button></td>
+                    <td align="center"><button type="submit" class="btn btn-success" data-bind="enable: ShelfList().length > 0 && enableSaveButton,click: $data.saveShelf">Save</button></td>
+                    <td align="left"><button type="submit" class="btn btn-success" data-bind="enable: enableUpdateButton ,click: $data.updateShelf">Update</button></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div style="padding-top:15px;padding-left:60px;margin-right:20px">
+            <div class="table-responsive" id="divShfAliasDtls" hidden="hidden">
+                <table class="table table-striped" id="idShlfAliasTbl">
+                    <thead>
+                        <tr>
+                            <th>Alias Name</th>
+                            <th>Alias Value</th>
+                            <th>NTE Value</th>
+                            <th>Application Name</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: shelfAliasList">
+                        <tr>
+                            <td><span data-bind="text: $data.aliasName"></span></td>
+                            <td><span data-bind="text: $data.aliasValue"></span></td>
+                            <td><span data-bind="text: $data.nteVal"></span></td>
+                            <td><span data-bind="text: $data.appName"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" id="shelfDetailsInnerDiv">
+                <span id="scrollAnchor"></span>
+            </div>
+    </div>
+    </div>
+
+<div class="modal" id="idSpecsearchlist">
+    <div class="modal-content">
+        <div class="modal-body">
+            <table style="width:100%">
+                <tr>
+                    <td><h4><b>Select Shelf:</b></h4></td>
+                    <td><span class="close" id="idShelfclose">&times;</span></td>
+                </tr>
+            </table>
+            <table id="idSpecList" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Details</th>
+                        <th>Specification ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Completed</th>
+                        <th>Propagated</th>
+                        <th>Unusable in NDS</th>
+                        <th>Specification Type</th>
+                        <th>Specification Class</th>
+
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:SpecList">
+                    <tr>
+                        <td><a data-bind="click: $parent.specificationSelectCall">Select</a></td>
+                        <td><span data-bind="text: $data.specn_id.value"></span></td>
+                        <td><span data-bind="text: $data.specn_nm.value"></span></td>
+                        <td><span data-bind="text: $data.specn_dsc.value"></span></td>
+                        <td><span data-bind="text: $data.cmplt_ind.value"></span></td>
+                        <td><span data-bind="text: $data.prpgt_ind.value"></span></td>
+                        <td><span data-bind="text: $data.del_ind.value"></span></td>
+                        <td><span data-bind="text: $data.specTyp.value"></span></td>
+                        <td><span data-bind="text: $data.specClss.value"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row" id="specificationDetailsInnerDiv">
+            <span id="scrollAnchor"></span>
+        </div>
+    </div>
+</div>
+
+<div id="idShelfdetails">
+    <div class="row" data-bind="compose:shelfSpecification" id="shelfSpec"></div>
+    <div class="row" data-bind="compose:slotAssignment" id="slotSpecAssign"></div>
+    <a href="#" class="scrollup"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>
+
+
